@@ -1,0 +1,50 @@
+Cambios en la tabla tbl_docente
+
+//identificador 
+1	IDDocente(Primaria)     varchar(14)	    utf8_unicode_ci		No
+//tipo de documento de identificacion
+2	Tipo_doc	            varchar(20)	    utf8_unicode_ci		Sí	Ninguna	(se modifico)		 
+//numero del documento
+3	N_documento	            char(20)	    utf8_unicode_ci		Sí	Ninguna	(se modifico)
+//nombre del docente
+4	Nombres	                varchar(30)	    utf8_unicode_ci		Sí	Ninguna
+//apellido del docente
+5	Apellidos	            varchar(60)	    utf8_unicode_ci		Sí	Ninguna
+//fecha de nacimiento
+6	Fecha_nac	            varchar(10)	    utf8_unicode_ci		Sí	Ninguna	
+//direccion
+7	Direccion	            varchar(60)	    utf8_unicode_ci		Sí	Ninguna		
+//codigo del distrito	 
+8	Cod_Dist(Índice)	    char(10)	    utf8_unicode_ci		No	Ninguna
+//telefono fijo			
+9	Telf_fijo	            varchar(15) 	utf8_unicode_ci		No	Ninguna
+//telefono celular			 
+10	Telf_celular	        varchar(15)	    utf8_unicode_ci		No	Ninguna
+//email	
+11	Email	                varchar(50)	    utf8_unicode_ci		No	Ninguna
+//estado			 
+12	Estado	                varchar(10)	    utf8_unicode_ci		Sí	Ninguna	(se modifico)		 
+//maestria o doctorado
+13	Categoria	            varchar(100)	utf8_unicode_ci		No	Ninguna	(se agrego)		
+//mañana noche o tiempo completo
+14	Regi_dedicacion	        varchar(10)	    utf8_unicode_ci		No	Ninguna	(se agrego)		 
+//horas al mes
+15	Tiem_labores	        int(11)			                    No	Ninguna	(se agrego)		 
+
+Nombre de los campos usados en este formulario
+
+1   id->IDDocente
+2   tipo->Tipo_doc
+3   docuemento->N_documento
+4   nombre->Nombres
+5   apellido->Apellidos
+6   fecha->Fecha_nac
+7   direccion->Direccion
+8   distrito->Cod_Dist
+9   telefono->Telf_fijo
+10  celular->Telf_celular
+11  email->Email
+12  estado->Estado
+13  categoria->Categoria
+14  regimen->Regi_dedicacion
+15  tiempo->Tiem_labores
