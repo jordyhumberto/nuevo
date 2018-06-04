@@ -46,7 +46,7 @@
                                 <li><a href="mantenimiento/academico/m_a_tipo_aula.php">Tipo de aula</a></li>
                                 <li><a href="mantenimiento/academico/m_a_aula.php">Aula</a></li>
                                 <li><a href="mantenimiento/academico/m_a_docente.php">Docentes</a></li>
-                                <li><a href="#">Cursos-Docentes</a></li>
+                                <li><a href="mantenimiento/academico/m_a_curso_docente.php">Cursos-Docentes</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Administrativo</a>
