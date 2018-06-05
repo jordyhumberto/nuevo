@@ -1,6 +1,6 @@
 <?php
 	require '../../conexion.php';
-	$sql = "SELECT * FROM tbl_facultad1 ORDER BY IDFacultad";
+	$sql = "SELECT * FROM tbl_proceso_admision1 ORDER BY IDPadmision";
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>Intranet Facultad</title>
+	<title>Intranet Admision</title>
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -48,10 +48,10 @@
 		<?php include '../../nav.php'?>
 		<div class="container">
 				<div class="row">
-					<h2 style="text-align:center">Formulario de Facultad</h2>
+					<h2 style="text-align:center">Formulario de Admision</h2>
 				</div>
 				<div class="row">
-					<a href="m_ad_f_nuevo.php" class="btn btn-primary">Nuevo Registro</a>
+					<a href="m_ad_p_nuevo.php" class="btn btn-primary">Nuevo Registro</a>
 				</div>
 				<br>
 				<div class="row table-responsive">
@@ -59,7 +59,8 @@
 				<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>ID_Aula</th>
+								<th>ID_Admision</th>
+								<th>Fecha-Creación</th>
 								<th>Descripción</th>
                                 <th>Estado</th>
 								<th></th>
@@ -68,10 +69,11 @@
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDFacultad']; ?></td>
+									<td><?php echo $row['IDPadmision']; ?></td>
+									<td><?php echo $row['Fecha_creacion']; ?></td>
 									<td><?php echo $row['Descripcion']; ?></td>
                                     <td><?php echo $row['Estado']; ?></td>
-									<td><a href="m_ad_f_modificar.php?IDFacultad=<?php echo $row['IDFacultad']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+									<td><a href="m_ad_p_modificar.php?IDPadmision=<?php echo $row['IDPadmision']; ?>&Fecha_creacion=<?php echo $row['Fecha_creacion'];?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>
