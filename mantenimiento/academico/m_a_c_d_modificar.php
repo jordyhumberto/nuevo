@@ -1,6 +1,8 @@
 <?php
     require '../../conexion.php';
-    $id = $_GET['IDDocente'];
+	$id = $_GET['IDDocente'];
+	$nombre=$_GET['Nombres'];
+	$apellidos=$_GET['Apellidos'];
 	$sql = "SELECT tbl_curso_docente1.IDDocente,tbl_curso_docente1.IDCursos,tbl_cursos1.Descripcion,tbl_curso_docente1.Estado FROM tbl_curso_docente1 INNER JOIN tbl_cursos1 ON tbl_curso_docente1.IDCursos=tbl_cursos1.IDCursos WHERE tbl_curso_docente1.IDDocente='$id'";
 	$resultado = $mysqli->query($sql);
 ?>
@@ -49,9 +51,11 @@
 		<?php include '../../nav.php'?>
 		<div class="container">
 				<div class="row">
-					<h2 style="text-align:center">Formulario de Curso-Profesor</h2>
+					<h2 style="text-align:center">Formulario de Curso-Docente</h2>
 				</div>
-				
+				<div class="row">
+					<h3 style="text-align:center"><?php echo $nombre.' '.$apellidos;?></h3>
+				</div>
 				<br>
 				<div class="row table-responsive">
 				<!-- tabla de profesores -->

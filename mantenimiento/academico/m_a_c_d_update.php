@@ -6,13 +6,16 @@
     $curso=$_POST['curso'];
     $estado=$_POST['estado'];
     
-
 	$sql = "UPDATE tbl_curso_docente1 SET 
     IDDocente='$docente',
     IDCursos='$curso',
     Estado='$estado'
     WHERE IDDocente = '$id' AND IDCursos='$idd'";
-	$resultado = $mysqli->query($sql);
+    $resultado = $mysqli->query($sql);
+    
+    $sql2 = "SELECT * FROM tbl_docente1 WHERE IDDocente='$id'";
+    $resultado2 = $mysqli->query($sql2);
+    $row2 = $resultado2->fetch_array(MYSQLI_ASSOC);
 ?>
 <html lang="es">
     <head>
@@ -39,7 +42,7 @@
 						<h3>ERROR AL MODIFICAR</h3>
 					<?php } ?>
 					
-					<a href="m_a_c_d_modificar.php?IDDocente=<?php echo $id;?>" class="btn btn-primary">Regresar</a>
+					<a href="m_a_c_d_modificar.php?IDDocente=<?php echo $row2['IDDocente'];?>&Nombres=<?php echo $row2['Nombres'];?>&Apellidos=<?php echo $row2['Apellidos'];?>" class="btn btn-primary">Regresar</a>
 					
 				</div>
 			</div>

@@ -11,6 +11,10 @@
 	$sql = "SELECT * FROM tbl_curso_docente1 WHERE IDDocente='$id' AND IDCursos='$idd'";
     $resultado = $mysqli->query($sql);
     $fila = $resultado->fetch_array(MYSQLI_ASSOC);
+
+    $sql2 = "SELECT * FROM tbl_docente1 WHERE IDDocente='$id'";
+    $resultado2 = $mysqli->query($sql2);
+    $row2 = $resultado2->fetch_array(MYSQLI_ASSOC);
 ?>
 <html lang="es">
 	<head>
@@ -75,7 +79,7 @@
 				<!--///////////////////////////////////////////////////////////////////////////////////-->
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<a href="m_a_c_d_modificar.php?IDDocente=<?php echo $fila['IDDocente'];?>" class="btn btn-default">Regresar</a>
+						<a href="m_a_c_d_modificar.php?IDDocente=<?php echo $row2['IDDocente'];?>&Nombres=<?php echo $row2['Nombres'];?>&Apellidos=<?php echo $row2['Apellidos'];?>" class="btn btn-default">Regresar</a>
 						<button type="submit" class="btn btn-primary">Guardar</button>
 					</div>
 				</div>

@@ -75,7 +75,7 @@
                                     <td><?php echo $row['Apellidos']; ?></td>
 									<td><?php echo $row['CURSOS']; ?></td>
 							
-									<td><a href="m_a_c_d_modificar.php?IDDocente=<?php echo $row['IDDocente']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+									<td><a href="m_a_c_d_modificar.php?IDDocente=<?php echo $row['IDDocente']; ?>&Nombres=<?php echo $row['Nombres'];?>&Apellidos=<?php echo $row['Apellidos'];?>"><span class="glyphicon glyphicon-plus"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>
