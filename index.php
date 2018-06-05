@@ -69,7 +69,7 @@
 					<ul>
                         <li><a href="#">Matricula</a>
                             <ul>
-                                <li><a href="#">Matricula</a></li>
+                                <li><a href="proceso/matricula/p_m_matricula.php">Matricula</a></li>
                                 <li><a href="#">Anular-Matricula</a></li>
                             </ul>
                         </li>

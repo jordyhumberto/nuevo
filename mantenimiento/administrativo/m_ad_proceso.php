@@ -45,7 +45,7 @@
 </head>
 <body>
 	<div class="contenedor">
-		<?php include '../../nav.php'?>
+		<?php include '../../nav.php';?>
 		<div class="container">
 				<div class="row">
 					<h2 style="text-align:center">Formulario de Admision</h2>
