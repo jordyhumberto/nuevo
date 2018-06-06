@@ -104,6 +104,7 @@
                         </li>
 					</ul>
 				</li>
+                <!--concentrarme en estos dos-->
 				<li><a href="#">Consultas</a>
 					<ul>
                         <li><a href="consultas/alumnos/c_a_alumnos.php">Alumnos</a></li>
@@ -121,9 +122,9 @@
 						<li><a href="#">Historico de Pagos</a></li>
 						<li><a href="#">Notas por cuso ope.</a></li>
 						<li><a href="#">Notas Registradas.</a></li>
-						<li><a href="#">Horario Alumnos.</a></li>
-						<li><a href="#">Horario Docente.</a></li>
-						<li><a href="#">Horario Aula.</a></li>
+						<li><a href="#">Horario Alumnos.</a></li><!--no sirve-->
+						<li><a href="#">Horario Docente.</a></li><!--no sirve-->
+						<li><a href="#">Horario Aula.</a></li><!--no sirve-->
 					</ul>
 				</li>
 				<li><a href="#">Salir</a></li>
