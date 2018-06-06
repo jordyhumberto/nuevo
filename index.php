@@ -106,8 +106,8 @@
 				</li>
 				<li><a href="#">Consultas</a>
 					<ul>
-                        <li><a href="#">Alumnos</a></li>
-						<li><a href="#">Pago Alumnos</a></li>
+                        <li><a href="consultas/alumnos/c_a_alumnos.php">Alumnos</a></li>
+						<li><a href="consultas/pagoalumnos/c_a_pagoalumnos.php">Pago Alumnos</a></li>
 						<li><a href="#">Pagos por Fecha</a></li>
 						<li><a href="#">Matricula Alumno</a></li>
 						<li><a href="#">Ver Pagos</a></li>

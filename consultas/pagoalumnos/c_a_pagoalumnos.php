@@ -59,7 +59,7 @@
 		<?php include '../../nav.php'?>
 		<div class="container">
 				<div class="row">
-					<h2 style="text-align:center">CONSULTA ALUMNOS</h2>
+					<h2 style="text-align:center">CONSULTA PAGOS-ALUMNOS</h2>
 				</div>
 				<form class="form-horizontal" method="POST" action="<?php $_SERVER['PHP_SELF'];?>">
                     <div class="form-group">
