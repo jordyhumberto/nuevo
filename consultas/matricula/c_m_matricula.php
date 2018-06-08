@@ -1,50 +1,35 @@
 <?php
-    require '../../conexion.php';
-    
-    
+    require '../../conexion.php';  
     $where = "";
-
     if(!empty($_POST))
 	{
-        $valor1 = $_POST['fechad'];
-        $valor2 = $_POST['fechah'];
+        //$valor1 = $_POST['fechad'];
+        //$valor2 = $_POST['fechah'];
         /*
         $fechaa1=substr($valor1,0,4);
         $fecham1=substr($valor1,-5,2);
         $fechad1=substr($valor1,-2);
-
         $fechaa2=substr($valor2,0,4);
         $fecham2=substr($valor2,-5,2);
         $fechad2=substr($valor2,-2);
         */
-        
-
         $valor3 = $_POST['carrera'];
         $valor4 = $_POST['semestre'];
-        
-        if(!empty($valor1) && !empty($valor2) && !empty($valor3) && !empty($valor4))
+        // && !empty($valor1) && !empty($valor2)
+        // && !empty($valor4)
+        if(!empty($valor3))
         {
             //Fecha_matricula BETWEEN '%$nfecha1' AND '%$nfecha2' AND
-            $where = "
-            WHERE fecha BETWEEN '%$valor1' AND '%$valor2'
-            
-            ";
-            //AND tbl_matricula_carrera1.IDCarrera LIKE '%$valor3' 
-            //AND tbl_matricula_carrera1.IDSemestre LIKE '$valor4'
+            $where = "WHERE carrera LIKE '%$valor3' and semestre LIKE '%$valor4'";
+            //AND tbl_matricula_carrera1.IDCarrera LIKE '%$valor3' AND tbl_matricula_carrera1.IDSemestre LIKE '$valor4'
+            //fecha BETWEEN $valor1 AND $valor2
+            //
 		}
-	}
-    echo $where;
-//date('Y-m-d',strtotime(Fecha_matricula)) 
-
-//CONCAT(SUBSTRING(Fecha_matricula,7,4),'-',SUBSTRING(Fecha_matricula,4,2),'-',SUBSTRING(Fecha_matricula,1,2)) as fecha
-	$sql = "SELECT tbl_matricula_carrera1.IDMatricula as matricula,tbl_matricula_carrera1.IDSemestre,tbl_matricula_carrera1.IDCarrera,tbl_alumno1.Nombres,tbl_alumno1.Apellido_paterno,tbl_alumno1.Apellido_materno,
-    date_format(Fecha_matricula,) as fecha
-    FROM tbl_matricula_carrera1 INNER JOIN tbl_alumno1 ON tbl_matricula_carrera1.IDAlumno=tbl_alumno1.IDAlumno $where";
+    }
+	$sql = "SELECT tbl_matricula_carrera1.IDMatricula AS matricula,tbl_matricula_carrera1.IDSemestre AS semestre,tbl_matricula_carrera1.IDCarrera AS carrera,tbl_alumno1.Nombres AS nombre,tbl_alumno1.Apellido_paterno AS paterno,tbl_alumno1.Apellido_materno AS materno,tbl_matricula_carrera1.Fecha_matricula1 AS fecha FROM tbl_matricula_carrera1 INNER JOIN tbl_alumno1 ON tbl_matricula_carrera1.IDAlumno=tbl_alumno1.IDAlumno $where";
     $resultado = $mysqli->query($sql);
-    
     $sql1 = "SELECT * FROM tbl_carrera1";
     $resultado1 = $mysqli->query($sql1);
-
     $sql2 = "SELECT * FROM tbl_semestre1";
 	$resultado2 = $mysqli->query($sql2);
     
@@ -157,9 +142,9 @@
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
 									<td><?php echo $row['matricula']; ?></td>
-                                    <td><?php echo $row['IDSemestre']; ?></td>
-									<td><?php echo $row['IDCarrera']; ?></td>
-									<td><?php echo $row['Nombres'].' '.$row['Apellido_paterno'].' '.$row['Apellido_materno']; ?></td>
+                                    <td><?php echo $row['semestre']; ?></td>
+									<td><?php echo $row['carrera']; ?></td>
+									<td><?php echo $row['nombre'].' '.$row['paterno'].' '.$row['materno']; ?></td>
                                     <td><?php echo $row['fecha'];?></td>
 								</tr>
 							<?php } ?>
