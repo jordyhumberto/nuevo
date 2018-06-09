@@ -13,12 +13,45 @@
         $valor4 = $_POST['semestre'];
         if(!empty($valor3)&& !empty($valor4) && !empty($valor1) && !empty($valor2))
         {
-            $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 BETWEEN '$valor1' AND '$valor2'   
+            $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 BETWEEN '$valor1' AND '$valor2'
+            AND tbl_matricula_carrera1.IDCarrera LIKE '%$valor3' 
+            AND tbl_matricula_carrera1.IDSemestre LIKE '%$valor4'    
             ";
-            //tbl_matricula_carrera1.IDSemestre LIKE '%$valor4'
-            //tbl_matricula_carrera1.IDCarrera LIKE '%$valor3'
-            //AND tbl_matricula_carrera1.IDSemestre LIKE '%$valor4' 
-//AND 
+        }else if(!empty($valor1) && !empty($valor2) && empty($valor3) && empty($valor4))
+        {
+            $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 BETWEEN '$valor1' AND '$valor2'    
+            ";
+        }else if(!empty($valor1) && empty($valor2) && empty($valor3) && empty($valor4))
+        {
+            $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 >= '$valor1'    
+            ";
+        }else if(!empty($valor2) && empty($valor1) && empty($valor3) && empty($valor4))
+        {
+            $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 <= '$valor2'    
+            ";
+        }else if(!empty($valor3) && empty($valor4) && empty($valor1) && empty($valor2))
+        {
+            $where = "WHERE tbl_matricula_carrera1.IDCarrera LIKE '%$valor3'    
+            ";
+        }else if(!empty($valor4) && empty($valor3) && empty($valor1) && empty($valor2))
+        {
+            $where = "WHERE tbl_matricula_carrera1.IDSemestre LIKE '%$valor4'    
+            ";
+        }else if(!empty($valor3) && !empty($valor4) && empty($valor1) && empty($valor2))
+        {
+            $where = "WHERE tbl_matricula_carrera1.IDCarrera LIKE '%$valor3'
+            AND tbl_matricula_carrera1.IDSemestre LIKE '%$valor4'    
+            ";
+        }else if(!empty($valor3) && empty($valor4) && !empty($valor1) && !empty($valor2))
+        {
+            $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 BETWEEN '$valor1' AND '$valor2'
+            AND tbl_matricula_carrera1.IDCarrera LIKE '%$valor3'    
+            ";
+        }else if(empty($valor3) && !empty($valor4) && !empty($valor1) && !empty($valor2))
+        {
+            $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 BETWEEN '$valor1' AND '$valor2'
+            AND tbl_matricula_carrera1.IDSemestre LIKE '%$valor4'
+            ";
         }
     }
 	$sql = "SELECT tbl_matricula_carrera1.IDMatricula AS matricula,
@@ -84,7 +117,7 @@
 					<h2 style="text-align:center">CONSULTA MATRICULA</h2>
 				</div>
                 <div class="row">
-					<h3 style="text-align:center"><?php echo $valor1.$valor2.$valor3.$valor4 ?></h2>
+					<h3 style="text-align:center"><?php echo $valor1.' '.$valor2.' '.$valor3.' '.$valor4 ;?></h2>
 				</div>
 				<form class="form-horizontal" method="POST" action="<?php $_SERVER['PHP_SELF'];?>">
                     <div class="form-group"><!--devolver el required-->
