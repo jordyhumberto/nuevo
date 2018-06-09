@@ -1,39 +1,40 @@
 <?php
     require '../../conexion.php';  
     $where = "";
+    $valor1 = '';
+    $valor2 = '';
+    $valor3 = '';
+    $valor4 = '';
     if(!empty($_POST))
 	{
-        //$valor1 = $_POST['fechad'];
-        //$valor2 = $_POST['fechah'];
-        /*
-        $fechaa1=substr($valor1,0,4);
-        $fecham1=substr($valor1,-5,2);
-        $fechad1=substr($valor1,-2);
-        $fechaa2=substr($valor2,0,4);
-        $fecham2=substr($valor2,-5,2);
-        $fechad2=substr($valor2,-2);
-        */
+        $valor1 = $_POST['fechad'];
+        $valor2 = $_POST['fechah'];
         $valor3 = $_POST['carrera'];
         $valor4 = $_POST['semestre'];
-        // && !empty($valor1) && !empty($valor2)
-        // && !empty($valor4)
-        if(!empty($valor3))
+        if(!empty($valor3)&& !empty($valor4) && !empty($valor1) && !empty($valor2))
         {
-            //Fecha_matricula BETWEEN '%$nfecha1' AND '%$nfecha2' AND
-            $where = "WHERE carrera LIKE '%$valor3' and semestre LIKE '%$valor4'";
-            //AND tbl_matricula_carrera1.IDCarrera LIKE '%$valor3' AND tbl_matricula_carrera1.IDSemestre LIKE '$valor4'
-            //fecha BETWEEN $valor1 AND $valor2
-            //
-		}
+            $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 BETWEEN '$valor1' AND '$valor2'   
+            ";
+            //tbl_matricula_carrera1.IDSemestre LIKE '%$valor4'
+            //tbl_matricula_carrera1.IDCarrera LIKE '%$valor3'
+            //AND tbl_matricula_carrera1.IDSemestre LIKE '%$valor4' 
+//AND 
+        }
     }
-	$sql = "SELECT tbl_matricula_carrera1.IDMatricula AS matricula,tbl_matricula_carrera1.IDSemestre AS semestre,tbl_matricula_carrera1.IDCarrera AS carrera,tbl_alumno1.Nombres AS nombre,tbl_alumno1.Apellido_paterno AS paterno,tbl_alumno1.Apellido_materno AS materno,tbl_matricula_carrera1.Fecha_matricula1 AS fecha FROM tbl_matricula_carrera1 INNER JOIN tbl_alumno1 ON tbl_matricula_carrera1.IDAlumno=tbl_alumno1.IDAlumno $where";
+	$sql = "SELECT tbl_matricula_carrera1.IDMatricula AS matricula,
+    tbl_matricula_carrera1.IDSemestre AS semestre,
+    tbl_matricula_carrera1.IDCarrera AS carrera,
+    tbl_alumno1.Nombres AS nombre,
+    tbl_alumno1.Apellido_paterno AS paterno,
+    tbl_alumno1.Apellido_materno AS materno,
+    tbl_matricula_carrera1.Fecha_matricula1 AS fecha
+    FROM tbl_matricula_carrera1 INNER JOIN tbl_alumno1 
+    ON tbl_matricula_carrera1.IDAlumno=tbl_alumno1.IDAlumno $where";
     $resultado = $mysqli->query($sql);
     $sql1 = "SELECT * FROM tbl_carrera1";
     $resultado1 = $mysqli->query($sql1);
     $sql2 = "SELECT * FROM tbl_semestre1";
 	$resultado2 = $mysqli->query($sql2);
-    
-    
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -82,7 +83,9 @@
 				<div class="row">
 					<h2 style="text-align:center">CONSULTA MATRICULA</h2>
 				</div>
-               
+                <div class="row">
+					<h3 style="text-align:center"><?php echo $valor1.$valor2.$valor3.$valor4 ?></h2>
+				</div>
 				<form class="form-horizontal" method="POST" action="<?php $_SERVER['PHP_SELF'];?>">
                     <div class="form-group"><!--devolver el required-->
                         <label for="fechad" class="col-sm-2 control-label">FECHA DESDE</label>
