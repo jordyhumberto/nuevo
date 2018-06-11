@@ -1,18 +1,9 @@
 <?php
     require '../../conexion.php';
-    $where = "";
-	$valor='';
-	if(!empty($_POST))
-	{
-		$valor = $_POST['admision'];
-		if(!empty($valor)){
-            $where = "WHERE IDAlumno LIKE '$valor%'";
-		}
-	}
-	$sql = "SELECT * FROM tbl_alumno1 $where";
+    $id=$_GET['IDAlumno'];
+	$sql = "SELECT * FROM 
+    tbl_compromiso_pago1 INNER JOIN  tbl_matricula_carrera1 ON tbl_compromiso_pago1.IDMatricula=tbl_matricula_carrera1.IDMatricula WHERE IDAlumno='$id'";
 	$resultado = $mysqli->query($sql);
-    $sql1 = "SELECT * FROM tbl_proceso_admision1";
-	$resultado1 = $mysqli->query($sql1);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>Intranet Aula</title>
+	<title>Intranet Consultas</title>
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -30,7 +21,9 @@
 	<script src="../../js/bootstrap.min.js"></script>	
 	<link href="../../css/jquery.dataTables.min.css" rel="stylesheet">	
 	<script src="../../js/jquery.dataTables.min.js"></script>
+
 	<link rel="stylesheet" href="../../css/estilos.css">
+	
 	<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Ultra" rel="stylesheet">
 	<script>
 		$(document).ready(function(){
@@ -56,52 +49,32 @@
 </head>
 <body>
 	<div class="contenedor">
-		<?php include '../../nav.php'?>
+        <?php include '../../nav.php'?>
 		<div class="container">
 				<div class="row">
-					<h2 style="text-align:center">CONSULTA ALUMNOS</h2>
+					<h2 style="text-align:center">CONSULTA TIPO DE PAGO</h2>
 				</div>
-				<div class="row">
-					<h3 style="text-align:center"><?php echo $valor;?></h2>
+                <div class="row">
+					<h3 style="text-align:center"><?php echo $id;?></h2>
 				</div>
-				<form class="form-horizontal" method="POST" action="<?php $_SERVER['PHP_SELF'];?>">
-                    <div class="form-group">
-                        <label for="admision" class="col-sm-2 control-label">PROCESO ADMISION</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="admision" name="admision">
-								<option value="">TODOS</option>
-                                <?php while($row = $resultado1->fetch_array(MYSQLI_ASSOC)) { ?>
-                                    <option value="<?php echo $row['IDPadmision']; ?>"><?php echo $row['Descripcion']; ?></option>	
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
-                        </div>
-                    </div>
-                </form>
-				
 				<br>
+                
 				<div class="row table-responsive">
 				<!-- tabla de profesores -->
 				<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>ID_ALUMNO</th>
-								<th>N_DOCUMENTO</th>
-								<th>NOMBRES</th>
-                                <th>ESTADO</th>
+								<th>ID_MATRICULA</th>
+                                <th>NRO_COMPROMISO</th>  
+                              
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDAlumno']; ?></td>
-									<td><?php echo $row['N_documento']; ?></td>
-									<td><?php echo $row['Nombres'].' '.$row['Apellido_paterno'].' '.$row['Apellido_materno']; ?></td>
-                                    <td><?php echo $row['Estado']; ?></td>
+									<td><?php echo $row['IDMatricula']; ?></td>
+                                    <td><?php echo $row['Nro_compromiso']; ?></td>
+                          
 								</tr>
 							<?php } ?>
 						</tbody>

@@ -11,43 +11,43 @@
         $valor2 = $_POST['fechah'];
         $valor3 = $_POST['carrera'];
         $valor4 = $_POST['semestre'];
-        if(!empty($valor3)&& !empty($valor4) && !empty($valor1) && !empty($valor2))
+        if(!empty($valor3)&& !empty($valor4) && !empty($valor1) && !empty($valor2))//todos los valores
         {
             $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 BETWEEN '$valor1' AND '$valor2'
             AND tbl_matricula_carrera1.IDCarrera LIKE '%$valor3' 
             AND tbl_matricula_carrera1.IDSemestre LIKE '%$valor4'    
             ";
-        }else if(!empty($valor1) && !empty($valor2) && empty($valor3) && empty($valor4))
+        }else if(!empty($valor1) && !empty($valor2) && empty($valor3) && empty($valor4))//solo fechas
         {
             $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 BETWEEN '$valor1' AND '$valor2'    
             ";
-        }else if(!empty($valor1) && empty($valor2) && empty($valor3) && empty($valor4))
+        }else if(!empty($valor1) && empty($valor2) && empty($valor3) && empty($valor4))//solo la primera fecha
         {
             $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 >= '$valor1'    
             ";
-        }else if(!empty($valor2) && empty($valor1) && empty($valor3) && empty($valor4))
+        }else if(!empty($valor2) && empty($valor1) && empty($valor3) && empty($valor4))//solo la segunda fecha
         {
             $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 <= '$valor2'    
             ";
-        }else if(!empty($valor3) && empty($valor4) && empty($valor1) && empty($valor2))
+        }else if(!empty($valor3) && empty($valor4) && empty($valor1) && empty($valor2))//solo carrera
         {
             $where = "WHERE tbl_matricula_carrera1.IDCarrera LIKE '%$valor3'    
             ";
-        }else if(!empty($valor4) && empty($valor3) && empty($valor1) && empty($valor2))
+        }else if(!empty($valor4) && empty($valor3) && empty($valor1) && empty($valor2))//solo semestre
         {
             $where = "WHERE tbl_matricula_carrera1.IDSemestre LIKE '%$valor4'    
             ";
-        }else if(!empty($valor3) && !empty($valor4) && empty($valor1) && empty($valor2))
+        }else if(!empty($valor3) && !empty($valor4) && empty($valor1) && empty($valor2))//carrera y semestre
         {
             $where = "WHERE tbl_matricula_carrera1.IDCarrera LIKE '%$valor3'
             AND tbl_matricula_carrera1.IDSemestre LIKE '%$valor4'    
             ";
-        }else if(!empty($valor3) && empty($valor4) && !empty($valor1) && !empty($valor2))
+        }else if(!empty($valor3) && empty($valor4) && !empty($valor1) && !empty($valor2))//carrera y fechas
         {
             $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 BETWEEN '$valor1' AND '$valor2'
             AND tbl_matricula_carrera1.IDCarrera LIKE '%$valor3'    
             ";
-        }else if(empty($valor3) && !empty($valor4) && !empty($valor1) && !empty($valor2))
+        }else if(empty($valor3) && !empty($valor4) && !empty($valor1) && !empty($valor2))//semestre y fechas
         {
             $where = "WHERE tbl_matricula_carrera1.Fecha_matricula1 BETWEEN '$valor1' AND '$valor2'
             AND tbl_matricula_carrera1.IDSemestre LIKE '%$valor4'

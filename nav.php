@@ -98,9 +98,10 @@
 			<li><a href="#">Consultas</a>
 				<ul>
                     <li><a href="../../consultas/alumnos/c_a_alumnos.php">Alumnos</a></li>
-					<li><a href="../../consultas/pagoalumnos/c_a_pagoalumnos.php">Pago Alumnos</a></li>
-					<li><a href="#">Pagos por Fecha</a></li>
+					<li><a href="../../consultas/pagoalumnos/c_pgs_pagoalumnos.php">Pago Alumnos</a></li>
+					<li><a href="../../consultas/pagofecha/c_pf_pagofecha.php">Pagos por Fecha</a></li>
 					<li><a href="../../consultas/matricula/c_m_matricula.php">Matricula Alumno</a></li>
+                    <li><a href="../../consultas/pagoalumno/c_pg_pagoalumno.php">Pago Alumnos</a></li>
 					<li><a href="#">Ver Pagos</a></li>
 					<li><a href="#">Notas por Alumno</a></li>
 					<li><a href="#">Pagos por Tipo</a></li>

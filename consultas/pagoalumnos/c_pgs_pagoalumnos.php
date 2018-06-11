@@ -66,7 +66,8 @@
                         <label for="admision" class="col-sm-2 control-label">PROCESO ADMISION</label>
                         <div class="col-sm-10">
                             <select class="form-control" id="admision" name="admision">
-                                <?php while($row = $resultado1->fetch_array(MYSQLI_ASSOC)) { ?>
+								<option value="">TODOS</option>
+								<?php while($row = $resultado1->fetch_array(MYSQLI_ASSOC)) { ?>	
                                     <option value="<?php echo $row['IDPadmision']; ?>"><?php echo $row['Descripcion']; ?></option>	
                                 <?php } ?>
                             </select>
