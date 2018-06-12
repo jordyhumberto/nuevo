@@ -1,9 +1,12 @@
 <?php
     require '../../conexion.php';
     $id=$_GET['IDAlumno'];
-	$sql = "SELECT * FROM 
-    tbl_compromiso_pago1 INNER JOIN  tbl_matricula_carrera1 ON tbl_compromiso_pago1.IDMatricula=tbl_matricula_carrera1.IDMatricula WHERE IDAlumno='$id'";
+	$sql = "SELECT * FROM tbl_pago_matricula1 INNER JOIN tbl_pago1 
+	ON tbl_pago_matricula1.IDPago=tbl_pago1.IDPago WHERE IDAlumno='$id' AND Fecha_anulacion IS NULL";
 	$resultado = $mysqli->query($sql);
+	$sql1="SELECT * FROM tbl_alumno1 WHERE IDAlumno='$id'";
+	$resultado1=$mysqli->query($sql1);
+	$fila=$resultado1->fetch_array(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -55,26 +58,35 @@
 					<h2 style="text-align:center">CONSULTA TIPO DE PAGO</h2>
 				</div>
                 <div class="row">
-					<h3 style="text-align:center"><?php echo $id;?></h2>
+					<h3 style="text-align:center"><?php echo $fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_materno'];?></h2>
 				</div>
 				<br>
-                
+                <div class="row">
+					<a href="c_pg_pagoalumno.php" class="btn btn-default">Regresar</a>
+				</div>
+				<br>
 				<div class="row table-responsive">
 				<!-- tabla de profesores -->
 				<table class="display" id="mitabla">
 						<thead>
 							<tr>
+								<th>ID_PAGO</th>
 								<th>ID_MATRICULA</th>
-                                <th>NRO_COMPROMISO</th>  
-                              
+                                <th>NRO.COMPROMISO</th>  
+								<th>MONTO</th>  
+								<th>NRO.DOC</th>  
+								<th>FECHA.PAGO</th>  
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
+									<td><?php echo $row['IDPago']; ?></td>
 									<td><?php echo $row['IDMatricula']; ?></td>
                                     <td><?php echo $row['Nro_compromiso']; ?></td>
-                          
+									<td><?php echo $row['Monto_pago']; ?></td>
+									<td><?php echo $row['Nro_pago']; ?></td>
+									<td><?php echo $row['Fecha_pago']; ?></td>
 								</tr>
 							<?php } ?>
 						</tbody>

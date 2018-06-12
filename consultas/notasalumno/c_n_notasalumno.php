@@ -1,6 +1,6 @@
 <?php
 	require '../../conexion.php';
-	$sql = "SELECT * FROM tbl_alumno1 ORDER BY IDAlumno";
+	$sql = "SELECT * FROM ((tbl_notas_alumno INNER JOIN tbl_curso_operativo ON tbl_notas_alumno.IDCO=tbl_curso_operativo.IDCO) INNER JOIN tbl_docente1 ON tbl_curso_operativo.IDDocente=tbl_docente1.IDDocente) WHERE ";
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -55,27 +55,37 @@
 					<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>ID_Alumno</th>
-								<th>Nombres</th>
-                                <th>Apellido_P</th>
-                                <th>Apellido_M</th>
-								<th>Telefono</th>
-								<th>Email</th>
-								<th>MATRICULA</th>
-								<th>OTROS</th>
+								<th>ID_MATRICULA</th>
+                                <th>IDSE</th>
+                                <th>IDCU</th>
+								<th>IDDO</th>
+                                <th>IDDO</th>
+                                <th>IDCO</th>
+                                <th>PPRACTICAS</th>
+                                <th>EPARCIAL</th>
+								<th>EFINAL</th>
+								<th>ESUSTI</th>
+								<th>PROMEDIO</th>
+								<th>ESTADO</th>
+                                <th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDAlumno']; ?></td>
-									<td><?php echo $row['Nombres']; ?></td>
-									<td><?php echo $row['Apellido_paterno']; ?></td>
-                                    <td><?php echo $row['Apellido_materno']; ?></td>
-                                    <td><?php echo $row['Telf_celular']; ?></td>
-									<td><?php echo $row['Email']; ?></td>
-									<td><a href="c_pg_consulta1.php?IDAlumno=<?php echo $row['IDAlumno']; ?>"><span class="glyphicon glyphicon-search"></span></a></td>
-									<td><a href="c_pg_consulta2.php?IDAlumno=<?php echo $row['IDAlumno']; ?>"><span class="glyphicon glyphicon-search"></span></a></td>
+									<td><?php echo $row['IDMatricula']; ?></td>
+                                    <td><?php echo $row['IDSemestre']; ?></td>
+                                    <td><?php echo $row['IDCursos']; ?></td>
+                                    <td><?php echo $row['IDDocente']; ?></td>
+                                    <td><?php echo $row['Nombres']; ?></td>
+									<td><?php echo $row['IDCO']; ?></td>
+									<td><?php echo $row['PPracticas']; ?></td>
+                                    <td><?php echo $row['ExamenParcial']; ?></td>
+                                    <td><?php echo $row['ExamenFinal']; ?></td>
+									<td><?php echo $row['ExamenSusti']; ?></td>
+                                    <td><?php echo $row['Promedio']; ?></td>
+									<td><?php echo $row['Estado']; ?></td>
+									<td><a href=""><span class="glyphicon glyphicon-search"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>

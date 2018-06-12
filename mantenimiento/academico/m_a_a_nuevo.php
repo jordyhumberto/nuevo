@@ -82,7 +82,6 @@
 						</select>
 					</div>
 				</div>
-				
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<a href="m_a_aula.php" class="btn btn-default">Regresar</a>

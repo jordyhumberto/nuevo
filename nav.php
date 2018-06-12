@@ -103,7 +103,7 @@
 					<li><a href="../../consultas/matricula/c_m_matricula.php">Matricula Alumno</a></li>
                     <li><a href="../../consultas/pagoalumno/c_pg_pagoalumno.php">Pago Alumnos</a></li>
 					<li><a href="#">Ver Pagos</a></li>
-					<li><a href="#">Notas por Alumno</a></li>
+					<li><a href="../../consultas/notasalumno/c_n_notasalumno.php">Notas por Alumno</a></li>
 					<li><a href="#">Pagos por Tipo</a></li>
 				</ul>					
 			</li>
