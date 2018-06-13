@@ -61,8 +61,9 @@
                                 <th>Apellido_M</th>
 								<th>Telefono</th>
 								<th>Email</th>
-								<th>MATRICULA</th>
-								<th>OTROS</th>
+								<th>MA</th>
+								<th>OT</th>
+								<th>MA/OT</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -76,6 +77,7 @@
 									<td><?php echo $row['Email']; ?></td>
 									<td><a href="c_pg_consulta1.php?IDAlumno=<?php echo $row['IDAlumno']; ?>"><span class="glyphicon glyphicon-search"></span></a></td>
 									<td><a href="c_pg_consulta2.php?IDAlumno=<?php echo $row['IDAlumno']; ?>"><span class="glyphicon glyphicon-search"></span></a></td>
+									<td><a href="c_pg_consulta3.php?IDAlumno=<?php echo $row['IDAlumno']; ?>"><span class="glyphicon glyphicon-search"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>

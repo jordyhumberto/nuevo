@@ -168,7 +168,6 @@
 						<thead>
 							<tr>
 								<th>COD_MATRICULA</th>
-                                <th>COD_SEMESTRE</th>
 								<th>COD_CARRERA</th>
 								<th>NOMBRES</th>
                                 <th>FECHA_MATRICULA</th>
@@ -178,7 +177,6 @@
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
 									<td><?php echo $row['matricula']; ?></td>
-                                    <td><?php echo $row['semestre']; ?></td>
 									<td><?php echo $row['carrera']; ?></td>
 									<td><?php echo $row['nombre'].' '.$row['paterno'].' '.$row['materno']; ?></td>
                                     <td><?php echo $row['fecha'];?></td>

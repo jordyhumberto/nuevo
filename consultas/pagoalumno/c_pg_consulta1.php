@@ -57,6 +57,9 @@
 				<div class="row">
 					<h2 style="text-align:center">CONSULTA TIPO DE PAGO</h2>
 				</div>
+				<div class="row">
+					<h3 style="text-align:center">MATRICULA</h2>
+				</div>
                 <div class="row">
 					<h3 style="text-align:center"><?php echo $fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_materno'];?></h2>
 				</div>

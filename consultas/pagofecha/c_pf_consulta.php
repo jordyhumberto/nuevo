@@ -3,7 +3,8 @@
     $id=$_GET['IDAlumno'];
     $where = "";
     $valor1 = '';
-    $valor2 = '';
+	$valor2 = '';
+	$con=0;
     if(!empty($_POST))
 	{
         $valor1 = $_POST['fechad'];
@@ -20,8 +21,11 @@
             $where = "AND Fecha_pago<'$valor2'";
         }
     }
-	$sql = "SELECT * FROM tbl_pago1 WHERE IDAlumno='$id' $where";
+	$sql = "SELECT * FROM tbl_pago1 WHERE IDAlumno='$id' $where AND Fecha_anulacion IS NULL";
 	$resultado = $mysqli->query($sql);
+	$sql1 = "SELECT * FROM tbl_alumno1 WHERE IDAlumno='$id'";
+	$resultado1 = $mysqli->query($sql1);
+	$fila=$resultado1->fetch_array(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -74,9 +78,8 @@
 					<h2 style="text-align:center">CONSULTA PAGO-FECHAS</h2>
 				</div>
                 <div class="row">
-					<h3 style="text-align:center"><?php echo $id;?></h2>
+					<h3 style="text-align:center"><?php echo $fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_materno'];?></h2>
 				</div>
-                <br>
                 <div class="row">
 					<h4 style="text-align:center"><?php echo $valor1.' '.$valor2;?></h2>
 				</div>
@@ -113,7 +116,9 @@
 								<th>ID_PAGO</th>
 								<th>NRO_PAGO</th>
                                 <th>IDALUMNO</th>
+								<th>TIPO_PAGO</th>
 								<th>TOTAL_PAGO</th>
+								<th>FECHA_PAGO</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -122,14 +127,26 @@
 									<td><?php echo $row['IDPago']; ?></td>
 									<td><?php echo $row['Nro_pago']; ?></td>
 									<td><?php echo $row['IDAlumno']; ?></td>
-                                    <td><?php echo $row['Total_pago']; ?></td>		
+									<td><?php echo $row['Tipo_Pago']; ?></td>
+									<td>
+									<?php echo $row['Total_pago'];
+										$con=$con+$row['Total_pago'];
+									?></td>		
+									<td><?php echo $row['Fecha_pago']; ?></td>
 								</tr>
 							<?php } ?>
 						</tbody>
 					</table>
 				</div>
-                
+				
+				<div class="row">
+					<h5 style="text-align:center;">*no incluye pagos anulados</h2>
+				</div>
+                <div class="row">
+					<h4 style="text-align:right;"><?php echo 'TOTAL PAGOS : '.$con;?></h2>
+				</div>
 			</div>	
+
 		<footer>
 			<div class="arriba"><a href="#header">arriba</a></div>
 			<div class="p_footer">

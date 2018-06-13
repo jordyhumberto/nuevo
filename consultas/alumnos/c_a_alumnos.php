@@ -13,6 +13,9 @@
 	$resultado = $mysqli->query($sql);
     $sql1 = "SELECT * FROM tbl_proceso_admision1";
 	$resultado1 = $mysqli->query($sql1);
+	$sql2 = "SELECT * FROM tbl_proceso_admision1 WHERE IDPadmision='$valor'";
+	$resultado2 = $mysqli->query($sql2);
+	$fila=$resultado2->fetch_array(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -62,7 +65,7 @@
 					<h2 style="text-align:center">CONSULTA ALUMNOS</h2>
 				</div>
 				<div class="row">
-					<h3 style="text-align:center"><?php echo $valor;?></h2>
+					<h3 style="text-align:center"><?php echo $fila['Descripcion'];?></h2>
 				</div>
 				<form class="form-horizontal" method="POST" action="<?php $_SERVER['PHP_SELF'];?>">
                     <div class="form-group">
@@ -101,7 +104,11 @@
 									<td><?php echo $row['IDAlumno']; ?></td>
 									<td><?php echo $row['N_documento']; ?></td>
 									<td><?php echo $row['Nombres'].' '.$row['Apellido_paterno'].' '.$row['Apellido_materno']; ?></td>
-                                    <td><?php echo $row['Estado']; ?></td>
+                                    <td><?php if ($row['Estado']=='01'){
+										echo 'ACTIVO';
+									}else if($row['Estado']=='02'){
+										echo 'INACTIVO';
+									} ?></td>
 								</tr>
 							<?php } ?>
 						</tbody>

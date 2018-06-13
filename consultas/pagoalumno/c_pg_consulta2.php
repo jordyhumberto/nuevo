@@ -58,6 +58,9 @@
 				<div class="row">
 					<h2 style="text-align:center">CONSULTA TIPO DE PAGO</h2>
 				</div>
+				<div class="row">
+					<h3 style="text-align:center">OTROS</h2>
+				</div>
                 <div class="row">
 					<h3 style="text-align:center"><?php echo $fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_materno'];?></h2>
 				</div>
@@ -72,7 +75,6 @@
 						<thead>
 							<tr>
 								<th>ID_PAGO</th>
-								<th>MOTIVO DE PAGO</th>
                                 <th>MOTIVO DE PAGO</th>
                                 <th>CANTIDAD</th>  
 								<th>MONTO</th>  
@@ -84,7 +86,6 @@
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
 									<td><?php echo $row['IDPago']; ?></td>
-									<td><?php echo $row['IDTipo']; ?></td>
                                     <td><?php echo $row['Descripcion']; ?></td>
                                     <td><?php echo $row['Cantidad']; ?></td>
 									<td><?php echo $row['Monto_pago']; ?></td>
