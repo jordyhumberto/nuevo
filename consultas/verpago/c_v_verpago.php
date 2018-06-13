@@ -1,6 +1,6 @@
 <?php
 	require '../../conexion.php';
-	$sql = "SELECT * FROM tbl_alumno1 ORDER BY IDAlumno";
+	$sql = "SELECT * FROM tbl_pago1 WHERE IDAlumno='2017010011'";
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>Intranet Alumnos</title>
+	<title>Intranet Consultas</title>
 
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -51,34 +51,31 @@
         <?php include '../../nav.php'?>
 		<div class="container">
 				<div class="row">
-					<h2 style="text-align:center">CONSULTA PAGO</h2>
+					<h2 style="text-align:center">VER PAGO</h2>
 				</div>
 				<br>
                 
 				<div class="row table-responsive">
-				<!-- tabla de profesores -->
-				<table class="display" id="mitabla">
+					<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>ID_Alumno</th>
-								<th>Nombres</th>
-                                <th>Apellido_P</th>
-                                <th>Apellido_M</th>
-								<th>Telefono</th>
-								<th>Email</th>
-								<th></th>
+								<th>IDPAGO</th>
+                                <th>IDALUMNO</th>
+                                <th>FECHAPAGO</th>
+								<th>NROPAGO</th>
+								<th>TIPOPAGO</th>
+								<th>TOTALPAGO</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
+									<td><?php echo $row['IDPago']; ?></td>
 									<td><?php echo $row['IDAlumno']; ?></td>
-									<td><?php echo $row['Nombres']; ?></td>
-									<td><?php echo $row['Apellido_paterno']; ?></td>
-                                    <td><?php echo $row['Apellido_materno']; ?></td>
-                                    <td><?php echo $row['Telf_celular']; ?></td>
-									<td><?php echo $row['Email']; ?></td>
-									<td><a href="c_pf_consulta.php?IDAlumno=<?php echo $row['IDAlumno']; ?>"><span class="glyphicon glyphicon-search"></span></a></td>
+									<td><?php echo $row['Fecha_pago']; ?></td>
+                                    <td><?php echo $row['Nro_pago']; ?></td>
+                                    <td><?php echo $row['Tipo_Pago']; ?></td>
+									<td><?php echo $row['Total_pago']; ?></td>
 								</tr>
 							<?php } ?>
 						</tbody>
