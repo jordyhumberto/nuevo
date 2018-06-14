@@ -109,7 +109,7 @@
 				</div>
                 <br>
 				<div class="row table-responsive">
-				<!-- tabla de profesores -->
+				
 				<table class="display" id="mitabla">
 						<thead>
 							<tr>

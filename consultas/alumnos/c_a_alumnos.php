@@ -85,7 +85,9 @@
                         </div>
                     </div>
                 </form>
-				
+				<div class="row">
+					<h2 style="text-align:center;"><a href="reporte.php?consulta=<?php echo $where;?>"><span class="glyphicon glyphicon-print"></span></a></h2>
+				</div>
 				<br>
 				<div class="row table-responsive">
 				<!-- tabla de profesores -->

@@ -4,7 +4,7 @@
 	require 'conexion.php';
 	
 	//Consulta
-	$sql = "SELECT tbl_alumno.Nombres, tbl_alumno.Apellido_paterno, tbl_alumno.Apellido_materno, tbl_usuario_alumno.IDAlumno, tbl_usuario_alumno.Clave, tbl_alumno.Email FROM tbl_alumno INNER JOIN tbl_usuario_alumno ON tbl_alumno.IDAlumno=tbl_usuario_alumno.IDAlumno";
+	$sql = "SELECT tbl_alumno.Nombres, tbl_alumno.Apellido_paterno, tbl_alumno.Apellido_materno, tbl_usuario_alumno.IDAlumno, tbl_usuario_alumno.Clave, tbl_alumno.Email FROM tbl_alumno INNER JOIN tbl_usuario_alumno ON tbl_alumno.IDAlumno=tbl_usuario_alumno.IDAlumno ORDER BY tbl_alumno.Nombres";
 	$resultado = $mysqli->query($sql);
 	$fila = 7; //Establecemos en que fila inciara a imprimir los datos
 	
@@ -63,7 +63,7 @@
     ),
     'fill' => array(
 	'type' => PHPExcel_Style_Fill::FILL_SOLID,
-	'color' => array('rgb' => '538DD5')
+	'color' => array('rgb' => '7a0b0c')
     ),
     'borders' => array(
 	'allborders' => array(
@@ -98,13 +98,13 @@
     )
 	));
 	
-	$objPHPExcel->getActiveSheet()->getStyle('A1:E4')->applyFromArray($estiloTituloReporte);
-	$objPHPExcel->getActiveSheet()->getStyle('A6:E6')->applyFromArray($estiloTituloColumnas);
+	$objPHPExcel->getActiveSheet()->getStyle('A1:F4')->applyFromArray($estiloTituloReporte);
+	$objPHPExcel->getActiveSheet()->getStyle('A6:F6')->applyFromArray($estiloTituloColumnas);
 	
 	$objPHPExcel->getActiveSheet()->setCellValue('B3', 'REPORTE DE ALUMNOS USUARIO');
 	$objPHPExcel->getActiveSheet()->mergeCells('B3:D3');
 	
-	$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
+	$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(30);
 	$objPHPExcel->getActiveSheet()->setCellValue('A6', 'NOMBRE');
 	$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
 	$objPHPExcel->getActiveSheet()->setCellValue('B6', 'APELLIDO_P');
@@ -114,7 +114,7 @@
 	$objPHPExcel->getActiveSheet()->setCellValue('D6', 'USUARIO');
 	$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
     $objPHPExcel->getActiveSheet()->setCellValue('E6', 'CLAVE');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(30);//modificar ancho
 	$objPHPExcel->getActiveSheet()->setCellValue('F6', 'EMAIL');
 	
 	//Recorremos los resultados de la consulta y los imprimimos

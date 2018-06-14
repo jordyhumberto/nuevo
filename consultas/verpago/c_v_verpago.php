@@ -1,7 +1,15 @@
 <?php
 	require '../../conexion.php';
-	$sql = "SELECT * FROM tbl_pago1 WHERE IDAlumno='2017010011'";
+	$where = "";
+    $valor1 = '';
+    $valor2 = '';
+    $valor3 = '';
+	$sql = "SELECT * FROM tbl_pago1 INNER JOIN tbl_alumno1 ON tbl_pago1.IDAlumno=tbl_alumno1.IDAlumno WHERE tbl_pago1.IDAlumno='2017010011'";
+	$sql1="SELECT * FROM tbl_semestre1";
+	$resultado1=$mysqli->query($sql1);
+
 	$resultado = $mysqli->query($sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -54,24 +62,51 @@
 					<h2 style="text-align:center">VER PAGO</h2>
 				</div>
 				<br>
-                
+                <form class="form-horizontal" method="POST" action="<?php $_SERVER['PHP_SELF'];?>">
+                    <div class="form-group"><!--devolver el required-->
+                        <label for="fechad" class="col-sm-2 control-label">FECHA DESDE</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="fechad" name="fechad">
+                        </div>
+                    </div>
+                    <div class="form-group"><!--devolver el required-->
+                        <label for="fechah" class="col-sm-2 control-label">FECHA HASTA</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="fechah" name="fechah">
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label for="admision" class="col-sm-2 control-label">PROCESO ADMISION</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="admision" name="admision">
+								<option value="">TODOS</option>
+                                <?php while($row = $resultado1->fetch_array(MYSQLI_ASSOC)) { ?>
+                                    <option value="<?php echo $row['IDSemestre']; ?>"><?php echo $row['Descripcion']; ?></option>	
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </form>
 				<div class="row table-responsive">
 					<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>IDPAGO</th>
                                 <th>IDALUMNO</th>
                                 <th>FECHAPAGO</th>
 								<th>NROPAGO</th>
 								<th>TIPOPAGO</th>
-								<th>TOTALPAGO</th>
+								<th>MONTO</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDPago']; ?></td>
-									<td><?php echo $row['IDAlumno']; ?></td>
+									<td><?php echo $row['Nombres'].' '.$row['Apellido_paterno'].' '.$row['Apellido_materno']; ?></td>
 									<td><?php echo $row['Fecha_pago']; ?></td>
                                     <td><?php echo $row['Nro_pago']; ?></td>
                                     <td><?php echo $row['Tipo_Pago']; ?></td>
