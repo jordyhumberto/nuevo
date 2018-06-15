@@ -6,11 +6,12 @@
 	{
 		$valor = $_POST['admision'];
 		if(!empty($valor)){
-            $where = "WHERE IDAlumno LIKE '$valor%'";
+            $where = "WHERE tbl_alumno1.IDAlumno LIKE '$valor%'";
 		}
 	}
-	$sql = "SELECT * FROM tbl_alumno1 $where";
+	$sql = "SELECT tbl_alumno1.*,distritos.Nom_Dist,tbl_colegio1.Nombre FROM ((tbl_alumno1 INNER JOIN distritos ON tbl_alumno1.Cod_Dist=distritos.Cod_Dist) INNER JOIN tbl_colegio1 ON tbl_alumno1.IDcolegio=tbl_colegio1.IDcolegio) $where ORDER BY tbl_alumno1.IDAlumno";
 	$resultado = $mysqli->query($sql);
+
     $sql1 = "SELECT * FROM tbl_proceso_admision1";
 	$resultado1 = $mysqli->query($sql1);
 	$sql2 = "SELECT * FROM tbl_proceso_admision1 WHERE IDPadmision='$valor'";
@@ -86,7 +87,7 @@
                     </div>
                 </form>
 				<div class="row">
-					<h2 style="text-align:center;"><a href="reporte.php?consulta=<?php echo $where;?>"><span class="glyphicon glyphicon-print"></span></a></h2>
+					<h2 style="text-align:center;"><a href="reporte.php?consulta=<?php echo $sql;?>&valor=<?php echo $fila['Descripcion'];?>"><span class="glyphicon glyphicon-print"></span></a></h2>
 				</div>
 				<br>
 				<div class="row table-responsive">
