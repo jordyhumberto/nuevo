@@ -54,7 +54,7 @@
 	)
     ),
     'alignment' => array(
-	'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+	'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
 	'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
     )
 	);
@@ -138,14 +138,12 @@
 	
 	$objPHPExcel->getActiveSheet()->getStyle('A5:B8')->applyFromArray($estiloLeyenda);
 
-	$objPHPExcel->getActiveSheet()->setCellValue('B1', 'REPORTE DE ALUMNOS');
-	$objPHPExcel->getActiveSheet()->mergeCells('B1:D1');
-	$objPHPExcel->getActiveSheet()->setCellValue('B2', 'PROCESO ADMISION :');
-	$objPHPExcel->getActiveSheet()->mergeCells('B2:C2');
-	$objPHPExcel->getActiveSheet()->setCellValue('D2', $valor);
-	$objPHPExcel->getActiveSheet()->mergeCells('D2:D2');
-	$objPHPExcel->getActiveSheet()->setCellValue('B3', date('d').'/'.date('m').'/'.date('Y'));
-	$objPHPExcel->getActiveSheet()->mergeCells('B3:D3');
+	$objPHPExcel->getActiveSheet()->setCellValue('B2', 'REPORTE DE ALUMNOS');
+	$objPHPExcel->getActiveSheet()->mergeCells('B2:D2');
+	$objPHPExcel->getActiveSheet()->setCellValue('B3', 'PROCESO ADMISION');
+	$objPHPExcel->getActiveSheet()->mergeCells('B3:C3');
+	$objPHPExcel->getActiveSheet()->setCellValue('D3', $valor);
+	$objPHPExcel->getActiveSheet()->mergeCells('D3:D3');
 
 	//AGREGAR LEYENDA TABLA AMARILLA
 	$objPHPExcel->getActiveSheet()->setCellValue('A5', 'LEYENDA');
@@ -161,7 +159,7 @@
 	$objPHPExcel->getActiveSheet()->setCellValue('B8', '02');
 	$objPHPExcel->getActiveSheet()->mergeCells('B8:B8');
 	////////////////////////LAS COLUMNAS//////////////////////////
-	$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(15);
+	$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
 	$objPHPExcel->getActiveSheet()->setCellValue('A10', 'IDALUMNO');
 	$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
 	$objPHPExcel->getActiveSheet()->setCellValue('B10', 'NOMBRES');
@@ -197,7 +195,7 @@
     $objPHPExcel->getActiveSheet()->setCellValue('Q10', 'COLEGIO');
     $objPHPExcel->getActiveSheet()->getColumnDimension('R')->setWidth(30);
     $objPHPExcel->getActiveSheet()->setCellValue('R10', 'NOMBRE_T');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('S')->setWidth(15);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('S')->setWidth(10);
     $objPHPExcel->getActiveSheet()->setCellValue('S10', 'PARENTESCO');
     $objPHPExcel->getActiveSheet()->getColumnDimension('T')->setWidth(20);
     $objPHPExcel->getActiveSheet()->setCellValue('T10', 'DIRECCION_T');
@@ -247,6 +245,42 @@
 	// definir origen de los rotulos
 	$categories = new PHPExcel_Chart_DataSeriesValues('String', 'alumnos!$B$11:$B$'.$fila);
 	
+	// definir  gráfico
+	$series = new PHPExcel_Chart_DataSeries(
+	PHPExcel_Chart_DataSeries::TYPE_BARCHART, // tipo de gráfico
+	PHPExcel_Chart_DataSeries::GROUPING_CLUSTERED,
+	array(0),
+	array(),
+	array($categories), // rótulos das columnas
+	array($values) // valores
+	);
+	$series->setPlotDirection(PHPExcel_Chart_DataSeries::DIRECTION_COL);
+
+	/*
+	// inicializar gráfico
+	$layout = new PHPExcel_Chart_Layout();
+	$plotarea = new PHPExcel_Chart_PlotArea($layout, array($series));
+	
+	// inicializar o gráfico
+	$chart = new PHPExcel_Chart('exemplo', null, null, $plotarea);
+	
+	// definir título do gráfico
+	$title = new PHPExcel_Chart_Title(null, $layout);
+	$title->setCaption('Gráfico PHPExcel Chart Class');
+	
+	// definir posiciondo gráfico y título
+	$chart->setTopLeftPosition('B'.$filaGrafica);
+	$filaFinal = $filaGrafica + 10;
+	$chart->setBottomRightPosition('E'.$filaFinal);
+	$chart->setTitle($title);
+	
+	// adicionar o gráfico à folha
+	$objPHPExcel->getActiveSheet()->addChart($chart);
+	
+	// incluir gráfico
+	$writer->setIncludeCharts(TRUE);
+	*/
+
 	$writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 	
 	header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");

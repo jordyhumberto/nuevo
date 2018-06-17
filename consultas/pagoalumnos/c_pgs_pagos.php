@@ -1,13 +1,19 @@
 <?php
-    require '../../conexion.php';
-	
-	$sql = "SELECT tbl_matricula_carrera1.IDAlumno as alumno,
-	CONCAT(tbl_alumno1.Nombres,' ',tbl_alumno1.Apellido_paterno,' ',tbl_alumno1.Apellido_materno) as nombre,
-	tbl_compromiso_pago1.*,
-	SUM(tbl_compromiso_pago1.Pago) as pagos 
-	FROM (tbl_compromiso_pago1 INNER JOIN tbl_matricula_carrera1 ON tbl_compromiso_pago1.IDMatricula=tbl_matricula_carrera1.IDMatricula) INNER JOIN tbl_alumno1 ON tbl_matricula_carrera1.IDAlumno=tbl_alumno1.IDAlumno GROUP BY tbl_matricula_carrera1.IDAlumno";
-	$resultado = $mysqli->query($sql);
+require '../../conexion.php';
+$id=$_GET['IDAlumno'];
+$sql = "SELECT tbl_matricula_carrera1.IDMatricula as matricula,
+tbl_matricula_carrera1.IDAlumno,
+tbl_compromiso_pago1.Nro_compromiso as compromiso,
+tbl_compromiso_pago1.Pago as pagos,
+tbl_compromiso_pago1.Estado as estado
+FROM tbl_compromiso_pago1 INNER JOIN tbl_matricula_carrera1 ON tbl_compromiso_pago1.IDMatricula=tbl_matricula_carrera1.IDMatricula 
+WHERE tbl_matricula_carrera1.IDAlumno='$id' ORDER BY tbl_matricula_carrera1.IDAlumno";
+$resultado=$mysqli->query($sql);
 
+$sql1="SELECT * FROM tbl_alumno1 WHERE IDAlumno='$id'";
+$resultado1=$mysqli->query($sql1);
+$fila=$resultado1->fetch_array(MYSQLI_ASSOC);
+$nombre=$fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_materno'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -56,25 +62,31 @@
 				<div class="row">
 					<h2 style="text-align:center">CONSULTA PAGOS-ALUMNOS</h2>
 				</div>
+                <div class="row">
+					<h3 style="text-align:center"><?php echo $nombre;?></h3>
+				</div>
+                <div class="row">
+					<h2 style="text-align:center;"><a href="prueba.php?consulta=<?php echo $sql;?>&nombre=<?php echo $nombre?>"><span class="glyphicon glyphicon-print"></span></a></h2>
+				</div>
 				<br>
 				<div class="row table-responsive">
 				<!-- tabla de profesores -->
 				<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>IDALUMNO</th>
-								<th>NOMBRE</th>
-								<th>SUMA</th>
-								<th></th>
+								<th>IDMATRICULA</th>
+								<th>NROCOMPROMISO</th>
+								<th>PAGO</th>
+                                <th>ESTADO</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['alumno']; ?></td>
-									<td><?php echo $row['nombre']?></td>
-									<td><?php echo $row['pagos']; ?></td>
-									<td><a href="c_pgs_pagos.php?IDAlumno=<?php echo $row['alumno'];?>"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+									<td><?php echo $row['matricula']; ?></td>
+									<td><?php echo $row['compromiso']?></td>
+                                    <td><?php echo $row['pagos']?></td>
+									<td><?php echo $row['estado']; ?></td>
 								</tr>
 							<?php } ?>
 						</tbody>
