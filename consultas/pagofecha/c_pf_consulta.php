@@ -113,7 +113,7 @@
 				<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>ID_PAGO</th>
+								
 								<th>NRO_PAGO</th>
                                 <th>IDALUMNO</th>
 								<th>TIPO_PAGO</th>
@@ -124,7 +124,7 @@
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDPago']; ?></td>
+									
 									<td><?php echo $row['Nro_pago']; ?></td>
 									<td><?php echo $row['IDAlumno']; ?></td>
 									<td><?php echo $row['Tipo_Pago']; ?></td>

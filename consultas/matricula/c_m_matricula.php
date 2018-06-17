@@ -54,20 +54,37 @@
             ";
         }
     }
-	$sql = "SELECT tbl_matricula_carrera1.IDMatricula AS matricula,
-    tbl_matricula_carrera1.IDSemestre AS semestre,
-    tbl_matricula_carrera1.IDCarrera AS carrera,
-    tbl_alumno1.Nombres AS nombre,
-    tbl_alumno1.Apellido_paterno AS paterno,
-    tbl_alumno1.Apellido_materno AS materno,
-    tbl_matricula_carrera1.Fecha_matricula1 AS fecha
-    FROM tbl_matricula_carrera1 INNER JOIN tbl_alumno1 
-    ON tbl_matricula_carrera1.IDAlumno=tbl_alumno1.IDAlumno $where";
+	$sql = "SELECT tbl_matricula_carrera1.IDMatricula,
+    tbl_matricula_carrera1.Fecha_matricula1,
+    tbl_matricula_carrera1.IDSemestre,
+    tbl_matricula_carrera1.IDCarrera,
+    tbl_matricula_carrera1.Cant_creditos,
+    tbl_matricula_carrera1.Estado,
+    tbl_alumno1.IDAlumno,
+    tbl_alumno1.Nombres,
+    tbl_alumno1.Apellido_paterno,
+    tbl_alumno1.Apellido_materno,
+    tbl_alumno1.Fecha_nac,
+    tbl_alumno1.Telf_fijo,
+    tbl_alumno1.Telf_celular,
+    tbl_alumno1.Direccion,
+    tbl_alumno1.Cod_Dist,
+    tbl_alumno1.N_documento,
+    tbl_alumno1.Email,
+    tbl_semestre1.IDSemestre,
+    tbl_semestre1.Descripcion as semestre,
+    tbl_carrera1.IDCarrera,
+    tbl_carrera1.Descripcion,
+    distritos.Cod_Dist,
+    distritos.Nom_Dist
+    FROM ((((tbl_matricula_carrera1 INNER JOIN tbl_alumno1 
+    ON tbl_matricula_carrera1.IDAlumno=tbl_alumno1.IDAlumno) INNER JOIN tbl_semestre1 ON tbl_matricula_carrera1.IDSemestre=tbl_semestre1.IDSemestre) INNER JOIN tbl_carrera1 ON tbl_matricula_carrera1.IDCarrera=tbl_carrera1.IDCarrera) INNER JOIN distritos ON tbl_alumno1.Cod_Dist=distritos.Cod_Dist) $where";
     $resultado = $mysqli->query($sql);
     $sql1 = "SELECT * FROM tbl_carrera1";
     $resultado1 = $mysqli->query($sql1);
     $sql2 = "SELECT * FROM tbl_semestre1";
-	$resultado2 = $mysqli->query($sql2);
+    $resultado2 = $mysqli->query($sql2);
+    $condicion=$valor1.' '.$valor2.' '.$valor3.' '.$valor4;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -160,7 +177,9 @@
                         </div>
                     </div>
                 </form>
-				
+				<div class="row">
+					<h2 style="text-align:center;"><a href="reporte.php?consulta=<?php echo $sql;?>&where=<?php echo $condicion;?>"><span class="glyphicon glyphicon-print"></span></a></h2>
+				</div>
 				<br>
 				<div class="row table-responsive">
 				<!-- tabla de profesores -->
@@ -176,10 +195,10 @@
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['matricula']; ?></td>
-									<td><?php echo $row['carrera']; ?></td>
-									<td><?php echo $row['nombre'].' '.$row['paterno'].' '.$row['materno']; ?></td>
-                                    <td><?php echo $row['fecha'];?></td>
+									<td><?php echo $row['IDMatricula']; ?></td>
+									<td><?php echo $row['IDCarrera']; ?></td>
+									<td><?php echo $row['Nombres'].' '.$row['Apellido_paterno'].' '.$row['Apellido_materno']; ?></td>
+                                    <td><?php echo $row['Fecha_matricula1'];?></td>
 								</tr>
 							<?php } ?>
 						</tbody>
