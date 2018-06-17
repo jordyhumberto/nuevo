@@ -1,13 +1,7 @@
 <?php
 require '../../conexion.php';
 $id=$_GET['IDAlumno'];
-$sql = "SELECT tbl_matricula_carrera1.IDMatricula as matricula,
-tbl_matricula_carrera1.IDAlumno,
-tbl_compromiso_pago1.Nro_compromiso as compromiso,
-tbl_compromiso_pago1.Pago as pagos,
-tbl_compromiso_pago1.Estado as estado
-FROM tbl_compromiso_pago1 INNER JOIN tbl_matricula_carrera1 ON tbl_compromiso_pago1.IDMatricula=tbl_matricula_carrera1.IDMatricula 
-WHERE tbl_matricula_carrera1.IDAlumno='$id' ORDER BY tbl_matricula_carrera1.IDAlumno";
+$sql = "SELECT tbl_matricula_carrera1.IDMatricula, tbl_matricula_carrera1.IDAlumno, tbl_compromiso_pago1.Nro_compromiso, tbl_compromiso_pago1.Pago, tbl_compromiso_pago1.Estado FROM tbl_compromiso_pago1 INNER JOIN tbl_matricula_carrera1 ON tbl_compromiso_pago1.IDMatricula=tbl_matricula_carrera1.IDMatricula WHERE tbl_matricula_carrera1.IDAlumno='$id' ORDER BY tbl_matricula_carrera1.IDAlumno";
 $resultado=$mysqli->query($sql);
 
 $sql1="SELECT * FROM tbl_alumno1 WHERE IDAlumno='$id'";
@@ -66,7 +60,7 @@ $nombre=$fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_mater
 					<h3 style="text-align:center"><?php echo $nombre;?></h3>
 				</div>
                 <div class="row">
-					<h2 style="text-align:center;"><a href="prueba.php?consulta=<?php echo $sql;?>&nombre=<?php echo $nombre?>"><span class="glyphicon glyphicon-print"></span></a></h2>
+					<h2 style="text-align:center;"><a href="reporte.php?consulta=<?php echo $sql;?>&nombre=<?php echo $nombre?>"><span class="glyphicon glyphicon-print"></span></a></h2>
 				</div>
 				<br>
 				<div class="row table-responsive">
@@ -83,10 +77,10 @@ $nombre=$fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_mater
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['matricula']; ?></td>
-									<td><?php echo $row['compromiso']?></td>
-                                    <td><?php echo $row['pagos']?></td>
-									<td><?php echo $row['estado']; ?></td>
+									<td><?php echo $row['IDMatricula']; ?></td>
+									<td><?php echo $row['Nro_compromiso']?></td>
+                                    <td><?php echo $row['Pago']?></td>
+									<td><?php echo $row['Estado']; ?></td>
 								</tr>
 							<?php } ?>
 						</tbody>

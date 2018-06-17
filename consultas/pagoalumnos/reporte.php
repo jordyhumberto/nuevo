@@ -3,10 +3,7 @@
 	require '../../Classes/PHPExcel.php';
     require '../../conexion.php';
 	$sql=$_GET['consulta'];
-	$valor=$_GET['valor'];
-	if($valor==''){
-		$valor='TODOS';
-	}
+	$nombre=$_GET['nombre'];
 	//Consulta
 	//$sql="SELECT * FROM tbl_alumno1";
 	$resultado = $mysqli->query($sql);
@@ -54,7 +51,7 @@
 	)
     ),
     'alignment' => array(
-	'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+	'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
 	'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
     )
 	);
@@ -134,107 +131,53 @@
 	
 	//AGREGAR ESTILOS
 	$objPHPExcel->getActiveSheet()->getStyle('A1:D4')->applyFromArray($estiloTituloReporte);
-	$objPHPExcel->getActiveSheet()->getStyle('A10:V10')->applyFromArray($estiloTituloColumnas);
+	$objPHPExcel->getActiveSheet()->getStyle('A10:D10')->applyFromArray($estiloTituloColumnas);
 	
 	$objPHPExcel->getActiveSheet()->getStyle('A5:B8')->applyFromArray($estiloLeyenda);
 
-	$objPHPExcel->getActiveSheet()->setCellValue('B2', 'REPORTE DE ALUMNOS');
+	$objPHPExcel->getActiveSheet()->setCellValue('B1', 'REPORTE DE PAGOS ALUMNOS');
+	$objPHPExcel->getActiveSheet()->mergeCells('B1:D1');
+	$objPHPExcel->getActiveSheet()->setCellValue('B2', $nombre);
 	$objPHPExcel->getActiveSheet()->mergeCells('B2:D2');
-	$objPHPExcel->getActiveSheet()->setCellValue('B3', 'PROCESO ADMISION');
-	$objPHPExcel->getActiveSheet()->mergeCells('B3:C3');
-	$objPHPExcel->getActiveSheet()->setCellValue('D3', $valor);
-	$objPHPExcel->getActiveSheet()->mergeCells('D3:D3');
+	$objPHPExcel->getActiveSheet()->setCellValue('B3', date('d').'/'.date('m').'/'.date('Y'));
+	$objPHPExcel->getActiveSheet()->mergeCells('B3:D3');
 
 	//AGREGAR LEYENDA TABLA AMARILLA
 	$objPHPExcel->getActiveSheet()->setCellValue('A5', 'LEYENDA');
 	$objPHPExcel->getActiveSheet()->mergeCells('A5:B5');
 	$objPHPExcel->getActiveSheet()->setCellValue('A6', 'CAMPO: ESTADO');
 	$objPHPExcel->getActiveSheet()->mergeCells('A6:B6');
-	$objPHPExcel->getActiveSheet()->setCellValue('A7', 'ACTIVO');
+	$objPHPExcel->getActiveSheet()->setCellValue('A7', 'NO CANCELO');
 	$objPHPExcel->getActiveSheet()->mergeCells('A7:A7');
 	$objPHPExcel->getActiveSheet()->setCellValue('B7', '01');
 	$objPHPExcel->getActiveSheet()->mergeCells('B7:B7');
-	$objPHPExcel->getActiveSheet()->setCellValue('A8', 'INACTIVO');
+	$objPHPExcel->getActiveSheet()->setCellValue('A8', 'CANCELO');
 	$objPHPExcel->getActiveSheet()->mergeCells('A8:A8');
 	$objPHPExcel->getActiveSheet()->setCellValue('B8', '02');
 	$objPHPExcel->getActiveSheet()->mergeCells('B8:B8');
 	////////////////////////LAS COLUMNAS//////////////////////////
-	$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
-	$objPHPExcel->getActiveSheet()->setCellValue('A10', 'IDALUMNO');
+	$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(15);
+	$objPHPExcel->getActiveSheet()->setCellValue('A10', 'IDMATRICULA');
 	$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
-	$objPHPExcel->getActiveSheet()->setCellValue('B10', 'NOMBRES');
+	$objPHPExcel->getActiveSheet()->setCellValue('B10', 'NRO_COMPROMISO');
 	$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
-	$objPHPExcel->getActiveSheet()->setCellValue('C10', 'APELLIDO_P');
+	$objPHPExcel->getActiveSheet()->setCellValue('C10', 'PAGO');
 	$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
-	$objPHPExcel->getActiveSheet()->setCellValue('D10', 'APELLIDO_M');
-	$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(10);
-    $objPHPExcel->getActiveSheet()->setCellValue('E10', 'TIPO_D');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(10);
-    $objPHPExcel->getActiveSheet()->setCellValue('F10', 'N_DOCUM');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(70);
-    $objPHPExcel->getActiveSheet()->setCellValue('G10', 'DIRECCION');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(30);
-    $objPHPExcel->getActiveSheet()->setCellValue('H10', 'DISTRITO');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(10);
-    $objPHPExcel->getActiveSheet()->setCellValue('I10', 'TELF_F');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(15);
-    $objPHPExcel->getActiveSheet()->setCellValue('J10', 'TELF_C');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(30);
-    $objPHPExcel->getActiveSheet()->setCellValue('K10', 'EMAIL');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(15);
-    $objPHPExcel->getActiveSheet()->setCellValue('L10', 'ESTADO_C');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(10);
-    $objPHPExcel->getActiveSheet()->setCellValue('M10', 'ALERGIA');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(10);
-    $objPHPExcel->getActiveSheet()->setCellValue('N10', 'T_SANGRE');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(20);
-    $objPHPExcel->getActiveSheet()->setCellValue('O10', 'DISCAPACIDAD');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('P')->setWidth(10);
-    $objPHPExcel->getActiveSheet()->setCellValue('P10', 'FECHA_E');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('Q')->setWidth(30);
-    $objPHPExcel->getActiveSheet()->setCellValue('Q10', 'COLEGIO');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('R')->setWidth(30);
-    $objPHPExcel->getActiveSheet()->setCellValue('R10', 'NOMBRE_T');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('S')->setWidth(10);
-    $objPHPExcel->getActiveSheet()->setCellValue('S10', 'PARENTESCO');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('T')->setWidth(20);
-    $objPHPExcel->getActiveSheet()->setCellValue('T10', 'DIRECCION_T');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('U')->setWidth(10);
-    $objPHPExcel->getActiveSheet()->setCellValue('U10', 'TELF_T');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('V')->setWidth(10);
-    $objPHPExcel->getActiveSheet()->setCellValue('V10', 'ESTADO');	
+	$objPHPExcel->getActiveSheet()->setCellValue('D10', 'ESTADO');
 	//Recorremos los resultados de la consulta y los imprimimos
 	while($rows = $resultado->fetch_array(MYSQLI_ASSOC)){////////////////////////////////<--------------cambio
 		
-		$objPHPExcel->getActiveSheet()->setCellValue('A'.$fila, $rows['IDAlumno']);
-		$objPHPExcel->getActiveSheet()->setCellValue('B'.$fila, $rows['Nombres']);
-		$objPHPExcel->getActiveSheet()->setCellValue('C'.$fila, $rows['Apellido_paterno']);
-        $objPHPExcel->getActiveSheet()->setCellValue('D'.$fila, $rows['Apellido_materno']);
-        $objPHPExcel->getActiveSheet()->setCellValue('E'.$fila, $rows['Tipo_doc']);
-        $objPHPExcel->getActiveSheet()->setCellValue('F'.$fila, $rows['N_documento']);
-        $objPHPExcel->getActiveSheet()->setCellValue('G'.$fila, $rows['Direccion']);
-        $objPHPExcel->getActiveSheet()->setCellValue('H'.$fila, $rows['Nom_Dist']);//distrito
-        $objPHPExcel->getActiveSheet()->setCellValue('I'.$fila, $rows['Telf_fijo']);
-        $objPHPExcel->getActiveSheet()->setCellValue('J'.$fila, $rows['Telf_celular']);
-        $objPHPExcel->getActiveSheet()->setCellValue('K'.$fila, $rows['Email']);
-        $objPHPExcel->getActiveSheet()->setCellValue('L'.$fila, $rows['Estado_civil']);
-        $objPHPExcel->getActiveSheet()->setCellValue('M'.$fila, $rows['Alergia']);
-        $objPHPExcel->getActiveSheet()->setCellValue('N'.$fila, $rows['T_sangre']);
-        $objPHPExcel->getActiveSheet()->setCellValue('O'.$fila, $rows['Discapacidad']);
-        $objPHPExcel->getActiveSheet()->setCellValue('P'.$fila, $rows['Fecha_egreso']);
-        $objPHPExcel->getActiveSheet()->setCellValue('Q'.$fila, $rows['Nombre']);//colegio
-        $objPHPExcel->getActiveSheet()->setCellValue('R'.$fila, $rows['Nombre_tutor']);
-        $objPHPExcel->getActiveSheet()->setCellValue('S'.$fila, $rows['Parentesco']);
-        $objPHPExcel->getActiveSheet()->setCellValue('T'.$fila, $rows['Direc_tutor']);
-        $objPHPExcel->getActiveSheet()->setCellValue('U'.$fila, $rows['fono_tutor']);
-        $objPHPExcel->getActiveSheet()->setCellValue('V'.$fila, $rows['Estado']);
-
+		$objPHPExcel->getActiveSheet()->setCellValue('A'.$fila, $rows['IDMatricula']);
+		$objPHPExcel->getActiveSheet()->setCellValue('B'.$fila, $rows['Nro_compromiso']);
+		$objPHPExcel->getActiveSheet()->setCellValue('C'.$fila, $rows['Pago']);
+        $objPHPExcel->getActiveSheet()->setCellValue('D'.$fila, $rows['Estado']);
+        
         $fila++; //Sumamos 1 para pasar a la siguiente fila
 	}
 	
 	$fila = $fila-1;
 	
-	$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A11:V".$fila);//tamaño de la tabla
+	$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A11:D".$fila);//tamaño de la tabla
 	
 	
 	//$filaGrafica = $fila+2;
@@ -245,46 +188,10 @@
 	// definir origen de los rotulos
 	$categories = new PHPExcel_Chart_DataSeriesValues('String', 'alumnos!$B$11:$B$'.$fila);
 	
-	// definir  gráfico
-	$series = new PHPExcel_Chart_DataSeries(
-	PHPExcel_Chart_DataSeries::TYPE_BARCHART, // tipo de gráfico
-	PHPExcel_Chart_DataSeries::GROUPING_CLUSTERED,
-	array(0),
-	array(),
-	array($categories), // rótulos das columnas
-	array($values) // valores
-	);
-	$series->setPlotDirection(PHPExcel_Chart_DataSeries::DIRECTION_COL);
-
-	/*
-	// inicializar gráfico
-	$layout = new PHPExcel_Chart_Layout();
-	$plotarea = new PHPExcel_Chart_PlotArea($layout, array($series));
-	
-	// inicializar o gráfico
-	$chart = new PHPExcel_Chart('exemplo', null, null, $plotarea);
-	
-	// definir título do gráfico
-	$title = new PHPExcel_Chart_Title(null, $layout);
-	$title->setCaption('Gráfico PHPExcel Chart Class');
-	
-	// definir posiciondo gráfico y título
-	$chart->setTopLeftPosition('B'.$filaGrafica);
-	$filaFinal = $filaGrafica + 10;
-	$chart->setBottomRightPosition('E'.$filaFinal);
-	$chart->setTitle($title);
-	
-	// adicionar o gráfico à folha
-	$objPHPExcel->getActiveSheet()->addChart($chart);
-	
-	// incluir gráfico
-	$writer->setIncludeCharts(TRUE);
-	*/
-
 	$writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 	
 	header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-	header('Content-Disposition: attachment;filename="Alumno.xlsx"');
+	header('Content-Disposition: attachment;filename="pagosAlumno.xlsx"');
 	header('Cache-Control: max-age=0');
 	
 	$writer->save('php://output');
