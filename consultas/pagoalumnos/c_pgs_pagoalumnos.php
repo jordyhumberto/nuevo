@@ -1,7 +1,7 @@
 <?php
     require '../../conexion.php';
     $where = "";
-	
+	/*
 	if(!empty($_POST))
 	{
 		$valor = $_POST['admision'];
@@ -9,7 +9,13 @@
             $where = "WHERE IDPadmision LIKE '%$valor'";
 		}
 	}
-	$sql = "SELECT * FROM tbl_alumno1 $where";
+	*/
+	
+	$sql = "SELECT tbl_matricula_carrera1.IDAlumno as alumno,
+	CONCAT(tbl_alumno1.Nombres,' ',tbl_alumno1.Apellido_paterno,' ',tbl_alumno1.Apellido_materno) as nombre,
+	tbl_compromiso_pago1.*,
+	SUM(tbl_compromiso_pago1.Pago) as pagos 
+	FROM (tbl_compromiso_pago1 INNER JOIN tbl_matricula_carrera1 ON tbl_compromiso_pago1.IDMatricula=tbl_matricula_carrera1.IDMatricula) INNER JOIN tbl_alumno1 ON tbl_matricula_carrera1.IDAlumno=tbl_alumno1.IDAlumno GROUP BY tbl_matricula_carrera1.IDAlumno";
 	$resultado = $mysqli->query($sql);
     $sql1 = "SELECT * FROM tbl_proceso_admision1";
 	$resultado1 = $mysqli->query($sql1);
@@ -86,19 +92,19 @@
 				<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>ID_ALUMNO</th>
-								<th>N_DOCUMENTO</th>
-								<th>NOMBRES</th>
-                                <th>ESTADO</th>
+								<th>IDALUMNO</th>
+								<th>NOMBRE</th>
+								<th>SUMA</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDAlumno']; ?></td>
-									<td><?php echo $row['N_documento']; ?></td>
-									<td><?php echo $row['Nombres'].' '.$row['Apellido_paterno'].' '.$row['Apellido_materno']; ?></td>
-                                    <td><?php echo $row['Estado']; ?></td>
+									<td><?php echo $row['alumno']; ?></td>
+									<td><?php echo $row['nombre']?></td>
+									<td><?php echo $row['pagos']; ?></td>
+									<td><a href=""><span class="glyphicon glyphicon-eye-open"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>
