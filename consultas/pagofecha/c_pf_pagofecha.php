@@ -1,9 +1,9 @@
 <?php
     require '../../conexion.php';
-    
     $where = "";
     $valor1 = '';
 	$valor2 = '';
+	$sql="";
 	$con=0;
     if(!empty($_POST))
 	{
@@ -19,10 +19,10 @@
         }else if(empty($valor1) && !empty($valor2))//solo la segunda fecha
         {
             $where = "AND tbl_pago1.Fecha_pago<'$valor2'";
-        }
-    }
-	$sql = "SELECT tbl_pago1.Nro_pago,tbl_pago1.IDAlumno,tbl_pago1.Fecha_pago,tbl_pago1.Fecha_anulacion,tbl_pago1.Total_pago,tbl_pago1.Tipo_Pago,tbl_alumno1.IDAlumno,tbl_alumno1.Nombres,tbl_alumno1.Apellido_paterno,tbl_alumno1.Apellido_materno FROM tbl_pago1 INNER JOIN tbl_alumno1 ON tbl_pago1.IDAlumno=tbl_alumno1.IDAlumno $where AND tbl_pago1.Fecha_anulacion IS NULL";
-	$resultado = $mysqli->query($sql);
+		}
+		$sql = "SELECT tbl_pago1.Nro_pago,tbl_pago1.IDAlumno,tbl_pago1.Fecha_pago,tbl_pago1.Fecha_anulacion,tbl_pago1.Total_pago,tbl_pago1.Tipo_Pago,tbl_alumno1.IDAlumno,tbl_alumno1.Nombres,tbl_alumno1.Apellido_paterno,tbl_alumno1.Apellido_materno FROM tbl_pago1 INNER JOIN tbl_alumno1 ON tbl_pago1.IDAlumno=tbl_alumno1.IDAlumno $where AND tbl_pago1.Fecha_anulacion IS NULL";
+		$resultado = $mysqli->query($sql);
+	}
 	$valor=$valor1.' '.$valor2;
 ?>
 <!DOCTYPE html>
@@ -99,7 +99,11 @@
                     </div>
                 </form>
 				<div class="row">
-					<h2 style="text-align:center;"><a href="reporte.php?consulta=<?php echo $sql;?>&valor=<?php echo $con;?>&"><span class="glyphicon glyphicon-print"></span></a></h2>
+					<h2 style="text-align:center;">
+						<a href="reporte.php?consulta=<?php echo $sql;?>&valor=<?php echo $con;?>&fecha=<?php echo $valor;?>">
+							<span class="glyphicon glyphicon-print"></span>
+						</a>
+					</h2>
 				</div>
                 <br>
 				<div class="row table-responsive">
@@ -117,7 +121,8 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
+							<?php if(!empty($_POST))
+									{while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
 									
 									<td><?php echo $row['Nro_pago']; ?></td>
@@ -131,7 +136,7 @@
 									?></td>		
 									<td><?php echo $row['Fecha_pago']; ?></td>
 								</tr>
-							<?php } ?>
+							<?php }} ?>
 						</tbody>
 					</table>
 				</div>

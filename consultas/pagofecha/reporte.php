@@ -4,6 +4,10 @@
     require '../../conexion.php';
 	$sql=$_GET['consulta'];
 	$valor=$_GET['valor'];
+	$fecha=$_GET['fecha'];
+	if($sql==''){
+		header("location:c_pf_pagofecha.php");
+	}
 	//Consulta
 	//$sql="SELECT * FROM tbl_alumno1";
 	$resultado = $mysqli->query($sql);
@@ -141,8 +145,10 @@
 	$objPHPExcel->getActiveSheet()->mergeCells('B2:C2');
 	$objPHPExcel->getActiveSheet()->setCellValue('D2', $valor);
 	$objPHPExcel->getActiveSheet()->mergeCells('D2:D2');
-	$objPHPExcel->getActiveSheet()->setCellValue('B3', date('d').'/'.date('m').'/'.date('Y'));
+	$objPHPExcel->getActiveSheet()->setCellValue('B3', $fecha);
 	$objPHPExcel->getActiveSheet()->mergeCells('B3:D3');
+	$objPHPExcel->getActiveSheet()->setCellValue('B4', date('d').'/'.date('m').'/'.date('Y'));
+	$objPHPExcel->getActiveSheet()->mergeCells('B4:D4');
 
 	//AGREGAR LEYENDA TABLA AMARILLA
 	$objPHPExcel->getActiveSheet()->setCellValue('A5', 'LEYENDA');
