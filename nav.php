@@ -1,16 +1,12 @@
 <header id="header">
-	<div class="fecha_hoy">
-		<?php
-			echo date("F j, Y, g:i a");
-		?>
-	</div>
+	
 	<div class="banner">
-        <a href="../../index.php">
+        <a href="../../welcome.php">
             <img class="l_upein" src="../../img/logo_upein.png" alt="Logo_upein">
         </a>
 		<div class="p_p">
 			<p class="p_upein">
-                <a href="../../index.php" style="text-decoration:none;color:white;">
+                <a href="../../welcome.php" style="text-decoration:none;color:white;">
                     UNIVERSIDAD PERUANA DE</br>INVESTIGACIÓN Y NEGOCIOS
                 </a>
             </p>	
@@ -118,6 +114,6 @@
 					<li><a href="#">Horario Aula.</a></li>
 				</ul>
 			</li>
-		<li><a href="#">Salir</a></li>
+		<li><a href="../../logout.php">Salir</a></li>
 	</ul>	
 </nav>
