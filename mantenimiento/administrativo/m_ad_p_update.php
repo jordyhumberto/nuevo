@@ -2,15 +2,18 @@
 	require '../../conexion.php';
     $id=$_POST['id'];
     $fecha=$_POST['fecha'];
+    /*
     $dd=substr($fecha,-2);
     $mm=substr($fecha,-5,2);
     $yyyy=substr($fecha,0,4);
     $nfecha=$dd.'/'.$mm.'/'.$yyyy;
+    */
+    
     $descripcion=$_POST['descripcion'];
     $estado=$_POST['estado'];
 
 	$sql = "UPDATE tbl_proceso_admision1 SET 
-    Fecha_creacion='$nfecha',
+    Fecha_creacion='$fecha',
     Descripcion='$descripcion',
     Estado='$estado'
     WHERE IDPadmision = '$id'";

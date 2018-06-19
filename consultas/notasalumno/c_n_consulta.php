@@ -63,8 +63,9 @@
         <?php include '../../nav.php'?>
 		<div class="container">
 				<div class="row">
-					<h2 style="text-align:center">CONSULTA TIPO DE PAGO</h2>
+					<h2 style="text-align:center">CONSULTA NOTAS ALUMNO</h2>
 				</div>
+				
 				<div class="row">
 					<h3 style="text-align:center"><?php echo $fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_materno'];?></h2>
 				</div>
@@ -86,6 +87,8 @@
                         </div>
                     </div>
                 </form>
+				<a href="c_n_notasalumno.php" class="btn btn-primary">Regresar</a>
+				<br>
 				<br>
 				<div class="row table-responsive">
 					<table class="display" id="mitabla">

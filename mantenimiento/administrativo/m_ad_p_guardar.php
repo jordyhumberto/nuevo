@@ -13,13 +13,16 @@
         }
     }
     $fecha=$_POST['fecha'];
+    /*
     $dd=substr($fecha,-2);
     $mm=substr($fecha,-5,2);
     $yyyy=substr($fecha,0,4);
     $nfecha=$dd.'/'.$mm.'/'.$yyyy;
+    */
+    
     $descripcion=$_POST['descripcion'];
     $estado=$_POST['estado']; 
-	$sql = "INSERT INTO tbl_proceso_admision1(IDPadmision,Fecha_creacion,Descripcion,Estado) VALUES ('$id','$nfecha','$descripcion','$estado')";
+	$sql = "INSERT INTO tbl_proceso_admision1(IDPadmision,Fecha_creacion,Descripcion,Estado) VALUES ('$id','$fecha','$descripcion','$estado')";
 	$resultado = $mysqli->query($sql);
 ?>
 <html lang="es">
