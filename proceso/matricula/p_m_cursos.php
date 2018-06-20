@@ -1,6 +1,8 @@
 <?php
-	require '../../conexion.php';
-	$sql = "SELECT * FROM tbl_alumno1 ORDER BY IDAlumno";
+    require '../../conexion.php';
+    $ciclo=$_GET['ciclo'];
+    $carrera=$_GET['carrera'];
+    $sql = "SELECT * FROM tbl_cursos1 as c INNER JOIN tbl_curso_carrera1 as cc ON c.IDCursos=cc.IDCursos WHERE c.IDCiclo='$ciclo' AND cc.IDCarrera='$carrera'";
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -48,36 +50,27 @@
         <?php include '../../nav.php'?>
 		<div class="container">
 				<div class="row">
-					<h2 style="text-align:center">FORMULARIO DE MATRICULA</h2>
+					<h2 style="text-align:center">MATRICULA CURSOS</h2>
 				</div>
-				<div class="row">
-					<h3 style="text-align:center">NUEVO REGRISTRO</h3>
-				</div>
-				
+				<a href="p_m_consulta.php">regresar</a>
 				<br>
 				<div class="row table-responsive">
 					<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>ID_Alumno</th>
-								<th>Nombres</th>
-                                <th>Apellido_P</th>
-                                <th>Apellido_M</th>
-								<th>Telefono</th>
-								<th>Email</th>
-								<th>MATRICULA</th>
+								<th>IDCARRERA</th>
+								<th>IDCICLO</th>
+                                <th>DESCRIPCION</th>
+                                <th>CREDITOS</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDAlumno']; ?></td>
-									<td><?php echo $row['Nombres']; ?></td>
-									<td><?php echo $row['Apellido_paterno']; ?></td>
-                                    <td><?php echo $row['Apellido_materno']; ?></td>
-                                    <td><?php echo $row['Telf_celular']; ?></td>
-									<td><?php echo $row['Email']; ?></td>
-									<td><a href="p_m_consulta.php?IDAlumno=<?php echo $row['IDAlumno']; ?>"><span class="glyphicon glyphicon-plus"></span></a></td>
+									<td><?php echo $row['IDCarrera']; ?></td>
+									<td><?php echo $row['IDCiclo']; ?></td>
+									<td><?php echo $row['Descripcion']; ?></td>
+                                    <td><?php echo $row['Creditos']; ?></td>
 								</tr>
 							<?php } ?>
 						</tbody>

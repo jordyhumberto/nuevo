@@ -4,15 +4,56 @@
 	if(!isset($_SESSION["id_usuario"])){
 		header("Location: ../../index.php");
 	}
+	
 	$id=$_GET['IDAlumno'];
+	
 	$sql="SELECT * FROM tbl_alumno1 WHERE IDAlumno='$id'";
 	$sql1="SELECT * FROM tbl_carrera1";
 	$sql2="SELECT * FROM tbl_semestre1";
+	$sql3="SELECT * FROM tbl_tipo_matricula";
+	$sql4="SELECT * FROM tbl_ciclos1";
+	$sql5="SELECT * FROM (((tbl_curso_carrera1 as cc INNER JOIN tbl_curso1 as c ON cc.IDCursos=c.IDCursos)INNER JOIN tbl_curso_prerequisito1 as cp ON c.IDcursos=cp.IDCursos)INNER JOIN tbl_notas_alumno as na ON )";
 	$resultado=$mysqli->query($sql);
 	$fila=$resultado->fetch_array(MYSQLI_ASSOC);
 	$nombre=$fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_materno'];
 	$resultado1=$mysqli->query($sql1);
 	$resultado2=$mysqli->query($sql2);
+	$resultado3=$mysqli->query($sql3);
+	$resultado4=$mysqli->query($sql4);
+	/*calcular la matricula*/
+	$idm="";
+	$ida="";
+	$idc="";
+	$ids="";
+	$idt="";
+	$ide="";
+	$idca="";
+	$creditos="";
+	$pension="";
+	$local="";
+	$fechai="";
+	if(!empty($_POST)){
+		$ida=$id;
+		$idc=$_POST['carrera'];
+		$ids=$_POST['semestre'];
+		$idt=$_POST['tipo'];
+		$ide=$_POST['estado'];
+		$idca=$_POST['ciclo'];
+		$s="SELECT * FROM tbl_carrera1 WHERE IDCarrera='$idc'";
+		$c=$mysqli->query($s);
+		$r=$c->fetch_array(MYSQLI_ASSOC);
+		$ss="SELECT * FROM tbl_semestre1 WHERE IDSemestre='$ids'";
+		$cc=$mysqli->query($ss);
+		$rr=$cc->fetch_array(MYSQLI_ASSOC);
+		$fechai=$rr['Fecha_Inicio'];
+		$pos=strpos($fechai,'/');
+		if($pos!==false){
+			$fechai=substr($fechai,-4).'-'.substr($fechai,-7,2).'-'.substr($fechai,0,2);
+		}
+		$idm=date('Y').substr($idc,0,2);
+		$local=date("Y-m-d H:i:s");
+	}
+	
 ?>
 <html lang="es">
 	<head>
@@ -40,7 +81,7 @@
 				<div class="row">
 					<h3 style="text-align:center"><?php echo $nombre;?></h3>
 				</div>
-				<form class="form-horizontal" method="POST" action="#" autocomplete="off">
+				<form class="form-horizontal" method="POST" action="<?php $_SERVER['PHP_SELF'];?>" autocomplete="off">
 					<div class="form-group">
 						<label for="año" class="col-sm-2 control-label"><?php echo date('Y');?></label>
 					</div>
@@ -64,8 +105,31 @@
 									</option>	
 								<?php } ?>	
 							</select>
-						</div>
-						
+						</div>	
+					</div>
+					<div class="form-group">
+						<label for="tipo" class="col-sm-2 control-label">MATRICULA</label>
+						<div class="col-sm-10">
+							<select class="form-control" id="tipo" name="tipo">
+								<?php while($row = $resultado3->fetch_array(MYSQLI_ASSOC)) { ?>
+									<option value="<?php echo $row['IDTipoM']; ?>">
+									<?php echo $row['Descripcion']; ?>
+									</option>	
+								<?php } ?>	
+							</select>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label for="ciclo" class="col-sm-2 control-label">CICLO</label>
+						<div class="col-sm-10">
+							<select class="form-control" id="ciclo" name="ciclo">
+								<?php while($row = $resultado4->fetch_array(MYSQLI_ASSOC)) { ?>
+									<option value="<?php echo $row['IDCiclo']; ?>">
+									<?php echo $row['Descripcion']; ?>
+									</option>	
+								<?php } ?>	
+							</select>
+						</div>	
 					</div>
 					<div class="form-group">
 						<label for="estado" class="col-sm-2 control-label">Estado</label>
@@ -78,11 +142,27 @@
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<a href="m_a_aula.php" class="btn btn-default">Regresar</a>
-							<button type="submit" class="btn btn-primary">Guardar</button>
+							<a href="p_m_matricula.php" class="btn btn-default">Regresar</a>
+							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 						</div>
 					</div>
 				</form>
+				<div class="row">
+				<h2 style="text-align:center"><a href="p_m_cursos.php?ciclo=<?php echo $idca?>&carrera=<?php echo $idc?>"><span class="glyphicon glyphicon-book"></span></a></h2>
+				</div>
+			</div>
+			<div class="matricula">
+				<label for=""><?php echo $idm;?></label><br>
+				<label for=""><?php echo $ida;?></label><br>
+				<label for=""><?php echo $idc;?></label><br>
+				<label for=""><?php echo $ids;?></label><br>
+				<label for=""><?php echo $idt;?></label><br>
+				<label for=""><?php echo $ide;?></label><br>
+				<label for=""><?php echo $idca;?></label><br>
+				<label for=""><?php echo $creditos;?></label><br>
+				<label for=""><?php echo $pension;?></label><br>
+				<label for=""><?php echo $local;?></label><br>
+				<label for=""><?php echo $fechai;?></label>
 			</div>
 			<footer>
 				<div class="arriba"><a href="#header">arriba</a></div>
