@@ -1,5 +1,6 @@
 <?php
-    require '../../conexion.php';
+	require '../../conexion.php';
+	$id=$_GET['id'];
     $ciclo=$_GET['ciclo'];
     $carrera=$_GET['carrera'];
     $sql = "SELECT * FROM tbl_cursos1 as c INNER JOIN tbl_curso_carrera1 as cc ON c.IDCursos=cc.IDCursos WHERE c.IDCiclo='$ciclo' AND cc.IDCarrera='$carrera'";
@@ -9,11 +10,12 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>Intranet Alumnos</title>
+	<title>INTRANET MATRICULA</title>
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -52,25 +54,35 @@
 				<div class="row">
 					<h2 style="text-align:center">MATRICULA CURSOS</h2>
 				</div>
-				<a href="p_m_consulta.php">regresar</a>
+				<div class="row">
+					<h3 style="text-align:center"><?php echo $ciclo.' '.$carrera;?></h2>
+				</div>
+				<div>
+					<a class="btn btn-default" href="p_m_consulta.php?IDAlumno=<?php echo $id;?>">regresar</a>
+				</div>
+				
 				<br>
 				<div class="row table-responsive">
 					<table class="display" id="mitabla">
 						<thead>
 							<tr>
+								<th>IDCURSOS</th>
 								<th>IDCARRERA</th>
 								<th>IDCICLO</th>
                                 <th>DESCRIPCION</th>
                                 <th>CREDITOS</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
+									<td><?php echo $row['IDCursos'];?></td>
 									<td><?php echo $row['IDCarrera']; ?></td>
 									<td><?php echo $row['IDCiclo']; ?></td>
 									<td><?php echo $row['Descripcion']; ?></td>
                                     <td><?php echo $row['Creditos']; ?></td>
+									<td><input type="checkbox" name="checkbox[]" id=""> </td>
 								</tr>
 							<?php } ?>
 						</tbody>

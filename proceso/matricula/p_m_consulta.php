@@ -9,7 +9,7 @@
 	
 	$sql="SELECT * FROM tbl_alumno1 WHERE IDAlumno='$id'";
 	$sql1="SELECT * FROM tbl_carrera1";
-	$sql2="SELECT * FROM tbl_semestre1";
+	$sql2="SELECT * FROM tbl_semestre1 ORDER BY IDSemestre DESC";
 	$sql3="SELECT * FROM tbl_tipo_matricula";
 	$sql4="SELECT * FROM tbl_ciclos1";
 	$sql5="SELECT * FROM (((tbl_curso_carrera1 as cc INNER JOIN tbl_curso1 as c ON cc.IDCursos=c.IDCursos)INNER JOIN tbl_curso_prerequisito1 as cp ON c.IDcursos=cp.IDCursos)INNER JOIN tbl_notas_alumno as na ON )";
@@ -57,6 +57,7 @@
 ?>
 <html lang="es">
 	<head>
+	
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -148,7 +149,7 @@
 					</div>
 				</form>
 				<div class="row">
-				<h2 style="text-align:center"><a href="p_m_cursos.php?ciclo=<?php echo $idca?>&carrera=<?php echo $idc?>"><span class="glyphicon glyphicon-book"></span></a></h2>
+				<h2 style="text-align:center"><a href="p_m_cursos.php?id=<?php echo $id;?>&ciclo=<?php echo $idca?>&carrera=<?php echo $idc?>"><span class="glyphicon glyphicon-book"></span></a></h2>
 				</div>
 			</div>
 			<div class="matricula">

@@ -1,12 +1,15 @@
 <?php
+	//header("Content-Type: text/html;charset=utf-8");
 	require '../../conexion.php';
 	$sql = "SELECT * FROM tbl_alumno1 ORDER BY IDAlumno";
 	$resultado = $mysqli->query($sql);
+	include '../../funcion.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
@@ -45,7 +48,7 @@
 </head>
 <body>
 	<div class="contenedor">
-        <?php include '../../nav.php'?>
+        <?php include '../../nav.php';?>
 		<div class="container">
 				<div class="row">
 					<h2 style="text-align:center">FORMULARIO DE MATRICULA</h2>
@@ -72,11 +75,11 @@
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
 									<td><?php echo $row['IDAlumno']; ?></td>
-									<td><?php echo $row['Nombres']; ?></td>
-									<td><?php echo $row['Apellido_paterno']; ?></td>
-                                    <td><?php echo $row['Apellido_materno']; ?></td>
+									<td><?php echo sanear_string($row['Nombres']); ?></td>
+									<td><?php echo sanear_string($row['Apellido_paterno']); ?></td>
+                                    <td><?php echo sanear_string($row['Apellido_materno']); ?></td>
                                     <td><?php echo $row['Telf_celular']; ?></td>
-									<td><?php echo $row['Email']; ?></td>
+									<td><?php echo sanear_string($row['Email']); ?></td>
 									<td><a href="p_m_consulta.php?IDAlumno=<?php echo $row['IDAlumno']; ?>"><span class="glyphicon glyphicon-plus"></span></a></td>
 								</tr>
 							<?php } ?>
