@@ -4,7 +4,7 @@
     $ciclo=$_GET['ciclo'];
 	$carrera=$_GET['carrera'];
 	$semestre=$_GET['semestre'];
-	$sql = "SELECT * FROM (((tbl_curso_operativo as co INNER JOIN tbl_cursos1 as c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_curso_carrera1 as cc ON c.IDCursos=cc.IDCursos) INNER JOIN tbl_curso_prerequisito1 as cp ON co.IDCursos=cp.IDCursos)";
+	$sql = "SELECT * FROM (((tbl_curso_operativo as co INNER JOIN tbl_cursos1 as c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_curso_carrera1 as cc ON c.IDCursos=cc.IDCursos) LEFT JOIN tbl_curso_prerequisito1 as cp ON co.IDCursos=cp.IDCursos)";
 	$sql.=" WHERE cc.IDCarrera='$carrera'";
 	$sql.=" AND c.IDCiclo='$ciclo'";
 	//$sql.=" WHERE c.IDCiclo='$ciclo' AND cc.IDCarrera='$carrera' AND co.IDSemestre='$semestre'";
