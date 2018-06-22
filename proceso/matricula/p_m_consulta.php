@@ -149,7 +149,7 @@
 					</div>
 				</form>
 				<div class="row">
-				<h2 style="text-align:center"><a href="p_m_cursos.php?id=<?php echo $id;?>&ciclo=<?php echo $idca?>&carrera=<?php echo $idc?>"><span class="glyphicon glyphicon-book"></span></a></h2>
+				<h2 style="text-align:center"><a href="p_m_cursos.php?id=<?php echo $id;?>&ciclo=<?php echo $idca?>&carrera=<?php echo $idc?>&semestre=<?php echo $ids;?>"><span class="glyphicon glyphicon-book"></span></a></h2>
 				</div>
 			</div>
 			<div class="matricula">

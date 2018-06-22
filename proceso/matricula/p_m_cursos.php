@@ -2,8 +2,12 @@
 	require '../../conexion.php';
 	$id=$_GET['id'];
     $ciclo=$_GET['ciclo'];
-    $carrera=$_GET['carrera'];
-    $sql = "SELECT * FROM tbl_cursos1 as c INNER JOIN tbl_curso_carrera1 as cc ON c.IDCursos=cc.IDCursos WHERE c.IDCiclo='$ciclo' AND cc.IDCarrera='$carrera'";
+	$carrera=$_GET['carrera'];
+	$semestre=$_GET['semestre'];
+	$sql = "SELECT * FROM (((tbl_curso_operativo as co INNER JOIN tbl_cursos1 as c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_curso_carrera1 as cc ON c.IDCursos=cc.IDCursos) INNER JOIN tbl_curso_prerequisito1 as cp ON co.IDCursos=cp.IDCursos)";
+	$sql.=" WHERE cc.IDCarrera='$carrera'";
+	$sql.=" AND c.IDCiclo='$ciclo'";
+	//$sql.=" WHERE c.IDCiclo='$ciclo' AND cc.IDCarrera='$carrera' AND co.IDSemestre='$semestre'";
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -55,7 +59,7 @@
 					<h2 style="text-align:center">MATRICULA CURSOS</h2>
 				</div>
 				<div class="row">
-					<h3 style="text-align:center"><?php echo $ciclo.' '.$carrera;?></h2>
+					<h3 style="text-align:center"><?php echo $ciclo.' '.$carrera.' '.$semestre;?></h2>
 				</div>
 				<div>
 					<a class="btn btn-default" href="p_m_consulta.php?IDAlumno=<?php echo $id;?>">regresar</a>
@@ -66,9 +70,13 @@
 					<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>IDCURSOS</th>
-								<th>IDCARRERA</th>
+								<th>IDCO</th>
+								<th>IDCU</th>
+								<th>IDPR</th>
+								
+								<th>IDCA</th>
 								<th>IDCICLO</th>
+								<th>IDSE</th>
                                 <th>DESCRIPCION</th>
                                 <th>CREDITOS</th>
 								<th></th>
@@ -77,12 +85,15 @@
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
+									<td><?php echo $row['IDCO'];?></td>
 									<td><?php echo $row['IDCursos'];?></td>
-									<td><?php echo $row['IDCarrera']; ?></td>
+									<td><?php echo $row['Pre_requisito'];?></td>
+									<td><?php echo $row['IDCarrera'];?></td>
 									<td><?php echo $row['IDCiclo']; ?></td>
+									<td><?php echo $row['IDSemestre']; ?></td>
 									<td><?php echo $row['Descripcion']; ?></td>
                                     <td><?php echo $row['Creditos']; ?></td>
-									<td><input type="checkbox" name="checkbox[]" id=""> </td>
+									<td><input type="checkbox" name="checkbox[]" value=""> </td>
 								</tr>
 							<?php } ?>
 						</tbody>
