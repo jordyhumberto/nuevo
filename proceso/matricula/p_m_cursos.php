@@ -1,14 +1,15 @@
 <?php
+	session_start();
 	require '../../conexion.php';
-	$id=$_GET['id'];
-    $ciclo=$_GET['ciclo'];
-	$carrera=$_GET['carrera'];
-	$semestre=$_GET['semestre'];
-	$sql = "SELECT * FROM (((tbl_curso_operativo as co INNER JOIN tbl_cursos1 as c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_curso_carrera1 as cc ON c.IDCursos=cc.IDCursos) LEFT JOIN tbl_curso_prerequisito1 as cp ON co.IDCursos=cp.IDCursos)";
-	$sql.=" WHERE cc.IDCarrera='$carrera'";
-	$sql.=" AND c.IDCiclo='$ciclo'";
-	//$sql.=" WHERE c.IDCiclo='$ciclo' AND cc.IDCarrera='$carrera' AND co.IDSemestre='$semestre'";
-	$resultado = $mysqli->query($sql);
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
+	$id=$_GET['IDAlumno'];
+	$carrera=$_GET['IDCarrera'];
+	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
+	$sql.=" FROM ((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)";
+	$sql.=" WHERE s.Estado='01' AND c.IDCarrera='$carrera'";
+	$resultado=$mysqli->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +20,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>INTRANET MATRICULA</title>
+	<title>INTRANET</title>
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -58,42 +59,37 @@
 				<div class="row">
 					<h2 style="text-align:center">MATRICULA CURSOS</h2>
 				</div>
-				<div class="row">
-					<h3 style="text-align:center"><?php echo $ciclo.' '.$carrera.' '.$semestre;?></h2>
-				</div>
 				<div>
-					<a class="btn btn-default" href="p_m_consulta.php?IDAlumno=<?php echo $id;?>">regresar</a>
+					<a class="btn btn-default" href="p_m_matricula.php">regresar</a>
 				</div>
-				
 				<br>
 				<div class="row table-responsive">
 					<table class="display" id="mitabla">
 						<thead>
 							<tr>
 								<th>IDCO</th>
-								<th>IDCU</th>
-								<th>IDPR</th>
-								
-								<th>IDCA</th>
-								<th>IDCICLO</th>
-								<th>IDSE</th>
-                                <th>DESCRIPCION</th>
-                                <th>CREDITOS</th>
-								<th></th>
+								<th>CURSO</th>
+                                <th>DOCENTE</th>
+                                <th>SEMESTRE</th>
+								<th>INICIO</th>
+								<th>FIN</th>
+                                <th>AULA</th>
+								<th>ESTADO</th>
+                                <th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDCO'];?></td>
-									<td><?php echo $row['IDCursos'];?></td>
-									<td><?php echo $row['Pre_requisito'];?></td>
-									<td><?php echo $row['IDCarrera'];?></td>
-									<td><?php echo $row['IDCiclo']; ?></td>
-									<td><?php echo $row['IDSemestre']; ?></td>
-									<td><?php echo $row['Descripcion']; ?></td>
-                                    <td><?php echo $row['Creditos']; ?></td>
-									<td><input type="checkbox" name="checkbox[]" value=""> </td>
+									<td><?php echo $row['id'];?></td>
+									<td><?php echo $row['curso'];?></td>
+									<td><?php echo $row['profe'];?></td>
+                                    <td><?php echo $row['semestre'];?></td>
+									<td><?php echo $row['inicio'];?></td>
+									<td><?php echo $row['fin'];?></td>
+                                    <td><?php echo $row['aula'];?></td>
+                                    <td><?php echo $row['estado'];?></td>
+									<td></td>
 								</tr>
 							<?php } ?>
 						</tbody>

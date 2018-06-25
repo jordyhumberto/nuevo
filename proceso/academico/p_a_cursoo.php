@@ -4,8 +4,8 @@
 	if(!isset($_SESSION["id_usuario"])){
 		header("Location: ../../index.php");
 	}
-	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso, d.Apellidos AS profe, s.Descripcion AS semestre, a.Descripcion AS aula, co.Estado AS estado"; 
-    $sql.=" FROM ((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) INNER JOIN tbl_aula AS a ON co.IDAula=a.IDAula)";
+	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
+    $sql.=" FROM ((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)";
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -68,6 +68,8 @@
 								<th>CURSO</th>
                                 <th>DOCENTE</th>
                                 <th>SEMESTRE</th>
+								<th>INICIO</th>
+								<th>FIN</th>
                                 <th>AULA</th>
 								<th>ESTADO</th>
                                 <th></th>
@@ -80,6 +82,8 @@
 									<td><?php echo $row['curso'];?></td>
 									<td><?php echo $row['profe'];?></td>
                                     <td><?php echo $row['semestre'];?></td>
+									<td><?php echo $row['inicio'];?></td>
+									<td><?php echo $row['fin'];?></td>
                                     <td><?php echo $row['aula'];?></td>
                                     <td><?php echo $row['estado'];?></td>
 									<td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>

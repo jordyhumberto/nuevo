@@ -27,13 +27,12 @@
 		<script src="../../js/jquery-3.3.1.min.js"></script>
 		<script src="../../js/bootstrap.min.js"></script>	
 	</head>
-	
 	<body>
 		<div class="container">
 			<div class="row">
 				<h3 style="text-align:center">NUEVO REGISTRO</h3>
 			</div>
-			<form class="form-horizontal" method="POST" action="#" autocomplete="off">
+			<form class="form-horizontal" method="POST" action="p_a_co_guardar.php" autocomplete="off">
 				<div class="form-group">
 					<label for="curso" class="col-sm-2 control-label">CURSO</label>
 					<div class="col-sm-10">

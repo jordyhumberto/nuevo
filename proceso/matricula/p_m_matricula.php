@@ -82,7 +82,7 @@
                                     <td><?php echo $row['Apellido_materno']; ?></td>
                                     <td><?php echo $row['Telf_celular']; ?></td>
 									<td><?php echo $row['Email']; ?></td>
-									<td><a href="p_m_consulta.php?IDAlumno=<?php echo $row['IDAlumno']; ?>"><span class="glyphicon glyphicon-plus"></span></a></td>
+									<td><a href="p_m_cursos.php?IDAlumno=<?php echo $row['IDAlumno']; ?>&IDCarrera=<?php echo $row['IDCarrera']?>"><span class="glyphicon glyphicon-plus"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>
