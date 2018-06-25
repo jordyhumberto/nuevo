@@ -137,7 +137,7 @@ if(!isset($_SESSION["id_usuario"])){
 			</ul>	
         </nav>
         <div class="slider">
-
+           
         </div>
         <footer>
 			<div class="arriba"><a href="#header">arriba</a></div>

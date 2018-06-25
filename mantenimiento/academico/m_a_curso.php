@@ -1,5 +1,10 @@
 <?php
+	session_start(); //Inicia una nueva sesión o reanuda la existente
 	require '../../conexion.php';
+	//Evaluamos si existe la variable de sesión id_usuario, si no existe redirigimos al index
+	if(!isset($_SESSION["id_usuario"])){
+    	header("Location: ../../index.php");
+	}
 	$sql = "SELECT c.IDCursos as id,c.Descripcion as descripcion,c.Tipo as tipo,c.HorasTeoricas as teoricas,c.HorasPractica as practicas,c.Creditos as creditos,cc.Descripcion as pre FROM tbl_cursos as c LEFT JOIN tbl_cursos as cc ON c.IDPrerequisito=cc.IDCursos ";
 	/* $sql="SELECT * FROM tbl_cursos"; */
 	$resultado = $mysqli->query($sql);

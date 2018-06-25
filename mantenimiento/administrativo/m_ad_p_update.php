@@ -1,5 +1,10 @@
 <?php
+	session_start(); //Inicia una nueva sesión o reanuda la existente
 	require '../../conexion.php';
+	//Evaluamos si existe la variable de sesión id_usuario, si no existe redirigimos al index
+	if(!isset($_SESSION["id_usuario"])){
+    	header("Location: ../../index.php");
+	}
     $id=$_POST['id'];
     $fecha=$_POST['fecha'];
     /*
@@ -8,11 +13,9 @@
     $yyyy=substr($fecha,0,4);
     $nfecha=$dd.'/'.$mm.'/'.$yyyy;
     */
-    
     $descripcion=$_POST['descripcion'];
     $estado=$_POST['estado'];
-
-	$sql = "UPDATE tbl_proceso_admision1 SET 
+	$sql = "UPDATE tbl_proceso_admision SET 
     Fecha_creacion='$fecha',
     Descripcion='$descripcion',
     Estado='$estado'
@@ -27,7 +30,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
         <meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-        <title>Intranet Admision</title>
+        <title>Intranet</title>
         <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/bootstrap-theme.css" rel="stylesheet">

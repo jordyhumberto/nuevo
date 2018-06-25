@@ -10,23 +10,19 @@
     $cad=$año.$proceso;
     $num='0000';
     $id=$cad.$num;
-
-    $sql = "SELECT IDAlumno FROM tbl_alumno1";
+    $sql = "SELECT IDAlumno FROM tbl_alumno";
     $resultado = $mysqli->query($sql);
     
     while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { 
         if($id==$row['IDAlumno']){
             $id=intval($id)+1;
-            $sql = "SELECT IDAlumno FROM tbl_alumno1";
+            $sql = "SELECT IDAlumno FROM tbl_alumno";
 	        $resultado = $mysqli->query($sql);
             $row = $resultado->fetch_array(MYSQLI_ASSOC);
         }
     }
-
     #$id=date("YmdGis");//Ymd
-    
     //echo $id;
-    
     $proceso=$_POST['proceso'];
     $carrera=$_POST['carrera'];
     $nombre = $_POST['nombre'];
@@ -59,16 +55,9 @@
     $direcciont=$_POST['direcciont'];
     $telefonot=$_POST['telefonot'];
     $parentesco=$_POST['parentesco'];
-    $categoria=$_POST['categoria'];
-    $beca=$_POST['beca'];
     $estado=$_POST['estado'];
-
-	$sql1 = "INSERT INTO tbl_alumno1 (IDAlumno, IDPadmision, IDCarrera, Nombres, Apellido_paterno, Apellido_materno, Tipo_doc, N_documento, Direccion, Cod_Dep, Cod_Prov, Cod_Dist, Sexo, Estado_civil, Fecha_nac, Cod_Depn, Cod_Provn, Telf_fijo, Telf_celular, Email, IDcolegio, Fecha_egreso, Pension_c, IDMingreso, Alergia, T_sangre, Discapacidad, Comentarios, Nombre_tutor, Email_tutor, Direc_tutor, fono_tutor, Parentesco, IDCategoria, Estado) VALUES ('$id', '$proceso', '$carrera', '$nombre', '$apellidop', '$apellidom', '$tipo', '$documento', '$direccion', '$departamento', '$provincia', '$distrito', '$sexo', '$estadoc', '$fecha', '$departamenton', '$provincian', '$telefono', '$celular', '$email', '$colegio', '$fechae', '$pension', '$mingreso', '$alergia', '$sangre', '$discapacidad', '$comentario', '$nombret', '$emailt', '$direcciont', '$telefonot', '$parentesco', '$categoria', '$estado')";
+	$sql1 = "INSERT INTO tbl_alumno (IDAlumno, IDPadmision, IDCarrera, Nombres, Apellido_paterno, Apellido_materno, Tipo_doc, N_documento, Direccion, Cod_Dep, Cod_Prov, Cod_Dist, Sexo, Estado_civil, Fecha_nac, Cod_Depn, Cod_Provn, Telf_fijo, Telf_celular, Email, IDcolegio, Fecha_egreso, Pension_c, IDMingreso, Alergia, T_sangre, Discapacidad, Comentarios, Nombre_tutor, Email_tutor, Direc_tutor, fono_tutor, Parentesco, Estado) VALUES ('$id', '$proceso', '$carrera', '$nombre', '$apellidop', '$apellidom', '$tipo', '$documento', '$direccion', '$departamento', '$provincia', '$distrito', '$sexo', '$estadoc', '$fecha', '$departamenton', '$provincian', '$telefono', '$celular', '$email', '$colegio', '$fechae', '$pension', '$mingreso', '$alergia', '$sangre', '$discapacidad', '$comentario', '$nombret', '$emailt', '$direcciont', '$telefonot', '$parentesco', '$estado')";
     $resultado1 = $mysqli->query($sql1);
-
-    
-    
-    //AGREGAR LA BECA
 ?>
 <html lang="es">
 	<head>

@@ -1,5 +1,10 @@
 <?php
-    require '../../conexion.php';
+    session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php';
+	//Evaluamos si existe la variable de sesión id_usuario, si no existe redirigimos al index
+	if(!isset($_SESSION["id_usuario"])){
+    	header("Location: ../../index.php");
+	}
     $id = $_GET['IDCursos'];
     $sql = "SELECT * FROM tbl_cursos WHERE IDCursos='$id'";
     $resultado = $mysqli->query($sql);

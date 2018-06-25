@@ -1,5 +1,10 @@
 <?php
+	session_start(); //Inicia una nueva sesión o reanuda la existente
 	require '../../conexion.php';
+	//Evaluamos si existe la variable de sesión id_usuario, si no existe redirigimos al index
+	if(!isset($_SESSION["id_usuario"])){
+    	header("Location: ../../index.php");
+	}
     $id=$_POST['id'];
     $proceso=$_POST['proceso'];
     $carrera=$_POST['carrera'];
@@ -33,12 +38,10 @@
     $direcciont=$_POST['direcciont'];
     $telefonot=$_POST['telefonot'];
     $parentesco=$_POST['parentesco'];
-    $categoria=$_POST['categoria'];
-    $beca=$_POST['beca'];
     $estado=$_POST['estado'];
     
 	
-	$sql = "UPDATE tbl_alumno1 SET 
+	$sql = "UPDATE tbl_alumno SET 
     IDPadmision='$proceso',
     IDCarrera='$carrera',
     Nombres='$nombre',
@@ -47,18 +50,18 @@
     Tipo_doc='$tipo',
     N_documento='$documento',
     Direccion='$direccion',
-    Cod_Dep ='$departamento',
-    Cod_Prov='$provincia',
-    Cod_Dist='$distrito',
+    Cod_dep ='$departamento',
+    Cod_prov='$provincia',
+    Cod_dist='$distrito',
     Sexo='$sexo',
     Estado_civil='$estadoc',
     Fecha_nac='$fecha',
-    Cod_Depn='$departamenton',
-    Cod_Provn='$provincian',
+    Cod_depn='$departamenton',
+    Cod_provn='$provincian',
     Telf_fijo='$telefono',
     Telf_celular='$celular',
     Email='$email',
-    IDcolegio='$colegio', 
+    IDColegio='$colegio', 
     Fecha_egreso='$fechae',
     Pension_c='$pension', 
     IDMingreso='$mingreso', 
@@ -71,7 +74,6 @@
     Direc_tutor='$direcciont',
     fono_tutor='$telefonot', 
     Parentesco='$parentesco', 
-    IDCategoria ='$categoria', 
     Estado='$estado' WHERE 
     IDAlumno = '$id' ";
 	$resultado = $mysqli->query($sql);
@@ -84,7 +86,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
         <meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-        <title>Intranet Alumnos</title>
+        <title>Intranet</title>
         <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/bootstrap-theme.css" rel="stylesheet">
