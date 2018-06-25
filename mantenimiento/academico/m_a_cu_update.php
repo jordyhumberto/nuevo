@@ -1,6 +1,8 @@
 <?php
 	require '../../conexion.php';
-	$id=$_POST['id'];
+    $año=$_POST['año'];
+    $semestre=$_POST['semestre'];
+    $id=$_POST['id'];
     $carrera=$_POST['carrera'];
     $tipoc=$_POST['tipoc'];
     $ciclo=$_POST['ciclo'];
@@ -12,8 +14,12 @@
     $horasp=$_POST['horasp'];
     $estado=$_POST['estado'];
     $tipo=$_POST['tipo'];
+    $pre=$_POST['pre'];
 
-	$sql = "UPDATE tbl_cursos1 SET 
+	$sql = "UPDATE tbl_cursos SET
+    Año='$año',
+    Semestre='$semestre',
+    IDCursos='$id', 
     IDCarrera='$carrera',
     Tipo_Curso='$tipoc',
     IDCiclo='$ciclo',
@@ -24,10 +30,10 @@
     HorasTeoricas='$horast',
     HorasPractica='$horasp',
     Estado='$estado',
-    Tipo='$tipo'
+    Tipo='$tipo',
+    IDPrerequisito='$pre'
     WHERE IDCursos = '$id'";
 	$resultado = $mysqli->query($sql);
-	
 ?>
 <html lang="es">
     <head>
@@ -36,14 +42,13 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
         <meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-        <title>Intranet Cursos</title>
+        <title>Intranet</title>
         <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/bootstrap-theme.css" rel="stylesheet">
         <script src="../../js/jquery-3.3.1.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>	
 	</head>
-	
 	<body>
 		<div class="container">
 			<div class="row">
@@ -53,9 +58,7 @@
 						<?php } else { ?>
 						<h3>ERROR AL MODIFICAR</h3>
 					<?php } ?>
-					
 					<a href="m_a_curso.php" class="btn btn-primary">Regresar</a>
-					
 				</div>
 			</div>
 		</div>

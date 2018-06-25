@@ -1,6 +1,8 @@
 <?php
     require '../../conexion.php';
-
+    $año=$_POST['año'];
+    $semestre=$_POST['semestre'];
+    $id=$_POST['id'];
     $carrera=$_POST['carrera'];
     $tipoc=$_POST['tipoc'];
     $ciclo=$_POST['ciclo'];
@@ -12,25 +14,17 @@
     $horasp=$_POST['horasp'];
     $estado=$_POST['estado'];
     $tipo=$_POST['tipo'];
+    $pre=$_POST['pre'];
    
     
-    $st='';
-    if($tipoc=='1'){
-        $st='B';
-    }else if($tipoc=='2'){
-        $st='G';
-    }else if($tipoc=='3'){
-        $st='P';
-    }
-
-    if($ciclo<10){
+    /* if($ciclo<10){
         $cad='0'.$ciclo;
     }else{
         $cad=$ciclo;
     }
-    
+     */
  
-    $cadd=$carrera.$st.$cad;
+    /* $cadd=$carrera.$tipoc.$cad;
     $num='01';
     $co='';
     $id=$cadd.$num;
@@ -51,10 +45,11 @@
             $id=$cadd.$co;
             $resultado1 = $mysqli->query($sql1);
         }
-    }
+    } */
 
     
-    $sql = "INSERT INTO tbl_cursos1(IDCursos,IDCarrera,Tipo_Curso,IDCiclo,Descripcion,Creditos,Rcreditos,IDTA,HorasTeoricas,HorasPractica,Estado,Tipo) VALUES ('$id','$carrera','$tipoc','$ciclo','$descripcion','$creditos','$creditosr','$tipoa','$horast','$horasp','$estado','$tipo')";
+    $sql ="INSERT INTO tbl_cursos(Año,Semestre,IDCursos,Descripcion,IDCarrera,Tipo_Curso,IDCiclo,IDPrerequisito,Creditos,Rcreditos,HorasTeoricas,HorasPractica,Tipo,IDTA,Estado)";
+    $sql.=" VALUES('$año','$semestre','$id','$descripcion','$carrera','$tipoc','$ciclo','$pre','$creditos','$creditosr','$horast','$horasp','$tipo','$tipoa','$estado')";
 	$resultado = $mysqli->query($sql);
     
 ?>
@@ -66,7 +61,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
 		<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-		<title>Intranet Cursos</title>
+		<title>Intranet</title>
 		<link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -78,14 +73,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="row" style="text-align:center">
-                    <?php 
-                    
-                    if($resultado) { 
-						    echo '<h3>REGISTRO GUARDADO</h3>';
-						} else { 
-						    echo '<h3>ERROR AL GUARDAR</h3>';
+                    <?php         
+                        if($resultado) { 
+                            echo '<h3>REGISTRO GUARDADO</h3>';
+                        } else { 
+                             echo '<h3>ERROR AL GUARDAR</h3>';
                         } 
- 
                     ?>
 					<a href="m_a_curso.php" class="btn btn-primary">Regresar</a>
 				</div>

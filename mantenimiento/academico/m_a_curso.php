@@ -1,6 +1,7 @@
 <?php
 	require '../../conexion.php';
-	$sql = "SELECT * FROM tbl_cursos1 ORDER BY IDCursos";
+	$sql = "SELECT c.IDCursos as id,c.Descripcion as descripcion,c.Tipo as tipo,c.HorasTeoricas as teoricas,c.HorasPractica as practicas,c.Creditos as creditos,cc.Descripcion as pre FROM tbl_cursos as c LEFT JOIN tbl_cursos as cc ON c.IDPrerequisito=cc.IDCursos ";
+	/* $sql="SELECT * FROM tbl_cursos"; */
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -11,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>Intranet Cursos</title>
+	<title>Intranet</title>
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -59,26 +60,27 @@
 				<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>ID_Cursos</th>
+								<th>IDCURSO</th>
 								<th>Descripción</th>
-								<th>Hora_Teoricas</th>
-                                <th>Hora_Practica</th>
-								<th>Pre_Req</th>
-								<th>Carr_Asc</th>
+								<th>TIPO</th>
+								<th>HT</th>
+                                <th>HP</th>
+								<th>CREDITOS</th>
+								<th>PREREQUISITO</th>
 								<th></th>
-								
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDCursos']; ?></td>
-									<td><?php echo $row['Descripcion']; ?></td>
-									<td><?php echo $row['HorasTeoricas']; ?></td>
-                                    <td><?php echo $row['HorasPractica']; ?></td>
-									<td><a href="m_a_curso_pre.php?IDCursos=<?php echo $row['IDCursos']; ?>"><span class="glyphicon glyphicon-plus"></span></a></td>
-									<td><a href="m_a_curso_car.php?IDCursos=<?php echo $row['IDCursos']; ?>"><span class="glyphicon glyphicon-plus"></span></a></td>
-									<td><a href="m_a_cu_modificar.php?IDCursos=<?php echo $row['IDCursos']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+									<td><?php echo $row['id']; ?></td>
+									<td><?php echo $row['descripcion']; ?></td>
+									<td><?php echo $row['tipo'];?></td>
+									<td><?php echo $row['teoricas']; ?></td>
+                                    <td><?php echo $row['practicas']; ?></td>
+									<td><?php echo $row['creditos'];?></td>
+									<td><?php echo $row['pre']?></td>
+									<td><a href="m_a_cu_modificar.php?IDCursos=<?php echo $row['id']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>
