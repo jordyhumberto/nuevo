@@ -59,9 +59,6 @@
 				<div class="row">
 					<h2 style="text-align:center">MATRICULA CURSOS</h2>
 				</div>
-				<div>
-					<a class="btn btn-default" href="p_m_matricula.php">regresar</a>
-				</div>
 				<br>
 				<form action="p_m_guardar.php" method="post">
 					<div class="row table-responsive">
@@ -96,6 +93,8 @@
 							</tbody>
 						</table>
 					</div>
+					<br>
+					<a class="btn btn-default" href="p_m_matricula.php">regresar</a>
 					<input type="submit" class="btn btn-primary">
 				</form>
 			</div>	
