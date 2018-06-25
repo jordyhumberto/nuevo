@@ -1,9 +1,13 @@
 <?php
-	//header("Content-Type: text/html;charset=utf-8");
-	require '../../conexion.php';
-	$sql = "SELECT * FROM tbl_alumno1 ORDER BY IDAlumno";
+	session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	
+	//Evaluamos si existe la variable de sesión id_usuario, si no existe redirigimos al index
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
+	$sql = "SELECT * FROM tbl_alumno ORDER BY IDAlumno";
 	$resultado = $mysqli->query($sql);
-	include '../../funcion.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,7 +18,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>Intranet Alumnos</title>
+	<title>Intranet</title>
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -75,11 +79,11 @@
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
 									<td><?php echo $row['IDAlumno']; ?></td>
-									<td><?php echo sanear_string($row['Nombres']); ?></td>
-									<td><?php echo sanear_string($row['Apellido_paterno']); ?></td>
-                                    <td><?php echo sanear_string($row['Apellido_materno']); ?></td>
+									<td><?php echo $row['Nombres']; ?></td>
+									<td><?php echo $row['Apellido_paterno']; ?></td>
+                                    <td><?php echo $row['Apellido_materno']; ?></td>
                                     <td><?php echo $row['Telf_celular']; ?></td>
-									<td><?php echo sanear_string($row['Email']); ?></td>
+									<td><?php echo $row['Email']; ?></td>
 									<td><a href="p_m_consulta.php?IDAlumno=<?php echo $row['IDAlumno']; ?>"><span class="glyphicon glyphicon-plus"></span></a></td>
 								</tr>
 							<?php } ?>

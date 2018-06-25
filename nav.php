@@ -75,7 +75,7 @@
                 </li>
                 <li ><a href="#">Academico</a>
                     <ul>
-                        <li><a href="#">Curso-Operativo</a></li>
+                        <li><a href="../../proceso/academico/p_a_cursoo.php">Curso-Operativo</a></li>
                         <li><a href="#">Horario-Clases</a></li>
                         <li><a href="#">Cursos-Alumno</a></li>
                         <li><a href="#">Registro-Notas</a></li>

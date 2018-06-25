@@ -4,15 +4,13 @@
 	if(!isset($_SESSION["id_usuario"])){
 		header("Location: ../../index.php");
 	}
-	
 	$id=$_GET['IDAlumno'];
-	
-	$sql="SELECT * FROM tbl_alumno1 WHERE IDAlumno='$id'";
-	$sql1="SELECT * FROM tbl_carrera1";
-	$sql2="SELECT * FROM tbl_semestre1 ORDER BY IDSemestre DESC";
+	$sql="SELECT * FROM tbl_alumno WHERE IDAlumno='$id'";
+	$sql1="SELECT * FROM tbl_carrera";
+	$sql2="SELECT * FROM tbl_semestre ORDER BY IDSemestre DESC";
 	$sql3="SELECT * FROM tbl_tipo_matricula";
-	$sql4="SELECT * FROM tbl_ciclos1";
-	$sql5="SELECT * FROM (((tbl_curso_carrera1 as cc INNER JOIN tbl_curso1 as c ON cc.IDCursos=c.IDCursos)INNER JOIN tbl_curso_prerequisito1 as cp ON c.IDcursos=cp.IDCursos)INNER JOIN tbl_notas_alumno as na ON )";
+	$sql4="SELECT * FROM tbl_ciclos";
+	$sql5="SELECT * FROM tbl_cursos";
 	$resultado=$mysqli->query($sql);
 	$fila=$resultado->fetch_array(MYSQLI_ASSOC);
 	$nombre=$fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_materno'];
@@ -39,10 +37,10 @@
 		$idt=$_POST['tipo'];
 		$ide=$_POST['estado'];
 		$idca=$_POST['ciclo'];
-		$s="SELECT * FROM tbl_carrera1 WHERE IDCarrera='$idc'";
+		$s="SELECT * FROM tbl_carrera WHERE IDCarrera='$idc'";
 		$c=$mysqli->query($s);
 		$r=$c->fetch_array(MYSQLI_ASSOC);
-		$ss="SELECT * FROM tbl_semestre1 WHERE IDSemestre='$ids'";
+		$ss="SELECT * FROM tbl_semestre WHERE IDSemestre='$ids'";
 		$cc=$mysqli->query($ss);
 		$rr=$cc->fetch_array(MYSQLI_ASSOC);
 		$fechai=$rr['Fecha_Inicio'];
@@ -53,7 +51,6 @@
 		$idm=date('Y').substr($idc,0,2);
 		$local=date("Y-m-d H:i:s");
 	}
-	
 ?>
 <html lang="es">
 	<head>
@@ -63,7 +60,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
 		<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-		<title>Intranet Matricula</title>
+		<title>Intranet</title>
 		<link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../../css/bootstrap-theme.css" rel="stylesheet">
