@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-06-2018 a las 20:10:03
--- Versión del servidor: 10.1.32-MariaDB
--- Versión de PHP: 7.2.5
+-- Tiempo de generación: 25-06-2018 a las 09:16:18
+-- Versión del servidor: 10.1.33-MariaDB
+-- Versión de PHP: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -2473,6 +2473,22 @@ CREATE TABLE `tbl_carrera` (
   `IDFacultad` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `tbl_carrera`
+--
+
+INSERT INTO `tbl_carrera` (`IDCarrera`, `Descripcion`, `Duracion`, `Cant_creditos`, `Pension`, `Nro_pensiones`, `Costo_matricula`, `Estado`, `IDFacultad`) VALUES
+('ADU', 'DIPLOMADO EN COMERCIO EXTERIOR Y ADUANAS', 1, 1, 200, 11, 20, '01', 1),
+('AFF', 'ADMINISTRACION DE EMPRESAS', 5, 20, 800, 10, 200, '01', 1),
+('CFF', 'CONTABILIDAD, FINANZAS Y AUDITORIA', 5, 20, 760, 10, 200, '01', 1),
+('CP', 'CURSO DE COMPUTACION', 0, 0, 0, 0, 50, '02', 1),
+('DEC', 'PROGRAMA_DECIDETE', 3, 0, 350, 3, 150, '01', 1),
+('INF', 'INGENIERIA DE NEGOCIOS', 5, 24, 760, 10, 200, '01', 1),
+('ISF', 'INGENIERIA DE SISTEMAS E INFORMATICA', 5, 24, 760, 5, 200, '01', 1),
+('MYP', 'DIPLOMADO EN MICRO Y PEQUEÑAS EMPRESAS', 0, 1, 250, 6, 30, '01', 1),
+('THF', 'TURISMO, HOTELERIA Y GASTRONOMIA', 5, 24, 840, 10, 200, '01', 1),
+('TIT', 'CURSO DE TITULACION', 0, 0, 0, 4, 400, '01', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -2484,6 +2500,22 @@ CREATE TABLE `tbl_ciclos` (
   `Descripcion` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_ciclos`
+--
+
+INSERT INTO `tbl_ciclos` (`IDCiclo`, `Descripcion`, `Estado`) VALUES
+(1, 'PRIMER CICLO', '01'),
+(2, 'SEGUNDO CICLO', '01'),
+(3, 'TERCER CICLO', '01'),
+(4, 'CUARTO CICLO', '01'),
+(5, 'QUINTO CICLO', '01'),
+(6, 'SEXTO CICLO', '01'),
+(7, 'SÉPTIMO CICLO', '01'),
+(8, 'OCTAVO CICLO', '01'),
+(9, 'NOVENO CICLO', '01'),
+(10, 'DECIMO CICLO', '01');
 
 -- --------------------------------------------------------
 
@@ -4694,20 +4726,30 @@ CREATE TABLE `tbl_compromiso_pago` (
 --
 
 CREATE TABLE `tbl_cursos` (
+  `Año` int(11) NOT NULL,
+  `Semestre` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `IDCursos` varchar(8) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `Descripcion` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IDCarrera` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   `Tipo_Curso` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IDCiclo` int(11) DEFAULT NULL,
   `IDPrerequisito` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
-  `Descripcion` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Creditos` int(11) DEFAULT NULL,
   `Rcreditos` int(11) DEFAULT NULL,
-  `IDTA` int(11) DEFAULT NULL,
   `HorasTeoricas` int(5) DEFAULT NULL,
   `HorasPractica` int(5) DEFAULT NULL,
-  `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Tipo` char(1) COLLATE utf8_unicode_ci DEFAULT NULL
+  `Tipo` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IDTA` int(11) NOT NULL,
+  `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_cursos`
+--
+
+INSERT INTO `tbl_cursos` (`Año`, `Semestre`, `IDCursos`, `Descripcion`, `IDCarrera`, `Tipo_Curso`, `IDCiclo`, `IDPrerequisito`, `Creditos`, `Rcreditos`, `HorasTeoricas`, `HorasPractica`, `Tipo`, `IDTA`, `Estado`) VALUES
+(1, 'I', 'ISFB0101', 'MATEMÁTICA I', 'ISF', 'B', 1, '', 5, 0, 4, 2, 'O', 1, '01'),
+(1, 'II', 'ISFB0201', 'MATEMÁTICA II', 'ISF', 'B', 2, 'ISFB0101', 5, 0, 4, 2, 'O', 1, '01');
 
 -- --------------------------------------------------------
 
@@ -4946,6 +4988,17 @@ CREATE TABLE `tbl_tipo_aula` (
   `Descripcion` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_tipo_aula`
+--
+
+INSERT INTO `tbl_tipo_aula` (`IDTA`, `Descripcion`, `Estado`) VALUES
+(1, 'Teórico', '01'),
+(2, 'LABORATORIO COMPUTO', '01'),
+(3, 'Laboratorio Quimica', '01'),
+(4, 'LABORATORIO CIENCIAS', '01'),
+(5, 'TALLER DE COCINA', '01');
 
 -- --------------------------------------------------------
 
@@ -6244,8 +6297,7 @@ ALTER TABLE `tbl_compromiso_pago`
 --
 ALTER TABLE `tbl_cursos`
   ADD PRIMARY KEY (`IDCursos`),
-  ADD KEY `idx_curso_ciclos` (`IDCiclo`),
-  ADD KEY `idx_curso_ticu` (`IDTA`);
+  ADD KEY `idx_curso_ciclos` (`IDCiclo`);
 
 --
 -- Indices de la tabla `tbl_curso_operativo`
@@ -6333,12 +6385,6 @@ ALTER TABLE `tbl_semestre`
   ADD PRIMARY KEY (`IDSemestre`);
 
 --
--- Indices de la tabla `tbl_tipo_aula`
---
-ALTER TABLE `tbl_tipo_aula`
-  ADD PRIMARY KEY (`IDTA`);
-
---
 -- Indices de la tabla `tbl_tipo_matricula`
 --
 ALTER TABLE `tbl_tipo_matricula`
@@ -6391,7 +6437,7 @@ ALTER TABLE `tbl_aula`
 -- AUTO_INCREMENT de la tabla `tbl_ciclos`
 --
 ALTER TABLE `tbl_ciclos`
-  MODIFY `IDCiclo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDCiclo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_colegio`
@@ -6422,12 +6468,6 @@ ALTER TABLE `tbl_pago`
 --
 ALTER TABLE `tbl_semestre`
   MODIFY `IDSemestre` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `tbl_tipo_aula`
---
-ALTER TABLE `tbl_tipo_aula`
-  MODIFY `IDTA` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_tipo_matricula`
