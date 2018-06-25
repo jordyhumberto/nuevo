@@ -63,38 +63,41 @@
 					<a class="btn btn-default" href="p_m_matricula.php">regresar</a>
 				</div>
 				<br>
-				<div class="row table-responsive">
-					<table class="display" id="mitabla">
-						<thead>
-							<tr>
-								<th>IDCO</th>
-								<th>CURSO</th>
-                                <th>DOCENTE</th>
-                                <th>SEMESTRE</th>
-								<th>INICIO</th>
-								<th>FIN</th>
-                                <th>AULA</th>
-								<th>ESTADO</th>
-                                <th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
+				<form action="p_m_guardar.php" method="post">
+					<div class="row table-responsive">
+						<table class="display" id="mitabla">
+							<thead>
 								<tr>
-									<td><?php echo $row['id'];?></td>
-									<td><?php echo $row['curso'];?></td>
-									<td><?php echo $row['profe'];?></td>
-                                    <td><?php echo $row['semestre'];?></td>
-									<td><?php echo $row['inicio'];?></td>
-									<td><?php echo $row['fin'];?></td>
-                                    <td><?php echo $row['aula'];?></td>
-                                    <td><?php echo $row['estado'];?></td>
-									<td></td>
+									<th>IDCO</th>
+									<th>CURSO</th>
+									<th>DOCENTE</th>
+									<th>SEMESTRE</th>
+									<th>INICIO</th>
+									<th>FIN</th>
+									<th>AULA</th>
+									<th>ESTADO</th>
+									<th></th>
 								</tr>
-							<?php } ?>
-						</tbody>
-					</table>
-				</div>
+							</thead>
+							<tbody>
+								<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
+									<tr>
+										<td><?php echo $row['id'];?></td>
+										<td><?php echo $row['curso'];?></td>
+										<td><?php echo $row['profe'];?></td>
+										<td><?php echo $row['semestre'];?></td>
+										<td><?php echo $row['inicio'];?></td>
+										<td><?php echo $row['fin'];?></td>
+										<td><?php echo $row['aula'];?></td>
+										<td><?php echo $row['estado'];?></td>
+										<td><input type="checkbox" name="check[]" value="<?php echo $row['id'];?>"></td>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+					<input type="submit" class="btn btn-primary">
+				</form>
 			</div>	
 		<footer>
 			<div class="arriba"><a href="#header">arriba</a></div>
