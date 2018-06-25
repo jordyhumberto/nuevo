@@ -1,17 +1,12 @@
 <?php
-	require '../../conexion.php';
-	/*
-		
-		if(!empty($_POST))
-		{
-			$valor = $_POST['campo'];
-			if(!empty($valor)){
-				$where = "WHERE nombre LIKE '%$valor'";
-			}
-		}
-	*/
-	$where = "";
-	$sql = "SELECT * FROM tbl_docente1 $where ORDER BY IDDocente";
+	session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	
+	//Evaluamos si existe la variable de sesión id_usuario, si no existe redirigimos al index
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
+	$sql = "SELECT * FROM tbl_docente ORDER BY IDDocente";
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -22,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>Intranet Docentes</title>
+	<title>Intranet</title>
 
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">

@@ -2,7 +2,7 @@
     require '../../conexion.php';
 	$sql1 = "SELECT * FROM tbl_local ORDER BY IDLocal";
     $resultado1 = $mysqli->query($sql1);
-    $sql2 = "SELECT * FROM tbl_tipo_aula1 ORDER BY IDTA";
+    $sql2 = "SELECT * FROM tbl_tipo_aula ORDER BY IDTA";
 	$resultado2 = $mysqli->query($sql2);
 ?>
 <html lang="es">
@@ -12,7 +12,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
 		<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-		<title>Intranet Aula</title>
+		<title>Intranet</title>
 		<link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -25,7 +25,6 @@
 			<div class="row">
 				<h3 style="text-align:center">NUEVO REGISTRO</h3>
 			</div>
-			
 			<form class="form-horizontal" method="POST" action="m_a_a_guardar.php" autocomplete="off">
 				
 				<div class="form-group">

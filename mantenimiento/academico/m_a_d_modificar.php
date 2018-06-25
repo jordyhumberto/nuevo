@@ -1,13 +1,14 @@
 <?php
-	require '../../conexion.php';
-	
+	session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
 	$id = $_GET['IDDocente'];
-	
-	$sql = "SELECT * FROM tbl_docente1 WHERE IDDocente = '$id'";
+	$sql = "SELECT * FROM tbl_docente WHERE IDDocente = '$id'";
 	$resultado = $mysqli->query($sql);
 	$row = $resultado->fetch_array(MYSQLI_ASSOC);
-	$where = "";
-	$consulta = "SELECT * FROM distrito $where ORDER BY Cod_dis";
+	$consulta = "SELECT * FROM distritos ORDER BY Nom_Dist";
 	$resul = $mysqli->query($consulta);
 ?>
 <html lang="es">
@@ -17,23 +18,20 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
         <meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-        <title>Intranet Docentes</title>
+        <title>Intranet</title>
         <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/bootstrap-theme.css" rel="stylesheet">
         <script src="../../js/jquery-3.3.1.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>	
 	</head>
-	
 	<body>
 		<div class="container">
 			<div class="row">
 				<h3 style="text-align:center">MODIFICAR REGISTRO</h3>
 			</div>
-			
 			<form class="form-horizontal" method="POST" action="m_a_d_update.php" autocomplete="off">
-				<input type="hidden" id="id" name="id" value="<?php echo $row['IDDocente']; ?>" />
-
+				<input type="hidden" id="id" name="id" value="<?php echo $row['IDDocente']; ?>"/>
 				<div class="form-group">
 					<label for="tipo" class="col-sm-2 control-label">Tipo de documento</label>
 					<div class="col-sm-10">
@@ -70,22 +68,19 @@
 						<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" value="<?php echo $row['Direccion'];?>" required>
 					</div>
 				</div>
-				
-				<!--////////////////////////problema aqui/////////////////////////-->
 				<div class="form-group">
 					<label for="distrito" class="col-sm-2 control-label">Distrito</label>
 					<div class="col-sm-10">
 						<select class="form-control" id="distrito" name="distrito">				
 							<?php while($fila = $resul->fetch_array(MYSQLI_ASSOC)) { ?>
-								<option value="<?php echo $fila['Cod_dis']; ?>" 
-								<?php if($fila['Cod_dis']==$row['Cod_Dist']) echo 'selected'; ?>>
-								<?php echo $fila['Nom_dis']; ?>
+								<option value="<?php echo $fila['Cod_Dist']; ?>" 
+								<?php if($fila['Cod_Dist']==$row['Cod_Dist']) echo 'selected'; ?>>
+								<?php echo $fila['Nom_Dist']; ?>
 								</option>	
 							<?php } ?>
 						</select>
 					</div>
 				</div>
-				<!--///////////////////////////////////////////////////////////////-->
 				<div class="form-group">
 					<label for="telefono" class="col-sm-2 control-label">Telefono</label>
 					<div class="col-sm-10">
@@ -105,15 +100,6 @@
 					</div>
 				</div>		
 				<div class="form-group">
-					<label for="estado_civil" class="col-sm-2 control-label">Estado Civil</label>
-					<div class="col-sm-10">
-						<select class="form-control" id="estado" name="estado">
-							<option value="01" <?php if($row['Estado']=='01') echo 'selected'; ?>>ACTIVO</option>
-							<option value="00" <?php if($row['Estado']=='00') echo 'selected'; ?>>INACTIVO</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
 					<label for="categoria" class="col-sm-2 control-label">Categoría</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="categoria" name="categoria" placeholder="Categoría" value="<?php echo $row['Categoria'];?>" required>
@@ -122,16 +108,24 @@
 				<div class="form-group">
 					<label for="regimen" class="col-sm-2 control-label">Régimen</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="regimen" name="regimen" placeholder="Régimen de dedicación" value="<?php echo $row['Regi_dedicacion'];?>" required>
+						<input type="text" class="form-control" id="regimen" name="regimen" placeholder="Régimen de dedicación" value="<?php echo $row['Regi_dedicacion'];?>">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="tiempo" class="col-sm-2 control-label">Tiempo de labores</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" id="tiempo" name="tiempo" min="0" placeholder="horas al mes" value="<?php echo $row['Tiem_labores'];?>" required>
+						<input type="number" class="form-control" id="tiempo" name="tiempo" min="0" placeholder="horas al mes" value="<?php echo $row['Tiem_labores'];?>">
 					</div>
 				</div>
-				<!--///////////////////////////////////////////////////////////////////////////////////-->
+				<div class="form-group">
+					<label for="estado_civil" class="col-sm-2 control-label">Estado</label>
+					<div class="col-sm-10">
+						<select class="form-control" id="estado" name="estado">
+							<option value="01" <?php if($row['Estado']=='01') echo 'selected'; ?>>ACTIVO</option>
+							<option value="00" <?php if($row['Estado']=='00') echo 'selected'; ?>>INACTIVO</option>
+						</select>
+					</div>
+				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<a href="m_a_docente.php" class="btn btn-default">Regresar</a>

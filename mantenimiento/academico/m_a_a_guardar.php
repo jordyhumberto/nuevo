@@ -1,6 +1,9 @@
 <?php
-    require '../../conexion.php';
-    
+    session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
     $descripcion=$_POST['descripcion'];
     $local=$_POST['local'];
     $aforo=$_POST['aforo'];
@@ -9,7 +12,7 @@
     $tipoa=$_POST['tipoa'];
     $estado=$_POST['estado'];
    
-	$sql = "INSERT INTO tbl_aula1(Descripcion,IDLocal,Aforo,Hora_Apertura,Hora_Cierre,IDTA,Estado) VALUES ('$descripcion','$local','$aforo','$horaa','$horac','$tipoa','$estado')";
+	$sql = "INSERT INTO tbl_aula(Descripcion,IDLocal,Aforo,Hora_Apertura,Hora_Cierre,IDTA,Estado) VALUES ('$descripcion','$local','$aforo','$horaa','$horac','$tipoa','$estado')";
 	$resultado = $mysqli->query($sql);
 ?>
 
