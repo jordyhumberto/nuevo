@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-06-2018 a las 09:16:18
--- Versión del servidor: 10.1.33-MariaDB
--- Versión de PHP: 7.2.6
+-- Tiempo de generación: 26-06-2018 a las 23:44:14
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -2354,6 +2354,7 @@ CREATE TABLE `tbl_alumno` (
   `Tipo_doc` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `N_documento` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Direccion` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `Cod_dist` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `Cod_dep` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `Cod_prov` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `Sexo` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
@@ -2379,6 +2380,14 @@ CREATE TABLE `tbl_alumno` (
   `Parentesco` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `Estado` varchar(2) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_alumno`
+--
+
+INSERT INTO `tbl_alumno` (`IDAlumno`, `IDPadmision`, `IDCarrera`, `Nombres`, `Apellido_paterno`, `Apellido_materno`, `Tipo_doc`, `N_documento`, `Direccion`, `Cod_dist`, `Cod_dep`, `Cod_prov`, `Sexo`, `Estado_civil`, `Fecha_nac`, `Cod_depn`, `Cod_provn`, `Telf_fijo`, `Telf_celular`, `Email`, `IDColegio`, `Fecha_egreso`, `Pension_c`, `IDMingreso`, `Alergia`, `T_sangre`, `Discapacidad`, `Comentarios`, `Nombre_tutor`, `Email_tutor`, `Direc_tutor`, `Fono_tutor`, `Parentesco`, `Estado`) VALUES
+('2018010000', '201802', 'ISF', 'JORDY HUMBERTO', 'VILLAVICENCIO', 'CRUZ', 'DNI', '75682557', 'MZA LT9 AAHH LOS SAUCES 3RA ZONA COLLIQUE', '120206', '150000', '150100', '01', '00', '1994-05-16', '150000', '150100', '', '', 'jordyhvillavicencio@gmail.com', '0', '0000-00-00', 0, '1', '', '', '', '', '', '', '', '', '', '01'),
+('2018010001', '201802', 'INF', 'JORDY NEGOCIOS', 'VILLAVICENCIO', 'CRUZ', 'DNI', '75682557', 'HOLA', '030101', '010000', '030100', '01', '00', '1994-05-16', '010000', '030100', '', '', 'jordyhvillavicencio@gmail.com', '0', '0000-00-00', 0, '1', '', '', '', '', '', '', '', '', '', '01');
 
 -- --------------------------------------------------------
 
@@ -4729,7 +4738,7 @@ CREATE TABLE `tbl_cursos` (
   `Año` int(11) NOT NULL,
   `Semestre` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `IDCursos` varchar(8) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `Descripcion` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Descripcion` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IDCarrera` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   `Tipo_Curso` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IDCiclo` int(11) DEFAULT NULL,
@@ -4748,8 +4757,14 @@ CREATE TABLE `tbl_cursos` (
 --
 
 INSERT INTO `tbl_cursos` (`Año`, `Semestre`, `IDCursos`, `Descripcion`, `IDCarrera`, `Tipo_Curso`, `IDCiclo`, `IDPrerequisito`, `Creditos`, `Rcreditos`, `HorasTeoricas`, `HorasPractica`, `Tipo`, `IDTA`, `Estado`) VALUES
+(1, 'I', 'INFB0101', 'MATEMÁTICA I', 'INF', 'B', 1, '', 5, 0, 4, 2, 'O', 1, '01'),
 (1, 'I', 'ISFB0101', 'MATEMÁTICA I', 'ISF', 'B', 1, '', 5, 0, 4, 2, 'O', 1, '01'),
-(1, 'II', 'ISFB0201', 'MATEMÁTICA II', 'ISF', 'B', 2, 'ISFB0101', 5, 0, 4, 2, 'O', 1, '01');
+(1, 'I', 'ISFB0102', 'SOPORTE TÉCNICO DE HARDWARE Y SOFTWARE', 'ISF', 'B', 1, '', 3, 0, 2, 2, 'O', 1, '01'),
+(1, 'II', 'ISFB0201', 'MATEMÁTICA II', 'ISF', 'B', 2, 'ISFB0101', 5, 0, 4, 2, 'O', 1, '01'),
+(1, 'I', 'ISFG0101', 'LENGUAJE I', 'ISF', 'G', 1, '', 5, 0, 4, 2, 'O', 1, '01'),
+(1, 'I', 'ISFG0102', 'METODOLOGÍA DEL TRABAJO UNIVER', 'ISF', 'G', 1, '', 4, 0, 3, 2, 'O', 1, '01'),
+(1, 'I', 'ISFG0103', 'INGLÉS I', 'ISF', 'G', 1, '', 3, 0, 2, 2, 'O', 1, '01'),
+(1, 'II', 'ISFG0201', 'LENGUAJE II', 'ISF', 'G', 2, 'ISFG0101', 5, 0, 4, 2, 'O', 1, '01');
 
 -- --------------------------------------------------------
 
@@ -4762,12 +4777,26 @@ CREATE TABLE `tbl_curso_operativo` (
   `IDCursos` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IDDocente` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IDSemestre` int(11) DEFAULT NULL,
-  `IDAlumno` int(11) NOT NULL,
+  `IDAula` int(11) NOT NULL,
   `F_exParcial` datetime DEFAULT NULL,
   `F_exFinal` datetime DEFAULT NULL,
   `F_exSusti` datetime DEFAULT NULL,
   `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_curso_operativo`
+--
+
+INSERT INTO `tbl_curso_operativo` (`IDCO`, `IDCursos`, `IDDocente`, `IDSemestre`, `IDAula`, `F_exParcial`, `F_exFinal`, `F_exSusti`, `Estado`) VALUES
+('2018001', 'ISFG0103', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018002', 'ISFG0101', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018003', 'INFB0101', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018004', 'ISFB0101', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018005', 'ISFG0102', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018006', 'ISFB0102', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018007', 'ISFG0201', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018008', 'ISFB0201', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01');
 
 -- --------------------------------------------------------
 
@@ -4788,8 +4817,8 @@ CREATE TABLE `tbl_det_semestre` (
 --
 
 CREATE TABLE `tbl_docente` (
-  `IDDocente` varchar(14) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `Tipo_doc` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IDDocente` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `Tipo_doc` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `N_documento` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Nombres` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Apellidos` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -4799,11 +4828,18 @@ CREATE TABLE `tbl_docente` (
   `Telf_fijo` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `Telf_celular` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `Email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Estado` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Categoria` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `Regi_dedicacion` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `Tiem_labores` int(11) NOT NULL
+  `Tiem_labores` int(11) NOT NULL,
+  `Estado` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_docente`
+--
+
+INSERT INTO `tbl_docente` (`IDDocente`, `Tipo_doc`, `N_documento`, `Nombres`, `Apellidos`, `Fecha_nac`, `Direccion`, `Cod_Dist`, `Telf_fijo`, `Telf_celular`, `Email`, `Categoria`, `Regi_dedicacion`, `Tiem_labores`, `Estado`) VALUES
+('OCAD201800', 'CARNET DE EXTRANJERIA', '0020182', 'JIANG', 'ARROYO', '1991-07-02', 'AV JUAN VELAZCO ALVARADO', '070101', '', '', 'profesorjiangarroyo@gmail.com', 'MAESTRIA ', '', 0, '01');
 
 -- --------------------------------------------------------
 
@@ -4816,6 +4852,27 @@ CREATE TABLE `tbl_facultad` (
   `Descripcion` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_local`
+--
+
+CREATE TABLE `tbl_local` (
+  `IDLocal` int(11) NOT NULL,
+  `Descripcion` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Direccion` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_local`
+--
+
+INSERT INTO `tbl_local` (`IDLocal`, `Descripcion`, `Direccion`, `Estado`) VALUES
+(1, 'Local1', 'Av. Salaverry 1810 - Jesús María - Lima - Lima', '01'),
+(2, 'Local2', 'Jr. Pachacutec 900 - Jesús María - Lima - Lima', '01');
 
 -- --------------------------------------------------------
 
@@ -4879,6 +4936,7 @@ INSERT INTO `tbl_modalidad_ingreso` (`IDMingreso`, `Descripcion`, `Estado`) VALU
 
 CREATE TABLE `tbl_notas_alumno` (
   `IDMatricula` char(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IDAlumno` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `IDCO` char(7) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Nota1` decimal(4,2) DEFAULT NULL,
   `Nota2` decimal(4,2) DEFAULT NULL,
@@ -4960,6 +5018,13 @@ CREATE TABLE `tbl_proceso_admision` (
   `Estado` varchar(2) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `tbl_proceso_admision`
+--
+
+INSERT INTO `tbl_proceso_admision` (`IDPadmision`, `Fecha_creacion`, `Descripcion`, `Estado`) VALUES
+('201802', '2018-06-25', '2018-II', '01');
+
 -- --------------------------------------------------------
 
 --
@@ -4970,12 +5035,19 @@ CREATE TABLE `tbl_semestre` (
   `IDSemestre` int(11) NOT NULL,
   `Descripcion` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Nro_pagos` int(11) DEFAULT NULL,
-  `Estado` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Fecha_Inicio` date DEFAULT NULL,
   `Fecha_Fin` date DEFAULT NULL,
   `Detalle` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nro_notas` tinyint(4) DEFAULT NULL
+  `nro_notas` tinyint(4) DEFAULT NULL,
+  `Estado` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_semestre`
+--
+
+INSERT INTO `tbl_semestre` (`IDSemestre`, `Descripcion`, `Nro_pagos`, `Fecha_Inicio`, `Fecha_Fin`, `Detalle`, `nro_notas`, `Estado`) VALUES
+(1, '2018-II', 5, '2018-08-06', '2018-12-21', 'SEGUNDO SEMESTRE DE 2018', 5, '01');
 
 -- --------------------------------------------------------
 
@@ -6328,6 +6400,12 @@ ALTER TABLE `tbl_facultad`
   ADD PRIMARY KEY (`IDFacultad`);
 
 --
+-- Indices de la tabla `tbl_local`
+--
+ALTER TABLE `tbl_local`
+  ADD PRIMARY KEY (`IDLocal`);
+
+--
 -- Indices de la tabla `tbl_matricula_carrera`
 --
 ALTER TABLE `tbl_matricula_carrera`
@@ -6452,6 +6530,12 @@ ALTER TABLE `tbl_facultad`
   MODIFY `IDFacultad` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `tbl_local`
+--
+ALTER TABLE `tbl_local`
+  MODIFY `IDLocal` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `tbl_modalidad_ingreso`
 --
 ALTER TABLE `tbl_modalidad_ingreso`
@@ -6467,7 +6551,7 @@ ALTER TABLE `tbl_pago`
 -- AUTO_INCREMENT de la tabla `tbl_semestre`
 --
 ALTER TABLE `tbl_semestre`
-  MODIFY `IDSemestre` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDSemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_tipo_matricula`
