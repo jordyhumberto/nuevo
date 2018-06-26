@@ -1,8 +1,6 @@
 <?php
 session_start(); //Inicia una nueva sesión o reanuda la existente
 require 'conexion.php'; //Agregamos el script de Conexión
-
-//Evaluamos si existe la variable de sesión id_usuario, si no existe redirigimos al index
 if(!isset($_SESSION["id_usuario"])){
     header("Location: index.php");
 }
@@ -23,11 +21,10 @@ if(!isset($_SESSION["id_usuario"])){
 <body>
     <div class="contenedor">
 		<header id="header">
-			
 			<div class="banner">
 				<img class="l_upein" src="img/logo_upein.png" alt="Logo_upein">
 				<div class="p_p">
-				<p class="p_upein">UNIVERSIDAD PERUANA DE</br>INVESTIGACIÓN Y NEGOCIOS</p>	
+				    <p class="p_upein">UNIVERSIDAD PERUANA DE</br>INVESTIGACIÓN Y NEGOCIOS</p>	
 				</div>
 			</div>
 		</header>
@@ -136,8 +133,8 @@ if(!isset($_SESSION["id_usuario"])){
 				<li><a href="logout.php">Salir</a></li>
 			</ul>	
         </nav>
-        <div class="slider">
-           
+        <div id="slider">
+           <img  id="bienvenido" src="img/bienvenido.jpg" alt="bienvenido">
         </div>
         <footer>
 			<div class="arriba"><a href="#header">arriba</a></div>

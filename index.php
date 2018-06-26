@@ -17,7 +17,7 @@
 			$row = $result->fetch_assoc();
 			$_SESSION['id_usuario'] = $row['Id_Usuario'];
 			//$_SESSION['tipo_usuario'] = $row['id_tipo'];
-			header("location: welcome.php");
+			header("location: welcome.php#slider");
 			} else {
 			$error = "El nombre o contrase&ntilde;a son incorrectos";
 		}

@@ -6,10 +6,27 @@
 	}
 	$id=$_GET['IDAlumno'];
 	$carrera=$_GET['IDCarrera'];
-	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
+	$error="";
+	if(!empty($_GET["error"])){
+		$error=$_GET["error"];
+	}
+	$sql1="SELECT * FROM tbl_carrera WHERE IDCarrera='$carrera'";
+	$resultado1=$mysqli->query($sql1);
+	$fila=$resultado1->fetch_array(MYSQLI_ASSOC);
+
+	$sql2="SELECT * FROM tbl_notas_alumno WHERE IDAlumno='$id'";
+	$resultado2=$mysqli->query($sql2);
+	$fila1=$resultado2->fetch_array(MYSQLI_ASSOC);
+	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso,c.Creditos as creditos, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
 	$sql.=" FROM ((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)";
 	$sql.=" WHERE s.Estado='01' AND c.IDCarrera='$carrera'";
 	$resultado=$mysqli->query($sql);
+	if(empty($fila1)){
+		$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso,c.Creditos as creditos, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
+		$sql.=" FROM ((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)";
+		$sql.=" WHERE s.Estado='01' AND c.IDCarrera='$carrera' AND c.IDCiclo='1'";
+		$resultado=$mysqli->query($sql);
+	}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -59,8 +76,14 @@
 				<div class="row">
 					<h2 style="text-align:center">MATRICULA CURSOS</h2>
 				</div>
+				<div class="row">
+					<h3 style="text-align:center"><?php echo $fila['Descripcion'];?></h3>
+				</div>
+				<div class="row">
+					<p style="text-align:center;color:#FE0000;"><?php echo $error;?></p>
+				</div>
 				<br>
-				<form action="p_m_guardar.php" method="post">
+				<form action="p_m_guardar.php?IDAlumno=<?php echo $id;?>&IDCarrera=<?php echo $carrera;?>" method="post">
 					<div class="row table-responsive">
 						<table class="display" id="mitabla">
 							<thead>
@@ -72,6 +95,7 @@
 									<th>INICIO</th>
 									<th>FIN</th>
 									<th>AULA</th>
+									<th>CREDITOS</th>
 									<th>ESTADO</th>
 									<th></th>
 								</tr>
@@ -86,6 +110,7 @@
 										<td><?php echo $row['inicio'];?></td>
 										<td><?php echo $row['fin'];?></td>
 										<td><?php echo $row['aula'];?></td>
+										<td><?php echo $row['creditos'];?></td>
 										<td><?php echo $row['estado'];?></td>
 										<td><input type="checkbox" name="check[]" value="<?php echo $row['id'];?>"></td>
 									</tr>

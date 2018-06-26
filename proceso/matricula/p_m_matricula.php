@@ -58,7 +58,6 @@
 				<div class="row">
 					<h3 style="text-align:center">NUEVO REGRISTRO</h3>
 				</div>
-				
 				<br>
 				<div class="row table-responsive">
 					<table class="display" id="mitabla">
