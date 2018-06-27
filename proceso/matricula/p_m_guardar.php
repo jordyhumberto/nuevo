@@ -9,7 +9,7 @@ $alerta="";//agregar una alerta sobre los creditos
 $IDA=$_GET['IDAlumno'];
 $IDC=$_GET['IDCarrera'];
 if(!isset($_POST['check'])){
-    /* $error="NO PRESIONÓ NINGÚN CHECKBOX"; */
+    $error="NO PRESIONÓ NINGÚN CHECKBOX";
     header("Location: p_m_cursos.php?IDAlumno=$IDA&IDCarrera=$IDC&error=$error");
 }
 $id=$_POST['check'];
@@ -35,6 +35,10 @@ $sql1="SELECT * FROM tbl_semestre WHERE Estado='01'";
 $resultado1=$mysqli->query($sql1);
 $row1=$resultado1->fetch_array(MYSQLI_ASSOC);
 
+for($j=0; $j < $N; $j++)
+{
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

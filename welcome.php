@@ -53,7 +53,7 @@ if(!isset($_SESSION["id_usuario"])){
                         </li>
                         <li><a href="#">Administrativo</a>
                             <ul>
-                                <li><a href="#">Becas</a></li>
+                                <li><a href="mantenimiento/administrativo/m_ad_beca.php">Becas</a></li>
                                 <li><a href="mantenimiento/administrativo/m_ad_facultad.php">Facultad</a></li>
                                 <li><a href="mantenimiento/administrativo/m_ad_carrera.php">Carrera</a></li>
                                 <li><a href="#">categoria</a></li>
