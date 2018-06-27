@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2018 a las 23:44:14
+-- Tiempo de generación: 27-06-2018 a las 20:34:47
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -2442,12 +2442,21 @@ INSERT INTO `tbl_aula` (`IDAula`, `Descripcion`, `IDLocal`, `Aforo`, `Hora_Apert
 --
 
 CREATE TABLE `tbl_becas` (
-  `IDBeca` varchar(4) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `IDBeca` int(11) NOT NULL,
   `Descripcion` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Porcentaje` double DEFAULT NULL,
-  `Observaciones` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
   `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_becas`
+--
+
+INSERT INTO `tbl_becas` (`IDBeca`, `Descripcion`, `Estado`) VALUES
+(1, 'NINGUNO', '01'),
+(2, '16-17', '01'),
+(3, '17.1-18', '01'),
+(4, '18.1-19', '01'),
+(5, '19.1-20', '01');
 
 -- --------------------------------------------------------
 
@@ -4796,7 +4805,8 @@ INSERT INTO `tbl_curso_operativo` (`IDCO`, `IDCursos`, `IDDocente`, `IDSemestre`
 ('2018005', 'ISFG0102', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
 ('2018006', 'ISFB0102', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
 ('2018007', 'ISFG0201', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
-('2018008', 'ISFB0201', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01');
+('2018008', 'ISFB0201', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018009', 'INFB0101', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00');
 
 -- --------------------------------------------------------
 
@@ -4877,21 +4887,18 @@ INSERT INTO `tbl_local` (`IDLocal`, `Descripcion`, `Direccion`, `Estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_matricula_carrera`
+-- Estructura de tabla para la tabla `tbl_matricula`
 --
 
-CREATE TABLE `tbl_matricula_carrera` (
+CREATE TABLE `tbl_matricula` (
   `IDMatricula` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `IDTipoM` int(11) DEFAULT NULL,
   `IDSemestre` int(11) DEFAULT NULL,
   `IDAlumno` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `IDCarrera` varchar(4) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Fecha_matricula` date NOT NULL,
-  `Pension` double DEFAULT NULL,
-  `Comentario` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Fecha_registro` datetime DEFAULT NULL,
-  `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Cant_creditos` int(5) DEFAULT NULL
+  `Matricula` double NOT NULL,
+  `Pension` double DEFAULT NULL,
+  `Cant_creditos` int(5) DEFAULT NULL,
+  `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -5047,7 +5054,9 @@ CREATE TABLE `tbl_semestre` (
 --
 
 INSERT INTO `tbl_semestre` (`IDSemestre`, `Descripcion`, `Nro_pagos`, `Fecha_Inicio`, `Fecha_Fin`, `Detalle`, `nro_notas`, `Estado`) VALUES
-(1, '2018-II', 5, '2018-08-06', '2018-12-21', 'SEGUNDO SEMESTRE DE 2018', 5, '01');
+(1, '2018-II', 5, '2018-08-06', '2018-12-21', 'SEGUNDO SEMESTRE DEL 2018', 5, '01'),
+(2, '2018-I', 5, '2018-02-05', '2018-06-16', 'PRIMER SEMESTRE DEL 2018', 5, '00'),
+(3, '2017-II', 5, '2017-08-07', '2017-12-07', 'SEGUNDO SEMESTRE DEL 2017', 5, '00');
 
 -- --------------------------------------------------------
 
@@ -5075,18 +5084,6 @@ INSERT INTO `tbl_tipo_aula` (`IDTA`, `Descripcion`, `Estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_tipo_matricula`
---
-
-CREATE TABLE `tbl_tipo_matricula` (
-  `IDTipoM` int(11) NOT NULL,
-  `Descripcion` varchar(80) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tbl_tipo_pago`
 --
 
@@ -5097,6 +5094,311 @@ CREATE TABLE `tbl_tipo_pago` (
   `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IMP` varchar(2) COLLATE utf8_unicode_ci DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_tipo_pago`
+--
+
+INSERT INTO `tbl_tipo_pago` (`IDTipo`, `Descripcion`, `Monto`, `Estado`, `IMP`) VALUES
+(-1, 'DUPLICADO DE CONSOLIDADO DE NOTAS', 5, '01', '0'),
+(1, 'LACRADO DE  DOCUMENTOS', 10, '01', '0'),
+(2, '1 CREDITO', 15, '01', '0'),
+(3, 'ADELANTO DE TALLER INGLES', 20, '01', '0'),
+(4, 'TALLER IDIOMAS CHINO', 25, '01', '0'),
+(5, 'DIPLOMA ADUANAS', 300, '01', '1'),
+(6, 'CERTIFICACION PROGRESIVA', 50, '01', '0'),
+(7, 'CONSTANCIA DE BUENA CONDUCTA', 50, '01', '0'),
+(8, 'POLO DE UPEIN', 10, '01', '0'),
+(9, 'REANUDACION DE ESTUDIOS', 50, '01', '0'),
+(10, 'TRASLADO INTERNO', 80, '01', '0'),
+(11, '4 CREDITOS', 272.8, '01', '0'),
+(12, 'CERTIFICADO ESTUDIOS', 50, '01', '0'),
+(13, 'CONSTANCIA  DE ESTUDIOS', 50, '01', '0'),
+(14, 'CURSO CONVALIDADO', 50, '01', '0'),
+(15, 'SILABOS FEDATEADOS POR CURSO', 50, '01', '0'),
+(16, 'CERTIFICADO DE ESTUDIOS C/NOTAS', 600, '01', '0'),
+(17, 'CONSTANCIA DE EGRESADO', 30, '01', '0'),
+(18, 'CONSTANCIA DE NOTAS /POR SEMESTRE ACADEMICO)', 50, '01', '0'),
+(19, 'SEGURO ESTUDIANTIL', 30, '01', '0'),
+(20, 'CONSTANCIA DE NO ADEUDO - TESORERIA/BIBLIOTECA', 50, '01', '0'),
+(21, 'SOLICITUD', 1, '01', '0'),
+(22, 'EXAMEN', 30, '01', '0'),
+(23, 'VENTA DE CARPETAS', 50, '01', '0'),
+(24, 'RETIRO DE ASIGNATURAS', 50, '01', '0'),
+(25, 'AUTENTICACION O FEDATEO DE DOCUMENTOS', 5, '01', '0'),
+(26, 'CREDITO POR 3 CURSO5', 45, '01', '0'),
+(27, 'EXAMEN SUSTITUTORIO', 25, '01', '0'),
+(28, 'EXAMEN APLAZADO', 25, '01', '0'),
+(29, 'RETIRO DEL CICLO (HASTA UNA SEMANA ANTES DE LOS EX', 100, '01', '0'),
+(31, 'TITULO PROFESIONAL', 2000, '02', '0'),
+(32, 'DIPLOMADO ADM', 350, '01', '0'),
+(34, 'INSCRIPCION DE CARRERAS', 60, '01', '0'),
+(35, 'SALDO INSCRIPCION', 10, '01', '0'),
+(36, 'MATRICULA  2014 - II', 180, '01', '0'),
+(40, 'TALLER INGLES', 40, '01', '0'),
+(41, 'ADELANTO EXAMEN APLAZADO', 50, '01', '0'),
+(42, 'PAGO PENSION', 400, '01', '0'),
+(43, 'INSCRIPCION ADUANAS', 20, '01', '0'),
+(44, 'DIPLOMADO ADM DCTO', 140, '01', '0'),
+(45, 'UNIFORME DE GHT', 80, '01', '0'),
+(46, 'ADELANTO DE TALLER CHINO', 15, '01', '0'),
+(47, 'PAGO ADUANAS 1', 180, '01', '0'),
+(48, 'PAGO ADUANAS 2', 200, '01', '0'),
+(49, 'CARNET UNIVERSITARIO', 20, '01', '0'),
+(50, 'DIPLOMADO AU.CARLOS', 56, '01', '0'),
+(57, 'RESERVA MATRICULA 2015 - I', 30, '01', '0'),
+(59, 'PROSPECTO', 50, '01', '0'),
+(60, 'CONVALIDACION 1 CURSO', 50, '01', '0'),
+(61, 'UNIFORME THG', 10, '01', '0'),
+(62, 'ALQUILER AULA', 150, '01', '0'),
+(63, 'ADELANTO DE TALLER INGLES', 5, '01', '0'),
+(64, 'MYPE', 250, '02', '0'),
+(65, 'CANCELACION DE MATRICULA', 10, '01', '0'),
+(66, 'TALLER DE COCINA', 100, '01', '0'),
+(69, 'NIVELACION INFORMATICA', 80, '01', '0'),
+(70, 'SEGURO ESTUDIANTIL', 100, '01', '0'),
+(71, 'CAMBIO DE CARRERA', 100, '01', '0'),
+(72, 'ADELANTO DIPLOMA ADUANAS', 100, '01', '0'),
+(76, 'DUPLICADO DE CARNE', 30, '01', '0'),
+(78, 'PAGO ANULADO', 0.1, '01', '0'),
+(79, 'DIPLOMADO ADM', 250, '02', '0'),
+(84, 'RESERVA MATRICULA', 30, '01', '0'),
+(85, 'RESERVA  2015 II', 30, '01', '0'),
+(86, 'CANCELACION LIBRO INGLES', 25, '01', '0'),
+(87, 'LIBRO INGLES', 110, '01', '0'),
+(88, 'SALDO  APLAZADO', 30, '01', '0'),
+(89, 'CANCELACION  PENSION  2014-II', 200, '01', '0'),
+(90, 'SEMINARIO  UPEIN NOV.  2014', 15, '01', '0'),
+(91, 'CANCELACION LIBRO DE INGLES', 10, '01', '0'),
+(92, 'CURSO COMPUTACION', 50, '01', '0'),
+(93, 'MATRICULA 2015 I', 180, '01', '0'),
+(94, 'ADELANTO LIBRO INGLES', 60, '01', '0'),
+(95, 'DERECHO TRAMITE CAMBIO CARRERA', 100, '01', '0'),
+(96, 'SILABOS', 20, '01', '0'),
+(97, 'ADELANTO CERTIFICADO ESTUDIOS', 20, '01', '0'),
+(98, 'CANCELACION  APLAZADO', 50, '01', '0'),
+(99, 'CAMBIO DE CARRERA', 100, '01', '0'),
+(100, 'SALDO INSCRIPCION', 40, '01', '0'),
+(101, 'CANCELACION SUSTITUTORIO', 5, '01', '0'),
+(102, 'ALQUILER AULA OCTUBRE - TALLER TEATRO', 50, '01', '0'),
+(103, 'PAGO X CREDITOS', 35, '01', '0'),
+(104, 'ACTIVIDADES ACADEMICAS  BETA', 400, '01', '0'),
+(105, 'CERTIFICADO CONDUCTA', 50, '01', '0'),
+(106, 'SEMINARIO JUAROSA', 200, '01', '0'),
+(107, 'COMPROMISO  DE PAGO', 270, '01', '0'),
+(110, 'GORRA  UNIFORME  THG', 20, '01', '0'),
+(111, 'LIBRO INGLES', 120, '01', '0'),
+(112, '01 CREDITO', 17.5, '01', '0'),
+(114, 'MATRICULA  2015-I  ABRIL', 180, '01', '0'),
+(115, 'ACTIVIDADES ACADEMICAS  BETA', 220, '01', '0'),
+(116, 'DIPLOMADO NIIF', 480, '01', '0'),
+(118, 'CANCELACION LIBRO INGLES', 50, '01', '0'),
+(119, 'ADELANTO  MATRICULA  2015-I  ABRIL', 100, '01', '0'),
+(120, 'CANCELACION LIBRO INGLES', 10, '01', '0'),
+(121, '1RA. PENSION  ABRIL 2015', 400, '01', '0'),
+(122, 'ACTIVIDADES ACADEMICAS  BETA', 320, '01', '0'),
+(123, '01  CREDITO', 19, '01', '0'),
+(124, 'CANCELACION LIBRO INGLES', 10, '01', '0'),
+(125, 'ADELANTO INSCRIPCION', 20, '01', '0'),
+(126, 'CANCELACION INSCRIPCION', 30, '01', '0'),
+(127, '1RA PENSION', 350, '01', '0'),
+(128, 'ACTIVIDADES ACADEMICAS BETA', 20, '01', '0'),
+(129, 'ADELANTO SUSTITUTORIO', 20, '01', '0'),
+(130, 'CERTIFICADO', 60, '01', '0'),
+(131, 'ACTIVIDADES ACADEMICAS BETA', 240, '01', '0'),
+(132, 'SALDO INSCRIPCION', 40, '01', '0'),
+(133, 'CAPACITACION  ESVICSAC', 2400, '01', '0'),
+(134, 'CANCELACION CREDITO', 5, '01', '0'),
+(135, 'DUPLICADO CARNET', 30, '01', '0'),
+(136, 'SEMINARIO JUAROSA', 300, '01', '0'),
+(137, 'ACTIVIDADES ACADEMICAS BETA', 200, '01', '0'),
+(138, 'SEMINARIO JUAROSA', 100, '01', '0'),
+(139, 'ACTIVIDADES ACADEMICAS BETA', 120, '01', '0'),
+(140, 'ALQUILER PC  BETA', 1.5, '01', '0'),
+(141, 'ALQUILER PC BETA', 2, '01', '0'),
+(142, 'BETA', 252.5, '01', '0'),
+(143, 'COPIA DE MODELO CONSTANCIA  DE PRACTICAS', 5, '01', '0'),
+(144, 'CONSTANCIA DE INASISTENCIA', 50, '01', '0'),
+(145, 'DERECHO TRAMITE  GRADO DE BACHILLER', 1000, '01', '0'),
+(146, 'CERTIFICADOS DE ESTUDIOS UNIVERSITARIOS ORIGINALES', 600, '01', '0'),
+(147, 'ACTIVIDADES ACADEMICAS BETA', 300, '01', '0'),
+(148, 'DERECHO TRAMITE GRADO BACHILLER', 900, '01', '0'),
+(149, 'ADELANTO INSCRIPCION', 30, '01', '0'),
+(150, 'CARTA PRESENTACION  PRACTICAS PRE-PROFESIONALES', 20, '01', '0'),
+(151, 'MORA', 1, '01', '0'),
+(152, 'CURSO ADICONAL CREDITOS', 40, '01', '0'),
+(153, 'PENSION', 50, '01', '0'),
+(155, 'RESERVA MATICULA  2016', 30, '01', '0'),
+(156, 'ADELANTO CERTIFICADO DE ESTUDIOS C/NOTAS', 500, '01', '0'),
+(157, 'PENSION Nº  2', 150, '01', '0'),
+(158, 'CANCELACION CERTIFICADO ESTUDIOS C/NOTAS', 100, '01', '0'),
+(159, 'MATRICULA 2016', 180, '01', '0'),
+(160, 'PENSION', 50, '01', '0'),
+(161, 'AULAS BETA', 195, '01', '0'),
+(162, '01 CREDITO', 20, '01', '0'),
+(163, 'AULAS BETA', 180, '01', '0'),
+(164, 'AULAS BETA', 90, '01', '0'),
+(165, 'CERTIFICADO PROGRESIVO', 25, '01', '0'),
+(166, 'CARTA DE PRESENTACION', 20, '01', '0'),
+(167, 'BETA', 120, '01', '0'),
+(168, 'BETA', 260, '01', '0'),
+(169, 'BETA', 161.5, '01', '0'),
+(171, 'CREDITOS ADICIONALES', 233, '01', '0'),
+(172, 'CAMBIO DE TURNO', 20, '01', '0'),
+(173, 'CREDITO', 12.5, '01', '0'),
+(174, 'MATRICULA', 20, '01', '0'),
+(175, 'CERTIFICADOS ESTUDIOS UNIVERSITARIOS ORIGINALES', 50, '01', '0'),
+(176, 'CREDITO', 20, '01', '0'),
+(177, 'CONSTANCIA DE NO ADEUDO /BIBLIOTECA', 100, '01', '0'),
+(178, 'CREDITO', 19.5, '01', '0'),
+(179, 'CONSTANCIA  DE MATRICULA', 20, '01', '0'),
+(180, 'CERTIFICADO ESTUDIO - ADELANTO', 400, '01', '0'),
+(181, 'CERTIFICADOS ESTUDIO CANCELACION', 200, '01', '0'),
+(182, 'BETAA', 1107.5, '01', '0'),
+(183, 'BETAFEB', 500, '01', '0'),
+(184, 'CREDITO ADICIONAL', 200, '01', '0'),
+(185, 'CREDITO ADICIONAL', 33, '01', '0'),
+(186, 'PENSION Nº 1', 380, '01', '0'),
+(187, 'BETA FB', 190, '01', '0'),
+(188, 'BETA MARZ', 630, '01', '0'),
+(189, 'PENSION', 50, '01', '0'),
+(190, 'PENSION', 134, '01', '0'),
+(191, 'MATRICULA 2017', 200, '01', '0'),
+(192, 'BETAB', 1260, '01', '0'),
+(193, 'BETAM', 500, '01', '0'),
+(194, 'PENSION  4', 200, '01', '0'),
+(195, 'BETAMM', 600, '01', '0'),
+(196, 'BEMY', 586, '01', '0'),
+(197, 'DUPLICADO CARNET', 50, '01', '0'),
+(198, 'BETAJU1', 700, '01', '0'),
+(199, 'BETAJU2', 800, '01', '0'),
+(200, 'ADELANT. INSC.', 45, '01', '0'),
+(201, 'BETAJU3', 240, '01', '0'),
+(202, 'TRAMITE BACHILLER', 55, '01', '0'),
+(203, 'INSCRIPCION', 15, '01', '0'),
+(204, 'BETJUL', 1109.5, '01', '0'),
+(205, 'CERTIFICADO ESTUDIOS C/NOTAS', 300, '01', '0'),
+(206, 'CONVALIDACION  CURSO', 40, '01', '0'),
+(207, 'CONSTANCIA DE EGRESADO', 50, '01', '0'),
+(208, 'BETA JUL1', 500, '01', '0'),
+(209, 'CREDITO', 21, '01', '0'),
+(210, 'MATRIC.', 90, '01', '0'),
+(211, 'BEJUL2', 290, '01', '0'),
+(212, 'BETAAG1', 690, '01', '0'),
+(213, 'CREDITO', 21, '01', '0'),
+(214, 'ADELANTO TRAMITE BACHILLER', 800, '01', '0'),
+(215, 'PENSION Nº 2', 150, '01', '0'),
+(216, 'ADELANTO TRAMITE BACHILLER', 1200, '01', '0'),
+(217, 'PENSION 2', 220, '01', '0'),
+(218, 'CONVENIO DE PRACTICAS', 20, '01', '0'),
+(219, 'TRAMITE BACHILLER', 5, '01', '0'),
+(220, 'TRAMITE BACHILLER', 340, '01', '0'),
+(221, 'MAT', 100, '01', '0'),
+(222, 'AULAS AG-SET 2016', 1000, '01', '0'),
+(223, 'CONSTANCIA EGRESADO', 50, '01', '0'),
+(224, 'PENSION', 5, '01', '0'),
+(225, 'ADELANTO SUSTITUTORIO', 20, '01', '0'),
+(226, '01 CREDITO', 21, '01', '0'),
+(227, 'CANCELACION TRAMITE BACHILLER', 800, '01', '0'),
+(228, 'MALLA CURRICULAR', 50, '01', '0'),
+(229, 'PENSION', 350, '01', '0'),
+(230, 'BETOCT', 636, '01', '0'),
+(231, 'CURSO WINDOWS', 60, '01', '0'),
+(232, 'AULAS NOV. 2016', 720, '01', '0'),
+(233, 'PENSION Nº 4', 380, '01', '0'),
+(234, 'AULAS DIC 2017', 700, '01', '0'),
+(235, 'DIPLOMA ADUANAS', 350, '01', '0'),
+(236, 'SILABO FEDATEADO POR CURSO', 20, '01', '0'),
+(237, 'PENSION', 40, '01', '0'),
+(238, 'JUAROSA', 150, '01', '0'),
+(239, 'COPIA SILABOS', 5, '01', '0'),
+(240, 'AULAS DIC-ENERO 2017', 1070, '01', '0'),
+(241, 'ADELANTO UNIFORME GHT', 70, '01', '0'),
+(242, 'ADELANTO REACTUALIZACION DE MATRICULA', 40, '01', '0'),
+(243, 'REACTUALIZACION DE MATRICULA', 50, '01', '0'),
+(244, 'RECORD ACADEMICO', 20, '01', '0'),
+(245, 'CREDITOS EXTRA', 32.5, '01', '0'),
+(246, 'ADELANTO CARTA PRACTICAS PRE-PROFESIONALES', 10, '01', '0'),
+(247, 'GORRO THG', 15, '01', '0'),
+(248, 'DERECHO TRAMITE GRADO BACHILLER', 100, '01', '0'),
+(249, 'CREDITO  EXTRA (4)', 152, '01', '0'),
+(250, 'SEM. JUAROSA', 240, '01', '0'),
+(251, 'INGLES V', 200, '01', '0'),
+(252, 'UNIFORME - THG', 60, '01', '0'),
+(253, 'RESERVA MATRICULA', 50, '01', '0'),
+(254, 'CREDITOS ADICIONALES', 330, '01', '0'),
+(255, 'JUAROSAA', 120, '01', '0'),
+(256, 'AULA ENE-FEBRERO 2017', 1500, '01', '0'),
+(257, 'UNIFORME COCINA', 20, '01', '0'),
+(258, 'PENSION Nº 1', 420, '01', '0'),
+(259, 'THG PENSION', 40, '01', '0'),
+(260, 'CREDITOS ADICIONALES', 252.5, '01', '0'),
+(261, 'PENSION  Nº 4', 380, '01', '0'),
+(262, 'PENSION Nº 5', 380, '01', '0'),
+(263, 'CARNET UNIVERSITARIO', 20, '01', '0'),
+(264, 'GRADO BACHILLER', 100, '01', '0'),
+(265, 'SEMINARIO', 50, '01', '0'),
+(266, 'SEMINARIO', 70, '01', '0'),
+(267, 'EXAMEN SUSTIT.', 50, '01', '0'),
+(268, 'DERECHO TRAMITE TITULO PROFESIONAL', 2000, '01', '0'),
+(269, 'RESERVA MATRIC.', 50, '01', '0'),
+(270, 'CONST, NO ADEUDO', 100, '01', '0'),
+(271, 'AULAS FEB-', 215, '01', '0'),
+(272, 'AULAS FEBR', 485, '01', '0'),
+(273, 'AULAS MARZ', 600, '01', '0'),
+(274, 'AULAS ABRIL', 385, '01', '0'),
+(275, 'PENSION 2', 220, '01', '0'),
+(276, 'COPIA DIPLOMA DE GRADO BACHILLER', 10, '01', '0'),
+(277, 'CONSTANCIA DE NO ADEUDO ADM/BIBLIOTECA/LAB', 100, '01', '0'),
+(278, 'CONSTANC. NO ADEUDO', 50, '01', '0'),
+(279, 'UNIF. THG', 50, '01', '0'),
+(280, 'SILLABUS', 20, '01', '0'),
+(281, 'UNIF. THG', 30, '01', '0'),
+(282, 'A CTA. BACHILLER', 370, '01', '0'),
+(283, 'MATRICULA 2018 - I', 200, '01', '0'),
+(284, 'AULAS MAYO', 1000, '01', '0'),
+(285, 'RESERVA PAGO. 2018', 250, '01', '0'),
+(286, 'ADELANTO BACHILL.', 500, '01', '0'),
+(287, 'TRAM. BACHILLER', 850, '01', '0'),
+(288, 'CREDITOS', 62.5, '01', '0'),
+(289, 'PAGO BACHILLER', 1330, '01', '0'),
+(290, 'AULAS MY,JUN.JUL', 1548, '01', '0'),
+(291, 'REINCORPORACION', 50, '01', '0'),
+(292, 'CREDIT.', 228, '01', '0'),
+(293, 'CDETITOS ADIC.', 19, '01', '0'),
+(294, 'BACHILLER', 1200, '01', '0'),
+(295, 'ADEL. SUST', 10, '01', '0'),
+(296, 'CONST. ESTUDIOS', 20, '01', '0'),
+(297, 'SUSTIT.', 40, '01', '0'),
+(298, 'TRAM. BACHILL.', 450, '01', '0'),
+(299, 'CREDIT.', 70, '01', '0'),
+(300, 'RETIRO DE CURSO', 30, '01', '0'),
+(301, 'CORP. JUAROSA', 50, '01', '0'),
+(302, 'AULAS AGOSTO', 1132, '01', '0'),
+(303, 'BACHILL.', 400, '01', '0'),
+(304, 'PENSION Nº 1', 100, '01', '0'),
+(305, 'CREDIT.', 10, '01', '0'),
+(306, 'RESERVA 2018-I', 250, '01', '0'),
+(307, 'PENSION  1', 200, '01', '0'),
+(308, 'SEMINARIO SALUD', 30, '01', '0'),
+(309, 'RETIRO DE CURSO', 30, '01', '0'),
+(310, 'SUSTITUT.', 40, '01', '0'),
+(311, 'ST- OCTUB. AULAS', 1000, '01', '0'),
+(312, 'COPIA RESOLUCION RECTORAL VISADA', 30, '01', '0'),
+(313, 'CERTIFICADO ESTUDIOS EN COPIA AUTENTICADA  P/HOJA', 30, '01', '0'),
+(314, 'VISACION FOTOCOPIA DE TITULO PROFESIONAL', 10, '01', '0'),
+(315, 'SUSTIT.', 10, '01', '0'),
+(316, 'UNIF.THG', 80, '01', '0'),
+(317, 'AULAS NOV-2017', 734, '01', '0'),
+(318, 'INSCRP. CARRERA', 50, '01', '0'),
+(319, 'PENSION.', 80, '01', '0'),
+(320, 'PENSION...', 100, '01', '0'),
+(321, 'DERECHO TRAMITE TITULO PROFESIONAL', 1000, '01', '0'),
+(322, 'SEMINARIO 17-12-2017', 20, '01', '0'),
+(323, 'OTRO', 1.3, '01', '0'),
+(324, 'INSCR. CARRERA', 30, '01', '0'),
+(325, 'CERTIFICADO CENTRO DE IDIOMAS', 200, '01', '0'),
+(333, 'PRUEBA', 2, '01', '01');
 
 -- --------------------------------------------------------
 
@@ -6406,13 +6708,11 @@ ALTER TABLE `tbl_local`
   ADD PRIMARY KEY (`IDLocal`);
 
 --
--- Indices de la tabla `tbl_matricula_carrera`
+-- Indices de la tabla `tbl_matricula`
 --
-ALTER TABLE `tbl_matricula_carrera`
+ALTER TABLE `tbl_matricula`
   ADD PRIMARY KEY (`IDMatricula`),
   ADD KEY `idx_mC_alum` (`IDAlumno`),
-  ADD KEY `idx_mc_carre` (`IDCarrera`),
-  ADD KEY `idx_mC_tM` (`IDTipoM`),
   ADD KEY `idx_mc_sem` (`IDSemestre`);
 
 --
@@ -6463,12 +6763,6 @@ ALTER TABLE `tbl_semestre`
   ADD PRIMARY KEY (`IDSemestre`);
 
 --
--- Indices de la tabla `tbl_tipo_matricula`
---
-ALTER TABLE `tbl_tipo_matricula`
-  ADD PRIMARY KEY (`IDTipoM`);
-
---
 -- Indices de la tabla `tbl_tipo_pago`
 --
 ALTER TABLE `tbl_tipo_pago`
@@ -6512,6 +6806,12 @@ ALTER TABLE `tbl_aula`
   MODIFY `IDAula` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
+-- AUTO_INCREMENT de la tabla `tbl_becas`
+--
+ALTER TABLE `tbl_becas`
+  MODIFY `IDBeca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `tbl_ciclos`
 --
 ALTER TABLE `tbl_ciclos`
@@ -6551,19 +6851,13 @@ ALTER TABLE `tbl_pago`
 -- AUTO_INCREMENT de la tabla `tbl_semestre`
 --
 ALTER TABLE `tbl_semestre`
-  MODIFY `IDSemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `tbl_tipo_matricula`
---
-ALTER TABLE `tbl_tipo_matricula`
-  MODIFY `IDTipoM` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDSemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_tipo_pago`
 --
 ALTER TABLE `tbl_tipo_pago`
-  MODIFY `IDTipo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDTipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=334;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_usuario_alumno`
