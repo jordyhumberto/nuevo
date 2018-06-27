@@ -69,7 +69,7 @@
 		<?php include '../../nav.php'?>
 		<div class="container">
 				<div class="row">
-					<h2 style="text-align:center">Formulario de Semestre</h2>
+					<h2 style="text-align:center">ASIGNACIÓN DE BECAS</h2>
 				</div>
 				<div class="row">
 					<a href="m_g_s_nuevo.php" class="btn btn-primary">Nuevo Registro</a>

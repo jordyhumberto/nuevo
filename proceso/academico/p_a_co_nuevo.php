@@ -8,7 +8,7 @@
     $resultado1 = $mysqli->query($sql1);
     $sql2 = "SELECT * FROM tbl_docente ORDER BY Apellidos";
     $resultado2 = $mysqli->query($sql2);
-    $sql3= "SELECT * FROM tbl_semestre ORDER BY IDSemestre DESC";
+    $sql3= "SELECT * FROM tbl_semestre ORDER BY Descripcion DESC";
     $resultado3=$mysqli->query($sql3);
     $sql4= "SELECT * FROM tbl_aula ORDER BY Descripcion";
     $resultado4=$mysqli->query($sql4);

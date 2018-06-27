@@ -14,7 +14,7 @@ if(!isset($_POST['check'])){
 }
 $id=$_POST['check'];
 $N=count($id);
-/* echo $N;echo '<br>'; */ 
+ 
 $suma=0;
 for($i=0; $i < $N; $i++)
 {
@@ -35,10 +35,12 @@ $sql1="SELECT * FROM tbl_semestre WHERE Estado='01'";
 $resultado1=$mysqli->query($sql1);
 $row1=$resultado1->fetch_array(MYSQLI_ASSOC);
 
-for($j=0; $j < $N; $j++)
+$IDM=date('Y').'';
+$sql2="INSERT INTO tbl_matricula(IDMatricula,IDSemestre,IDAlumno,Fecha_registro,Matricula,Pension,Cant_creditos,Estado) VALUES ()";
+/* for($j=0; $j < $N; $j++)
 {
-
-}
+	;
+} */
 ?>
 <!DOCTYPE html>
 <html lang="en">

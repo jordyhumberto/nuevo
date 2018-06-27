@@ -59,7 +59,7 @@ if(!isset($_SESSION["id_usuario"])){
                                 <li><a href="#">categoria</a></li>
                                 <li><a href="mantenimiento/administrativo/m_ad_modalidad_ingreso.php">Modo de Ingreso</a></li>
                                 <li><a href="mantenimiento/administrativo/m_ad_proceso.php">Proceso Admision</a></li>
-                                <li><a href="#">Asignar Beca</a></li>
+                                <li><a href="mantenimiento/administrativo/m_ad_becaa.php">Asignar Beca</a></li>
                                 <li><a href="#">Usuarios</a></li>
                                 <li><a href="#">Movimientos Usuario</a></li>
                                 <li><a href="#">Documento D' Impresión</a></li>

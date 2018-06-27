@@ -4,8 +4,26 @@
 	if(!isset($_SESSION["id_usuario"])){
 		header("Location: ../../index.php");
 	}
-	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
-    $sql.=" FROM ((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)";
+	$sql1="SELECT co.IDCO AS id,s.Fecha_Fin AS fin,co.Estado AS estado FROM tbl_curso_operativo AS co INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre";
+	$resultado1=$mysqli->query($sql1);
+	$fechafin="";
+	$fechahoy=date('Y-m-d');
+	$fechahoy=substr($fechahoy,0,4).substr($fechahoy,5,2).substr($fechahoy,8,2);
+
+	while($fila=$resultado1->fetch_array(MYSQLI_ASSOC)){
+		$IDS=$fila['id'];
+		$fechafin=$fila['fin'];
+		$fechafin=substr($fechafin,0,4).substr($fechafin,5,2).substr($fechafin,8,2);
+		/* echo $fechafin;echo '<br>'; */
+		if($fechahoy>$fechafin){
+			/* echo 'si se puede'; */
+			$sql3="UPDATE tbl_curso_operativo SET Estado='00' WHERE IDCO='$IDS'";
+			$resultado3=$mysqli->query($sql3);
+		}
+	}
+
+	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado,ca.Descripcion AS carrera"; 
+    $sql.=" FROM (((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula) INNER JOIN tbl_carrera AS ca ON c.IDCarrera=ca.IDCarrera)";
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -65,6 +83,7 @@
 						<thead>
 							<tr>
 								<th>IDCO</th>
+								<th>CARRERA</th>
 								<th>CURSO</th>
                                 <th>DOCENTE</th>
                                 <th>SEMESTRE</th>
@@ -79,6 +98,7 @@
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
 									<td><?php echo $row['id'];?></td>
+									<td><?php echo $row['carrera'];?></td>
 									<td><?php echo $row['curso'];?></td>
 									<td><?php echo $row['profe'];?></td>
                                     <td><?php echo $row['semestre'];?></td>
