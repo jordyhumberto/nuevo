@@ -100,7 +100,7 @@
 				<div class="form-group">
 					<label for="tiempo" class="col-sm-2 control-label">Tiempo de labores</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" id="tiempo" name="tiempo" min="0" placeholder="horas al mes">
+						<input type="number" class="form-control" id="tiempo" name="tiempo" min="0" placeholder="horas a la semana">
 					</div>
 				</div>
 				<div class="form-group">
