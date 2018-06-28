@@ -6,14 +6,14 @@
     }
     $sql1="SELECT IDCO FROM tbl_curso_operativo";
     $resultado1=$mysqli->query($sql1);
-    $x='001';
+    $x='000';
     $id=date('Y').$x;
     while($row=$resultado1->fetch_array(MYSQLI_ASSOC)){
         if ($id==$row['IDCO']) {
             $x=intval($x)+1;
             if ($x<10) {
                 $x='00'.$x;
-            }else if($x<100){
+            }else if($x<100 && $x>=10){
                 $x='0'.$x;
             }
             $id=date('Y').$x;
