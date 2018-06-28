@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2018 a las 20:34:47
+-- Tiempo de generación: 28-06-2018 a las 20:01:56
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -4771,7 +4771,7 @@ INSERT INTO `tbl_cursos` (`Año`, `Semestre`, `IDCursos`, `Descripcion`, `IDCarr
 (1, 'I', 'ISFB0102', 'SOPORTE TÉCNICO DE HARDWARE Y SOFTWARE', 'ISF', 'B', 1, '', 3, 0, 2, 2, 'O', 1, '01'),
 (1, 'II', 'ISFB0201', 'MATEMÁTICA II', 'ISF', 'B', 2, 'ISFB0101', 5, 0, 4, 2, 'O', 1, '01'),
 (1, 'I', 'ISFG0101', 'LENGUAJE I', 'ISF', 'G', 1, '', 5, 0, 4, 2, 'O', 1, '01'),
-(1, 'I', 'ISFG0102', 'METODOLOGÍA DEL TRABAJO UNIVER', 'ISF', 'G', 1, '', 4, 0, 3, 2, 'O', 1, '01'),
+(1, 'I', 'ISFG0102', 'METODOLOGÍA DEL TRABAJO UNIVERSITARIO', 'ISF', 'B', 1, '', 4, 0, 3, 2, 'O', 1, '01'),
 (1, 'I', 'ISFG0103', 'INGLÉS I', 'ISF', 'G', 1, '', 3, 0, 2, 2, 'O', 1, '01'),
 (1, 'II', 'ISFG0201', 'LENGUAJE II', 'ISF', 'G', 2, 'ISFG0101', 5, 0, 4, 2, 'O', 1, '01');
 
@@ -4806,7 +4806,7 @@ INSERT INTO `tbl_curso_operativo` (`IDCO`, `IDCursos`, `IDDocente`, `IDSemestre`
 ('2018006', 'ISFB0102', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
 ('2018007', 'ISFG0201', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
 ('2018008', 'ISFB0201', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
-('2018009', 'INFB0101', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00');
+('2018011', 'ISFG0103', 'OCAD201800', 2, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00');
 
 -- --------------------------------------------------------
 
@@ -4816,8 +4816,10 @@ INSERT INTO `tbl_curso_operativo` (`IDCO`, `IDCursos`, `IDDocente`, `IDSemestre`
 
 CREATE TABLE `tbl_det_semestre` (
   `IDSemestre` int(11) DEFAULT NULL,
-  `Nro_pago` int(11) DEFAULT NULL,
-  `Fecha_pago` date DEFAULT NULL
+  `Fecha_Inicio` date NOT NULL,
+  `Fecha_Fin` date NOT NULL,
+  `Turno` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `Estado` varchar(2) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -5055,8 +5057,7 @@ CREATE TABLE `tbl_semestre` (
 
 INSERT INTO `tbl_semestre` (`IDSemestre`, `Descripcion`, `Nro_pagos`, `Fecha_Inicio`, `Fecha_Fin`, `Detalle`, `nro_notas`, `Estado`) VALUES
 (1, '2018-II', 5, '2018-08-06', '2018-12-21', 'SEGUNDO SEMESTRE DEL 2018', 5, '01'),
-(2, '2018-I', 5, '2018-02-05', '2018-06-16', 'PRIMER SEMESTRE DEL 2018', 5, '00'),
-(3, '2017-II', 5, '2017-08-07', '2017-12-07', 'SEGUNDO SEMESTRE DEL 2017', 5, '00');
+(2, '2018-I', 5, '2018-02-05', '2018-06-16', 'PRIMER SEMESTRE DEL 2018', 5, '00');
 
 -- --------------------------------------------------------
 
