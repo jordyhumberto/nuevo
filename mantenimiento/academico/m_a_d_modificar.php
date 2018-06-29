@@ -34,25 +34,21 @@
 				<input type="hidden" id="id" name="id" value="<?php echo $row['IDDocente']; ?>"/>
 				<div class="form-group">
 					<label for="tipo" class="col-sm-2 control-label">Tipo de documento</label>
-					<div class="col-sm-10">
+					<div class="col-sm-4">
 						<input type="text" class="form-control" id="tipo" name="tipo" placeholder="Tipo de documento" value="<?php echo $row['Tipo_doc']; ?>" required>
 					</div>
-				</div>
-				<div class="form-group">
 					<label for="documento" class="col-sm-2 control-label"># de documento</label>
-					<div class="col-sm-10">
+					<div class="col-sm-4">
 						<input type="text" class="form-control" id="documento" name="documento" placeholder="# de documento" value="<?php echo $row['N_documento'];?>" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="nombre" class="col-sm-2 control-label">Nombre</label>
-					<div class="col-sm-10">
+					<div class="col-sm-4">
 						<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="<?php echo $row['Nombres'];?>"required>
 					</div>
-				</div>
-				<div class="form-group">
 					<label for="Apellido" class="col-sm-2 control-label">Apellido</label>
-					<div class="col-sm-10">
+					<div class="col-sm-4">
 						<input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" value="<?php echo $row['Apellidos'];?>" required>
 					</div>
 				</div>
@@ -64,13 +60,11 @@
 				</div>
 				<div class="form-group">
 					<label for="direccion" class="col-sm-2 control-label">Dirección</label>
-					<div class="col-sm-10">
+					<div class="col-sm-6">
 						<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" value="<?php echo $row['Direccion'];?>" required>
 					</div>
-				</div>
-				<div class="form-group">
 					<label for="distrito" class="col-sm-2 control-label">Distrito</label>
-					<div class="col-sm-10">
+					<div class="col-sm-2">
 						<select class="form-control" id="distrito" name="distrito">				
 							<?php while($fila = $resul->fetch_array(MYSQLI_ASSOC)) { ?>
 								<option value="<?php echo $fila['Cod_Dist']; ?>" 
@@ -83,16 +77,14 @@
 				</div>
 				<div class="form-group">
 					<label for="telefono" class="col-sm-2 control-label">Telefono</label>
-					<div class="col-sm-10">
+					<div class="col-sm-4">
 						<input type="tel" class="form-control" id="telefono" name="telefono" value="<?php echo $row['Telf_fijo'];?>" placeholder="Telefono">
 					</div>
-				</div>
-				<div class="form-group">
 					<label for="celular" class="col-sm-2 control-label">Celular</label>
-					<div class="col-sm-10">
+					<div class="col-sm-4">
 						<input type="tel" class="form-control" id="celular" name="celular" value="<?php echo $row['Telf_celular'];?>" placeholder="Celular">
 					</div>
-				</div>	
+				</div>
 				<div class="form-group">
 					<label for="email" class="col-sm-2 control-label">Email</label>
 					<div class="col-sm-10">
