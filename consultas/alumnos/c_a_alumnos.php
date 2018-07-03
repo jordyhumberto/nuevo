@@ -13,7 +13,7 @@
             $where = "WHERE tbl_alumno.IDAlumno LIKE '$valor%'";
 		}
 	}
-	$sql = "SELECT a.IDAlumno as id,concat(a.Apellido_paterno,' ',a.Apellido_materno,' ',a.Nombres) as alumno,pa.Descripcion as admision,a.N_documento as dni,a.Direccion as direccion from  (((tbl_alumno as a inner join tbl_colegio as c on a.IDColegio=c.IDcolegio)inner join distritos as d on a.Cod_dist=d.Cod_Dist) inner join tbl_proceso_admision as pa on a.IDPadmision=pa.IDPadmision)$where order by a.Apellido_paterno";
+	$sql = "SELECT a.IDAlumno as id,concat(a.Apellido_paterno,' ',a.Apellido_materno,' ',a.Nombres) as alumno,pa.Descripcion as admision,a.N_documento as dni,a.Direccion as direccion,a.Estado as estado from  (((tbl_alumno as a inner join tbl_colegio as c on a.IDColegio=c.IDcolegio)inner join distritos as d on a.Cod_dist=d.Cod_Dist) inner join tbl_proceso_admision as pa on a.IDPadmision=pa.IDPadmision)$where order by a.Apellido_paterno";
 	$resultado = $mysqli->query($sql);
 
     $sql1 = "SELECT * FROM tbl_proceso_admision";

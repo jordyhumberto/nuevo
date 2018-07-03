@@ -1,10 +1,14 @@
 <?php
-require '../../conexion.php';
+session_start(); //Inicia una nueva sesión o reanuda la existente
+require '../../conexion.php'; //Agregamos el script de Conexión
+if(!isset($_SESSION["id_usuario"])){
+	header("Location: ../../index.php");
+}
 $id=$_GET['IDAlumno'];
-$sql = "SELECT tbl_matricula_carrera1.IDMatricula, tbl_matricula_carrera1.IDAlumno, tbl_compromiso_pago1.Nro_compromiso, tbl_compromiso_pago1.Pago, tbl_compromiso_pago1.Estado FROM tbl_compromiso_pago1 INNER JOIN tbl_matricula_carrera1 ON tbl_compromiso_pago1.IDMatricula=tbl_matricula_carrera1.IDMatricula WHERE tbl_matricula_carrera1.IDAlumno='$id' ORDER BY tbl_matricula_carrera1.IDAlumno";
+$sql = "SELECT m.IDMatricula as matricula, m.IDAlumno as id, cp.Nro_compromiso as numero, cp.Pago as pago, cp.Estado as estado FROM tbl_compromiso_pago as cp INNER JOIN tbl_matricula as m ON cp.IDMatricula=m.IDMatricula WHERE m.IDAlumno='$id' ORDER BY m.IDAlumno";
 $resultado=$mysqli->query($sql);
 
-$sql1="SELECT * FROM tbl_alumno1 WHERE IDAlumno='$id'";
+$sql1="SELECT * FROM tbl_alumno WHERE IDAlumno='$id'";
 $resultado1=$mysqli->query($sql1);
 $fila=$resultado1->fetch_array(MYSQLI_ASSOC);
 $nombre=$fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_materno'];
@@ -17,7 +21,7 @@ $nombre=$fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_mater
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>Intranet Aula</title>
+	<title>Intranet</title>
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -69,6 +73,7 @@ $nombre=$fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_mater
 						<thead>
 							<tr>
 								<th>IDMATRICULA</th>
+								<th>IDALUMNO</th>
 								<th>NROCOMPROMISO</th>
 								<th>PAGO</th>
                                 <th>ESTADO</th>
@@ -77,10 +82,11 @@ $nombre=$fila['Nombres'].' '.$fila['Apellido_paterno'].' '.$fila['Apellido_mater
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDMatricula']; ?></td>
-									<td><?php echo $row['Nro_compromiso']?></td>
-                                    <td><?php echo $row['Pago']?></td>
-									<td><?php echo $row['Estado']; ?></td>
+									<td><?php echo $row['matricula']; ?></td>
+									<td><?php echo $row['id'];?></td>
+									<td><?php echo $row['numero'];?></td>
+                                    <td><?php echo $row['pago'];?></td>
+									<td><?php echo $row['estado']; ?></td>
 								</tr>
 							<?php } ?>
 						</tbody>

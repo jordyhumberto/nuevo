@@ -1,11 +1,10 @@
 <?php
-    require '../../conexion.php';
-	
-	$sql = "SELECT tbl_matricula_carrera1.IDAlumno as alumno,
-	CONCAT(tbl_alumno1.Nombres,' ',tbl_alumno1.Apellido_paterno,' ',tbl_alumno1.Apellido_materno) as nombre,
-	tbl_compromiso_pago1.*,
-	SUM(tbl_compromiso_pago1.Pago) as pagos 
-	FROM (tbl_compromiso_pago1 INNER JOIN tbl_matricula_carrera1 ON tbl_compromiso_pago1.IDMatricula=tbl_matricula_carrera1.IDMatricula) INNER JOIN tbl_alumno1 ON tbl_matricula_carrera1.IDAlumno=tbl_alumno1.IDAlumno GROUP BY tbl_matricula_carrera1.IDAlumno";
+   session_start(); //Inicia una nueva sesión o reanuda la existente
+   require '../../conexion.php'; //Agregamos el script de Conexión
+   if(!isset($_SESSION["id_usuario"])){
+	   header("Location: ../../index.php");
+   }
+	$sql = "SELECT m.IDAlumno as alumno,CONCAT(a.Nombres,' ',a.Apellido_paterno,' ',a.Apellido_materno) as nombre,SUM(cp.Pago) as pagos FROM ((tbl_compromiso_pago as cp INNER JOIN tbl_matricula as m ON cp.IDMatricula=m.IDMatricula) INNER JOIN tbl_alumno as a ON m.IDAlumno=a.IDAlumno) GROUP BY m.IDAlumno";
 	$resultado = $mysqli->query($sql);
 
 ?>
@@ -17,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>Intranet Aula</title>
+	<title>Intranet</title>
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -54,7 +53,10 @@
 		<?php include '../../nav.php'?>
 		<div class="container">
 				<div class="row">
-					<h2 style="text-align:center">CONSULTA PAGOS-ALUMNOS</h2>
+					<h2 style="text-align:center">COMPROMISOPAGOS ALUMNOS</h2>
+				</div>
+				<div class="row">
+					<h3 style="text-align:center">CONSULTA</h3>
 				</div>
 				<br>
 				<div class="row table-responsive">

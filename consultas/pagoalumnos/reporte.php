@@ -1,7 +1,11 @@
 <?php
 	//Incluimos librería y archivo de conexión
 	require '../../Classes/PHPExcel.php';
-    require '../../conexion.php';
+    session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
 	$sql=$_GET['consulta'];
 	$nombre=$_GET['nombre'];
 	//Consulta
@@ -15,11 +19,11 @@
 	$objPHPExcel  = new PHPExcel();
 	
 	//Propiedades de Documento
-	$objPHPExcel->getProperties()->setCreator("Jordy")->setDescription("Reporte de Alumnos");
+	$objPHPExcel->getProperties()->setCreator("Jordy")->setDescription("Reporte de pagos");
 	
 	//Establecemos la pestaña activa y nombre a la pestaña
 	$objPHPExcel->setActiveSheetIndex(0);
-	$objPHPExcel->getActiveSheet()->setTitle("alumnos");
+	$objPHPExcel->getActiveSheet()->setTitle("pagos");
 	
 	$objDrawing = new PHPExcel_Worksheet_MemoryDrawing();
 	$objDrawing->setName('Logotipo');

@@ -15,7 +15,7 @@
 	//Consulta
 	//$sql="SELECT * FROM tbl_alumno1";
 	$resultado = $mysqli->query($sql);
-	$fila = 11; //Establecemos en que fila inciara a imprimir los datos
+	$fila = 6; //Establecemos en que fila inciara a imprimir los datos
 	
 	$gdImage = imagecreatefrompng('../../img/logo_upein.png');//Logotipo
 	
@@ -112,7 +112,7 @@
 
 
 	//ESTILOS DE LEYENDA
-	$estiloLeyenda = array(
+	/* $estiloLeyenda = array(
 		'font' => array(
 		'name'  => 'calibri',
 		'bold'  => true,
@@ -135,25 +135,25 @@
 		'vertical'  => PHPExcel_Style_Alignment::VERTICAL_CENTER
 		)
 		);
-
+ */
 	
 	//AGREGAR ESTILOS
 	$objPHPExcel->getActiveSheet()->getStyle('A1:D4')->applyFromArray($estiloTituloReporte);
-	$objPHPExcel->getActiveSheet()->getStyle('A10:V10')->applyFromArray($estiloTituloColumnas);
+	$objPHPExcel->getActiveSheet()->getStyle('A5:F5')->applyFromArray($estiloTituloColumnas);
 	
-	$objPHPExcel->getActiveSheet()->getStyle('A5:B8')->applyFromArray($estiloLeyenda);
+	/* $objPHPExcel->getActiveSheet()->getStyle('A5:B8')->applyFromArray($estiloLeyenda); */
 
 	$objPHPExcel->getActiveSheet()->setCellValue('B1', 'REPORTE DE ALUMNOS');
 	$objPHPExcel->getActiveSheet()->mergeCells('B1:D1');
 	$objPHPExcel->getActiveSheet()->setCellValue('B2', 'PROCESO ADMISION :');
-	$objPHPExcel->getActiveSheet()->mergeCells('B2:C2');
-	$objPHPExcel->getActiveSheet()->setCellValue('D2', $valor);
-	$objPHPExcel->getActiveSheet()->mergeCells('D2:D2');
+	$objPHPExcel->getActiveSheet()->mergeCells('B2:B2');
+	$objPHPExcel->getActiveSheet()->setCellValue('C2', $valor);
+	$objPHPExcel->getActiveSheet()->mergeCells('C2:C2');
 	$objPHPExcel->getActiveSheet()->setCellValue('B3', date('d').'/'.date('m').'/'.date('Y'));
 	$objPHPExcel->getActiveSheet()->mergeCells('B3:D3');
 
 	//AGREGAR LEYENDA TABLA AMARILLA
-	$objPHPExcel->getActiveSheet()->setCellValue('A5', 'LEYENDA');
+	/* $objPHPExcel->getActiveSheet()->setCellValue('A5', 'LEYENDA');
 	$objPHPExcel->getActiveSheet()->mergeCells('A5:B5');
 	$objPHPExcel->getActiveSheet()->setCellValue('A6', 'CAMPO: ESTADO');
 	$objPHPExcel->getActiveSheet()->mergeCells('A6:B6');
@@ -164,18 +164,20 @@
 	$objPHPExcel->getActiveSheet()->setCellValue('A8', 'INACTIVO');
 	$objPHPExcel->getActiveSheet()->mergeCells('A8:A8');
 	$objPHPExcel->getActiveSheet()->setCellValue('B8', '02');
-	$objPHPExcel->getActiveSheet()->mergeCells('B8:B8');
+	$objPHPExcel->getActiveSheet()->mergeCells('B8:B8'); */
 	////////////////////////LAS COLUMNAS//////////////////////////
 	$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(15);
-	$objPHPExcel->getActiveSheet()->setCellValue('A10', 'IDALUMNO');
+	$objPHPExcel->getActiveSheet()->setCellValue('A5', 'IDALUMNO');
 	$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(50);
-	$objPHPExcel->getActiveSheet()->setCellValue('B10', 'ALUMNO');
+	$objPHPExcel->getActiveSheet()->setCellValue('B5', 'ALUMNO');
 	$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(10);
-	$objPHPExcel->getActiveSheet()->setCellValue('C10', 'ADMISION');
+	$objPHPExcel->getActiveSheet()->setCellValue('C5', 'ADMISION');
 	$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
-	$objPHPExcel->getActiveSheet()->setCellValue('D10', 'NDOCUMENTO');
-	$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(50);
-	$objPHPExcel->getActiveSheet()->setCellValue('E10', 'DIRECCION');
+	$objPHPExcel->getActiveSheet()->setCellValue('D5', 'NDOCUMENTO');
+	$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(60);
+	$objPHPExcel->getActiveSheet()->setCellValue('E5', 'DIRECCION');
+	$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+	$objPHPExcel->getActiveSheet()->setCellValue('F5', 'ESTADO');
 	//Recorremos los resultados de la consulta y los imprimimos
 	while($rows = $resultado->fetch_array(MYSQLI_ASSOC)){////////////////////////////////<--------------cambio
 		
@@ -184,22 +186,26 @@
 		$objPHPExcel->getActiveSheet()->setCellValue('C'.$fila, $rows['admision']);
 		$objPHPExcel->getActiveSheet()->setCellValue('D'.$fila, $rows['dni']);
 		$objPHPExcel->getActiveSheet()->setCellValue('E'.$fila, $rows['direccion']);
-		
+		if ($rows['estado']==01) {
+			$objPHPExcel->getActiveSheet()->setCellValue('F'.$fila,"activo");
+		} else{
+			$objPHPExcel->getActiveSheet()->setCellValue('F'.$fila, "inactivo");
+		}
         $fila++; //Sumamos 1 para pasar a la siguiente fila
 	}
 	
 	$fila = $fila-1;
 	
-	$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A11:E".$fila);//tamaño de la tabla
+	$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A6:F".$fila);//tamaño de la tabla
 	
 	
 	//$filaGrafica = $fila+2;
 	
 	// definir origen de los valores
-	$values = new PHPExcel_Chart_DataSeriesValues('Number', 'alumnos!$D$11:$D$'.$fila);
+	$values = new PHPExcel_Chart_DataSeriesValues('Number', 'alumnos!$D$6:$D$'.$fila);
 	
 	// definir origen de los rotulos
-	$categories = new PHPExcel_Chart_DataSeriesValues('String', 'alumnos!$B$11:$B$'.$fila);
+	$categories = new PHPExcel_Chart_DataSeriesValues('String', 'alumnos!$B$6:$B$'.$fila);
 	
 	$writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 	
