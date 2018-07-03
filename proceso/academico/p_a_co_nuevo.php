@@ -38,7 +38,7 @@
 					<div class="col-sm-10">
 						<select class="form-control" id="curso" name="curso">
 							<?php while($row = $resultado1->fetch_array(MYSQLI_ASSOC)) { ?>
-								<option value="<?php echo $row['IDCursos']; ?>"><?php echo $row['Descripcion']; ?></option>	
+								<option value="<?php echo $row['IDCursos']; ?>"><?php echo $row['Descripcion'].' '.$row['IDCarrera']; ?></option>	
 							<?php } ?>
 						</select>
 					</div>
