@@ -1,11 +1,15 @@
 <?php
-    require '../../conexion.php';
+    session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
     //Método con str_shuffle() 
     function generarId($length = 3) { 
         return substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length); 
     }
     $id=generarId();
-    $sql = "SELECT IDCarrera FROM tbl_carrera1";
+    $sql = "SELECT IDCarrera FROM tbl_carrera";
 	$resultado = $mysqli->query($sql);
     while($row = $resultado->fetch_array(MYSQLI_ASSOC)) {
         if($id==$row['IDCarrera']){
@@ -25,7 +29,7 @@
     $estado=$_POST['estado']; 
     $facultad=$_POST['facultad'];
 
-	$sql1 = "INSERT INTO tbl_carrera1(IDCarrera,Descripcion,Duracion,Cant_creditos,Pension,Nro_pensiones,Costo_matricula,Estado,IDFacultad) VALUES ('$id','$descripcion','$duracion','$creditos','$pension','$pensionn','$matricula','$estado','$facultad')";
+	$sql1 = "INSERT INTO tbl_carrera(IDCarrera,Descripcion,Duracion,Cant_creditos,Pension,Nro_pensiones,Costo_matricula,Estado,IDFacultad) VALUES ('$id','$descripcion','$duracion','$creditos','$pension','$pensionn','$matricula','$estado','$facultad')";
 	$resultado1 = $mysqli->query($sql1);
 ?>
 <html lang="es">
@@ -35,7 +39,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
 		<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-		<title>Intranet Carrera</title>
+		<title>Intranet</title>
 		<link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../../css/bootstrap-theme.css" rel="stylesheet">

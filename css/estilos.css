@@ -55,7 +55,7 @@ footer div{
 }
 .contenedor{
     padding: 0;
-    width: 90vw;
+    /* width: 90vw; */
     margin: auto; 
     border: .3vw white solid;
     background: white;

@@ -1,7 +1,10 @@
 <?php
-	require '../../conexion.php';
-	$where = "";
-	$sql7 = "SELECT * FROM distrito $where ORDER BY Cod_dis";
+	session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
+	$sql7 = "SELECT * FROM distritos ORDER BY Cod_Dist";
 	$resultado7 = $mysqli->query($sql7);
 	
 ?>
@@ -12,7 +15,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
 		<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-		<title>Intranet Alumnos</title>
+		<title>Intranet</title>
 		<link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../../css/bootstrap-theme.css" rel="stylesheet">
@@ -43,7 +46,7 @@
 					<div class="col-sm-10">
 						<select class="form-control" id="distrito" name="distrito">
 							<?php while($row = $resultado7->fetch_array(MYSQLI_ASSOC)) { ?>
-								<option value="<?php echo $row['Cod_dis']; ?>"><?php echo $row['Nom_dis']; ?></option>	
+								<option value="<?php echo $row['Cod_dis']; ?>"><?php echo $row['Nom_Dist']; ?></option>	
 							<?php } ?>
 						</select>
 					</div>

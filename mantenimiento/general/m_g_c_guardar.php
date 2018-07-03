@@ -1,13 +1,16 @@
 <?php
-    require '../../conexion.php';
+    session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
     $nombre = $_POST['nombre'];
     $direccion=$_POST['direccion'];
     $distrito=$_POST['distrito'];
     $telefono = $_POST['telefono'];
     $gestion=$_POST['gestion'];
-    
 
-	$sql = "INSERT INTO tbl_colegio1 (Nombre,Direccion,Cod_Dist,Telefono,Gestion) VALUES ('$nombre','$direccion','$distrito','$telefono','$gestion')";
+	$sql = "INSERT INTO tbl_colegio (Nombre,Direccion,Cod_Dist,Telefono,Gestion) VALUES ('$nombre','$direccion','$distrito','$telefono','$gestion')";
     $resultado = $mysqli->query($sql);
     //AGREGAR LA BECA
 ?>
@@ -18,7 +21,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
 		<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-		<title>Intranet Colegios</title>
+		<title>Intranet</title>
 		<link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
 		<link href="../../css/bootstrap-theme.css" rel="stylesheet">

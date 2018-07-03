@@ -1,5 +1,9 @@
 <?php
-	require '../../conexion.php';
+	session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
 	$id=$_POST['id'];
     $descripcion=$_POST['descripcion'];
     $duracion=$_POST['duracion'];
