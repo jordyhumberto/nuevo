@@ -13,7 +13,7 @@
             $where = "WHERE tbl_alumno.IDAlumno LIKE '$valor%'";
 		}
 	}
-	$sql = "SELECT tbl_alumno.*,distritos.Nom_Dist,tbl_colegio.Nombre FROM ((tbl_alumno INNER JOIN distritos ON tbl_alumno.Cod_Dist=distritos.Cod_Dist) INNER JOIN tbl_colegio ON tbl_alumno.IDcolegio=tbl_colegio.IDcolegio) $where ORDER BY tbl_alumno.IDAlumno";
+	$sql = "SELECT a.IDAlumno as id,concat(a.Apellido_paterno,' ',a.Apellido_materno,' ',a.Nombres) as alumno,pa.Descripcion as admision,a.N_documento as dni,a.Direccion as direccion from  (((tbl_alumno as a inner join tbl_colegio as c on a.IDColegio=c.IDcolegio)inner join distritos as d on a.Cod_dist=d.Cod_Dist) inner join tbl_proceso_admision as pa on a.IDPadmision=pa.IDPadmision)$where order by a.Apellido_paterno";
 	$resultado = $mysqli->query($sql);
 
     $sql1 = "SELECT * FROM tbl_proceso_admision";
@@ -102,20 +102,14 @@
 								<th>ID_ALUMNO</th>
 								<th>N_DOCUMENTO</th>
 								<th>NOMBRES</th>
-                                <th>ESTADO</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDAlumno']; ?></td>
-									<td><?php echo $row['N_documento']; ?></td>
-									<td><?php echo $row['Nombres'].' '.$row['Apellido_paterno'].' '.$row['Apellido_materno']; ?></td>
-                                    <td><?php if ($row['Estado']=='01'){
-										echo 'ACTIVO';
-									}else if($row['Estado']=='02'){
-										echo 'INACTIVO';
-									} ?></td>
+									<td><?php echo $row['id']; ?></td>
+									<td><?php echo $row['dni']; ?></td>
+									<td><?php echo $row['alumno']; ?></td>
 								</tr>
 							<?php } ?>
 						</tbody>
