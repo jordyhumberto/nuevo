@@ -1,7 +1,12 @@
 <?php
 	//Incluimos librería y archivo de conexión
+	
+    session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
 	require '../../Classes/PHPExcel.php';
-    require '../../conexion.php';
 	$sql=$_GET['consulta'];
 	$valor=$_GET['valor'];
 	if($valor==''){

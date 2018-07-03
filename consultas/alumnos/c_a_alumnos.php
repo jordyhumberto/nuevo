@@ -1,20 +1,24 @@
 <?php
-    require '../../conexion.php';
+    session_start(); //Inicia una nueva sesión o reanuda la existente
+	require '../../conexion.php'; //Agregamos el script de Conexión
+	if(!isset($_SESSION["id_usuario"])){
+		header("Location: ../../index.php");
+	}
     $where = "";
 	$valor='';
 	if(!empty($_POST))
 	{
 		$valor = $_POST['admision'];
 		if(!empty($valor)){
-            $where = "WHERE tbl_alumno1.IDAlumno LIKE '$valor%'";
+            $where = "WHERE tbl_alumno.IDAlumno LIKE '$valor%'";
 		}
 	}
-	$sql = "SELECT tbl_alumno1.*,distritos.Nom_Dist,tbl_colegio1.Nombre FROM ((tbl_alumno1 INNER JOIN distritos ON tbl_alumno1.Cod_Dist=distritos.Cod_Dist) INNER JOIN tbl_colegio1 ON tbl_alumno1.IDcolegio=tbl_colegio1.IDcolegio) $where ORDER BY tbl_alumno1.IDAlumno";
+	$sql = "SELECT tbl_alumno.*,distritos.Nom_Dist,tbl_colegio.Nombre FROM ((tbl_alumno INNER JOIN distritos ON tbl_alumno.Cod_Dist=distritos.Cod_Dist) INNER JOIN tbl_colegio ON tbl_alumno.IDcolegio=tbl_colegio.IDcolegio) $where ORDER BY tbl_alumno.IDAlumno";
 	$resultado = $mysqli->query($sql);
 
-    $sql1 = "SELECT * FROM tbl_proceso_admision1";
+    $sql1 = "SELECT * FROM tbl_proceso_admision";
 	$resultado1 = $mysqli->query($sql1);
-	$sql2 = "SELECT * FROM tbl_proceso_admision1 WHERE IDPadmision='$valor'";
+	$sql2 = "SELECT * FROM tbl_proceso_admision WHERE IDPadmision='$valor'";
 	$resultado2 = $mysqli->query($sql2);
 	$fila=$resultado2->fetch_array(MYSQLI_ASSOC);
 ?>
@@ -26,7 +30,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="universidad, peruana, investigación, investigacion, negocios, upein, UPEIN">
   	<meta name="description" content="UPEIN! - Universidad Peruana de Invesitgacion y Negocios da la bienvenida a sus nuevos estudiantes">
-	<title>Intranet Aula</title>
+	<title>Intranet</title>
     <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../css/bootstrap-theme.css" rel="stylesheet">
