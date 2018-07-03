@@ -5,7 +5,7 @@
 	if(!isset($_SESSION["id_usuario"])){
     	header("Location: ../../index.php");
 	}
-	$sql = "SELECT c.IDCursos as id,c.Descripcion as descripcion,c.Tipo as tipo,c.HorasTeoricas as teoricas,c.HorasPractica as practicas,c.Creditos as creditos,cc.Descripcion as pre FROM tbl_cursos as c LEFT JOIN tbl_cursos as cc ON c.IDPrerequisito=cc.IDCursos ";
+	$sql = "SELECT c.IDCursos as id,c.Descripcion as descripcion,c.Tipo as tipo,c.HorasTeoricas as teoricas,c.HorasPractica as practicas,c.Creditos as creditos,cc.Descripcion as pre,ca.Descripcion as carrera FROM ((tbl_cursos as c LEFT JOIN tbl_cursos as cc ON c.IDPrerequisito=cc.IDCursos) INNER JOIN tbl_carrera as ca on c.IDCarrera=ca.IDCarrera)";
 	/* $sql="SELECT * FROM tbl_cursos"; */
 	$resultado = $mysqli->query($sql);
 ?>
@@ -66,6 +66,7 @@
 						<thead>
 							<tr>
 								<th>IDCURSO</th>
+								<th>CARRERA</th>
 								<th>Descripción</th>
 								<th>TIPO</th>
 								<th>HT</th>
@@ -79,6 +80,7 @@
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
 									<td><?php echo $row['id']; ?></td>
+									<td><?php echo $row['carrera'];?></td>
 									<td><?php echo $row['descripcion']; ?></td>
 									<td><?php echo $row['tipo'];?></td>
 									<td><?php echo $row['teoricas']; ?></td>

@@ -43,7 +43,18 @@
 			<br>
 			<form class="form-horizontal" method="POST" action="m_a_cu_update.php" autocomplete="off">
                 <input type="hidden" id="id" name="id" value="<?php echo $fila['IDCursos']; ?>" />
-
+				<div class="form-group">
+					<label for="carrera" class="col-sm-2 control-label">Carrera</label>
+					<div class="col-sm-10">
+						<select class="form-control" id="carrera" name="carrera">
+							<?php while($row = $resultado1->fetch_array(MYSQLI_ASSOC)) { ?>
+								<option value="<?php echo $row['IDCarrera']; ?>"
+                                <?php if($row['IDCarrera']==$fila['IDCarrera'])echo 'selected';?>
+                                ><?php echo $row['Descripcion']; ?></option>	
+							<?php } ?>
+						</select>
+					</div>
+				</div>
 				<div class="form-group">
 					<label for="año" class="col-sm-2 control-label">AÑO</label>
 					<div class="col-sm-4">
@@ -66,18 +77,7 @@
 						required>
 					</div>
 				</div>
-                <div class="form-group">
-					<label for="carrera" class="col-sm-2 control-label">Carrera</label>
-					<div class="col-sm-10">
-						<select class="form-control" id="carrera" name="carrera">
-							<?php while($row = $resultado1->fetch_array(MYSQLI_ASSOC)) { ?>
-								<option value="<?php echo $row['IDCarrera']; ?>"
-                                <?php if($row['IDCarrera']==$fila['IDCarrera'])echo 'selected';?>
-                                ><?php echo $row['Descripcion']; ?></option>	
-							<?php } ?>
-						</select>
-					</div>
-				</div>
+                
                 <div class="form-group">
 					<label for="tipoc" class="col-sm-2 control-label">Tipo de Curso</label>
 					<div class="col-sm-4">
@@ -112,46 +112,6 @@
                         required>
 					</div>
 				</div>
-                <div class="form-group">
-					<label for="creditos" class="col-sm-2 control-label">Creditos</label>
-					<div class="col-sm-4">
-						<input type="number" class="form-control" id="creditos" name="creditos" placeholder="creditos" 
-                        value="<?php echo $fila['Creditos'];?>"
-                        required>
-					</div>
-					<label for="creditosr" class="col-sm-2 control-label">Creditos Requeridos</label>
-					<div class="col-sm-4">
-						<input type="number" class="form-control" id="creditosr" name="creditosr" placeholder="creditos requeridos" 
-                        value="<?php echo $fila['Rcreditos'];?>"
-                        required>
-					</div>
-				</div>
-                <div class="form-group">
-					<label for="tipoa" class="col-sm-2 control-label">Tipo Aula</label>
-					<div class="col-sm-10">
-						<select class="form-control" id="tipoa" name="tipoa">
-							<?php while($row = $resultado3->fetch_array(MYSQLI_ASSOC)) { ?>
-								<option value="<?php echo $row['IDTA']; ?>"
-                                <?php if($row['IDTA']==$fila['IDTA'])echo 'selected';?>
-                                ><?php echo $row['Descripcion']; ?></option>	
-							<?php } ?>
-						</select>
-					</div>
-				</div>
-                <div class="form-group">
-					<label for="horast" class="col-sm-2 control-label">Horas teoricas</label>
-					<div class="col-sm-4">
-						<input type="number" class="form-control" id="horast" name="horast" placeholder="horas teoricas" 
-                        value="<?php echo $fila['HorasTeoricas'];?>"
-                        required>
-					</div>
-					<label for="horasp" class="col-sm-2 control-label">Horas Practicas</label>
-					<div class="col-sm-4">
-						<input type="number" class="form-control" id="horasp" name="horasp" placeholder="horas practicas" 
-                        value="<?php echo $fila['HorasPractica'];?>"
-                        required>
-					</div>
-				</div>
 				<div class="form-group">
 					<label for="tipo" class="col-sm-2 control-label">Tipo</label>
 					<div class="col-sm-10">
@@ -166,6 +126,35 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label for="horast" class="col-sm-2 control-label">Horas teoricas</label>
+					<div class="col-sm-4">
+						<input type="number" class="form-control" id="horast" name="horast" placeholder="horas teoricas" 
+                        value="<?php echo $fila['HorasTeoricas'];?>"
+                        required>
+					</div>
+					<label for="horasp" class="col-sm-2 control-label">Horas Practicas</label>
+					<div class="col-sm-4">
+						<input type="number" class="form-control" id="horasp" name="horasp" placeholder="horas practicas" 
+                        value="<?php echo $fila['HorasPractica'];?>"
+                        required>
+					</div>
+				</div>
+                <div class="form-group">
+					<label for="creditos" class="col-sm-2 control-label">Creditos</label>
+					<div class="col-sm-4">
+						<input type="number" class="form-control" id="creditos" name="creditos" placeholder="creditos" 
+                        value="<?php echo $fila['Creditos'];?>"
+                        required>
+					</div>
+					<label for="creditosr" class="col-sm-2 control-label">Creditos Requeridos</label>
+					<div class="col-sm-4">
+						<input type="number" class="form-control" id="creditosr" name="creditosr" placeholder="creditos requeridos" 
+                        value="<?php echo $fila['Rcreditos'];?>"
+                        required>
+					</div>
+				</div>
+                
+				<div class="form-group">
 					<label for="pre" class="col-sm-2 control-label">PREREQUISITO</label>
 					<div class="col-sm-10">
 						<select class="form-control" id="pre" name="pre">
@@ -173,6 +162,26 @@
 							<?php while($row = $resultado4->fetch_array(MYSQLI_ASSOC)) { ?>
 								<option value="<?php echo $row['IDCursos']; ?>"
                                 <?php if($row['IDCursos']==$fila['IDPrerequisito'])echo 'selected';?>
+                                ><?php echo $row['Descripcion']; ?></option>	
+							<?php } ?>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="plan" class="col-sm-2 control-label">PLAN DE ESTUDIO</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="plan" name="plan" placeholder="Plan de Estudio" 
+						value="<?php echo $fila['Plan_estudio'];?>"
+						required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="tipoa" class="col-sm-2 control-label">Tipo Aula</label>
+					<div class="col-sm-10">
+						<select class="form-control" id="tipoa" name="tipoa">
+							<?php while($row = $resultado3->fetch_array(MYSQLI_ASSOC)) { ?>
+								<option value="<?php echo $row['IDTA']; ?>"
+                                <?php if($row['IDTA']==$fila['IDTA'])echo 'selected';?>
                                 ><?php echo $row['Descripcion']; ?></option>	
 							<?php } ?>
 						</select>

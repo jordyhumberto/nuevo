@@ -20,8 +20,7 @@
     $estado=$_POST['estado'];
     $tipo=$_POST['tipo'];
     $pre=$_POST['pre'];
-   
-    
+    $plan=$_POST['plan'];
     /* if($ciclo<10){
         $cad='0'.$ciclo;
     }else{
@@ -50,13 +49,10 @@
             $id=$cadd.$co;
             $resultado1 = $mysqli->query($sql1);
         }
-    } */
-
-    
-    $sql ="INSERT INTO tbl_cursos(Año,Semestre,IDCursos,Descripcion,IDCarrera,Tipo_Curso,IDCiclo,IDPrerequisito,Creditos,Rcreditos,HorasTeoricas,HorasPractica,Tipo,IDTA,Estado)";
-    $sql.=" VALUES('$año','$semestre','$id','$descripcion','$carrera','$tipoc','$ciclo','$pre','$creditos','$creditosr','$horast','$horasp','$tipo','$tipoa','$estado')";
+    } */ 
+    $sql ="INSERT INTO tbl_cursos(Año,Semestre,IDCursos,Descripcion,IDCarrera,Tipo_Curso,IDCiclo,IDPrerequisito,Creditos,Rcreditos,HorasTeoricas,HorasPractica,Tipo,IDTA,Plan_estudio,Estado)";
+    $sql.=" VALUES('$año','$semestre','$id','$descripcion','$carrera','$tipoc','$ciclo','$pre','$creditos','$creditosr','$horast','$horasp','$tipo','$tipoa','$plan','$estado')";
 	$resultado = $mysqli->query($sql);
-    
 ?>
 
 <html lang="es">
