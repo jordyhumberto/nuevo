@@ -127,7 +127,7 @@
 						<select class="form-control" id="pre" name="pre">
 							<option value="">NO TIENE</option>
 							<?php while($row = $resultado4->fetch_array(MYSQLI_ASSOC)) { ?>
-								<option value="<?php echo $row['IDCursos']; ?>"><?php echo $row['Descripcion']; ?></option>	
+								<option value="<?php echo $row['IDCursos']; ?>"><?php echo $row['Descripcion'].' '.$row['IDCarrera']; ?></option>	
 							<?php } ?>
 						</select>
 					</div>

@@ -162,7 +162,7 @@
 							<?php while($row = $resultado4->fetch_array(MYSQLI_ASSOC)) { ?>
 								<option value="<?php echo $row['IDCursos']; ?>"
                                 <?php if($row['IDCursos']==$fila['IDPrerequisito'])echo 'selected';?>
-                                ><?php echo $row['Descripcion']; ?></option>	
+                                ><?php echo $row['Descripcion'].' '.$row['IDCarrera']; ?></option>	
 							<?php } ?>
 						</select>
 					</div>

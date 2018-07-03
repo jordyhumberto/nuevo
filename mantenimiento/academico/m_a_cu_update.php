@@ -20,6 +20,7 @@
     $estado=$_POST['estado'];
     $tipo=$_POST['tipo'];
     $pre=$_POST['pre'];
+    $plan=$_POST['plan'];
 
 	$sql = "UPDATE tbl_cursos SET
     Año='$año',
@@ -36,7 +37,8 @@
     HorasPractica='$horasp',
     Estado='$estado',
     Tipo='$tipo',
-    IDPrerequisito='$pre'
+    IDPrerequisito='$pre',
+    Plan_estudio='$plan'
     WHERE IDCursos = '$id'";
 	$resultado = $mysqli->query($sql);
 ?>
