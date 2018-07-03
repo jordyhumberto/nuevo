@@ -19,6 +19,9 @@ if(!isset($_SESSION["id_usuario"])){
     <!-- <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Ultra" rel="stylesheet"> -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Shrikhand" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Great+Vibes|Press+Start+2P|Shrikhand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Yesteryear" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
     <style>
         .slider{
@@ -37,6 +40,10 @@ if(!isset($_SESSION["id_usuario"])){
             font-family: 'Great Vibes', cursive;
             font-family: 'Press Start 2P', cursive;
             font-family: 'Black Ops One', cursive;
+            /* font-family: 'Homemade Apple', cursive; */
+            /* font-family: 'Homemade Apple', cursive;
+            font-family: 'Yesteryear', cursive; */
+            /* font-family: 'Cabin Sketch', cursive; */
             font-size: 9VW;
             font-weight: 600;
             text-transform: uppercase;
