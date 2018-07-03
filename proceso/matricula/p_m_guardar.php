@@ -4,6 +4,7 @@ require '../../conexion.php'; //Agregamos el script de Conexión
 if(!isset($_SESSION["id_usuario"])){
     header("Location: ../../index.php");
 }
+
 $error="";
 $alerta="";//agregar una alerta sobre los creditos
 $IDA=$_GET['IDAlumno'];
@@ -105,6 +106,11 @@ $sqlp4="INSERT INTO tbl_compromiso_pago(IDMatricula,Nro_compromiso,Pago_F,Descue
 $resultadop4=$mysqli->query($sqlp4);
 $sqlp5="INSERT INTO tbl_compromiso_pago(IDMatricula,Nro_compromiso,Pago_F,Descuento,Pago,Fecha,Estado) VALUES ('$IDM',5,'$pension',0,'$pension','$pago5','01')";
 $resultadop5=$mysqli->query($sqlp5);
+//los cursos operativos con alumnos y con notas
+foreach ($id as $s) {
+	$sql5="INSERT INTO tbl_notas_alumno(IDMatricula,IDAlumno,IDCO,Estado) VALUES ('$IDM','$IDA','$s','01')";
+	$resultado5=$mysqli->query($sql5);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
