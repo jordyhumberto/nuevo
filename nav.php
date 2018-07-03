@@ -78,7 +78,7 @@
                         <li><a href="../../proceso/academico/p_a_cursoo.php">Curso-Operativo</a></li>
                         <li><a href="#">Horario-Clases</a></li>
                         <li><a href="#">Cursos-Alumno</a></li>
-                        <li><a href="#">Registro-Notas</a></li>
+                        <li><a href="../../proceso/academico/p_a_registronotas.php">Registro-Notas</a></li>
                         <li><a href="#">Registro-Notas-Admin</a></li>
                     </ul>
                 </li>
