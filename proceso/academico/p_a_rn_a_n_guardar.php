@@ -10,9 +10,21 @@
     $nota1=$_POST['nota1'];
     $nota2=$_POST['nota2'];
     $nota3=$_POST['nota3'];
-    $nota4=$_POST['nota4'];
-    
-	$sql = "UPDATE tbl_notas_alumno SET PPracticas='$nota1',ExamenParcial='$nota2',ExamenFinal='$nota3',ExamenSusti='$nota4' WHERE IDMatricula='$idma' AND IDCO='$idco'";
+	$nota4=$_POST['nota4'];
+	$promedio=0;
+	$estado='';
+	if($nota1!=0 && $nota2!=0 && $nota3!=0 && $nota4==0){
+		$promedio=($nota1+$nota2+$nota3)/3;
+		
+	}elseif ($nota1!=0 && $nota2!=0 && $nota3!=0 && $nota4!=0){
+		$promedio=($nota1+$nota2+$nota3+$nota4)/4;
+	}
+	if($promedio>10.4){
+		$estado='01';
+	}else{
+		$estado='00';
+	}
+	$sql = "UPDATE tbl_notas_alumno SET PPracticas='$nota1',ExamenParcial='$nota2',ExamenFinal='$nota3',ExamenSusti='$nota4',Promedio='$promedio',Estado='$estado' WHERE IDMatricula='$idma' AND IDCO='$idco'";
 	$resultado = $mysqli->query($sql);
 ?>
 <html lang="es">

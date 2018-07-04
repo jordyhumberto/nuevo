@@ -85,7 +85,12 @@
                                     <td><?php echo $row['final'];?></td>
 									<td><?php echo $row['susti'];?></td>
 									<td><?php echo $row['promedio'];?></td>
-                                    <td><?php echo $row['estado'];?></td>
+									<td><?php if($row['estado']=='01'){
+											echo "APROBADO";
+										}elseif($row['estado']=='00'){
+											echo "DESAPROBADO";
+										}
+									?></td>
 									<td><a href="p_a_rn_a_n.php?IDMA=<?php echo $row['matricula'];?>&IDCO=<?php echo $row['operativo'];?>"><span class="glyphicon glyphicon-plus"></a></td>
 								</tr>
 							<?php } ?>
