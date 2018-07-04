@@ -6,6 +6,7 @@
 	}
 	$id=$_GET['IDAlumno'];
 	$carrera=$_GET['IDCarrera'];
+	$ciclo=$_GET['IDCiclo'];
 	$error="";
 	if(!empty($_GET["error"])){
 		$error=$_GET["error"];
@@ -14,19 +15,23 @@
 	$resultado1=$mysqli->query($sql1);
 	$fila=$resultado1->fetch_array(MYSQLI_ASSOC);
 
-	$sql2="SELECT * FROM tbl_notas_alumno WHERE IDAlumno='$id'";
+	/* $sql2="SELECT * FROM tbl_notas_alumno WHERE IDAlumno='$id'";
 	$resultado2=$mysqli->query($sql2);
-	$fila1=$resultado2->fetch_array(MYSQLI_ASSOC);
+	$fila1=$resultado2->fetch_array(MYSQLI_ASSOC); */
 	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso,c.Creditos as creditos, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
 	$sql.=" FROM ((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)";
-	$sql.=" WHERE s.Estado='01' AND c.IDCarrera='$carrera'";
+	$sql.=" WHERE s.Estado='01' AND c.IDCarrera='$carrera' AND c.IDCiclo='$ciclo'";
 	$resultado=$mysqli->query($sql);
-	if(empty($fila1)){
+	$sql1 = "SELECT co.IDCO AS id, c.Descripcion AS curso,c.Creditos as creditos, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
+	$sql1.=" FROM (((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula) INNER JOIN tbl_notas_alumno as na on co.IDCO=na.IDCO)";
+	$sql1.=" WHERE s.Estado='01' AND c.IDCarrera='$carrera' AND na.Estado='00'";
+	$resultado1=$mysqli->query($sql1);
+	/* if(empty($fila1)){
 		$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso,c.Creditos as creditos, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
 		$sql.=" FROM ((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)";
 		$sql.=" WHERE s.Estado='01' AND c.IDCarrera='$carrera' AND c.IDCiclo='1'";
 		$resultado=$mysqli->query($sql);
-	}
+	} */
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -84,6 +89,7 @@
 				</div>
 				<br>
 				<form action="p_m_guardar.php?IDAlumno=<?php echo $id;?>&IDCarrera=<?php echo $carrera;?>" method="post">
+					<input type="hidden" name="ciclo" value="<?php echo $ciclo;?>">
 					<div class="row table-responsive">
 						<table class="display" id="mitabla">
 							<thead>
@@ -115,11 +121,25 @@
 										<td><input type="checkbox" name="check[]" value="<?php echo $row['id'];?>"></td>
 									</tr>
 								<?php } ?>
+								<?php while($row = $resultado1->fetch_array(MYSQLI_ASSOC)) { ?>
+									<tr>
+										<td><?php echo $row['id'];?></td>
+										<td><?php echo $row['curso'];?></td>
+										<td><?php echo $row['profe'];?></td>
+										<td><?php echo $row['semestre'];?></td>
+										<td><?php echo $row['inicio'];?></td>
+										<td><?php echo $row['fin'];?></td>
+										<td><?php echo $row['aula'];?></td>
+										<td><?php echo $row['creditos'];?></td>
+										<td><?php echo $row['estado'];?></td>
+										<td><input type="checkbox" name="check[]" value="<?php echo $row['id'];?>"></td>
+									</tr>
+								<?php } ?>
 							</tbody>
 						</table>
 					</div>
 					<br>
-					<a class="btn btn-default" href="p_m_matricula.php">regresar</a>
+					<a class="btn btn-default" href="p_m_ciclos.php?IDAlumno=<?php echo $id;?>&IDCarrera=<?php echo $carrera;?>">regresar</a>
 					<input type="submit" class="btn btn-primary">
 				</form>
 			</div>	

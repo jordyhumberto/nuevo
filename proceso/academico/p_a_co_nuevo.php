@@ -4,7 +4,7 @@
 	if(!isset($_SESSION["id_usuario"])){
 		header("Location: ../../index.php");
 	}
-	$sql1 = "SELECT * FROM tbl_cursos ORDER BY Descripcion";
+	$sql1 = "SELECT c.IDCursos as idc,c.Descripcion as curso,ca.Descripcion as carrera FROM tbl_cursos as c inner join tbl_carrera as ca on c.IDCarrera=ca.IDCarrera  ORDER BY c.IDCursos";
     $resultado1 = $mysqli->query($sql1);
     $sql2 = "SELECT * FROM tbl_docente ORDER BY Apellidos";
     $resultado2 = $mysqli->query($sql2);
@@ -38,7 +38,7 @@
 					<div class="col-sm-10">
 						<select class="form-control" id="curso" name="curso">
 							<?php while($row = $resultado1->fetch_array(MYSQLI_ASSOC)) { ?>
-								<option value="<?php echo $row['IDCursos']; ?>"><?php echo $row['Descripcion'].' '.$row['IDCarrera']; ?></option>	
+								<option value="<?php echo $row['idc']; ?>"><?php echo $row['curso'].' ('.$row['carrera'].')'; ?></option>	
 							<?php } ?>
 						</select>
 					</div>

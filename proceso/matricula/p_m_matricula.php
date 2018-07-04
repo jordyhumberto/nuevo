@@ -4,7 +4,7 @@
 	if(!isset($_SESSION["id_usuario"])){
 		header("Location: ../../index.php");
 	}
-	$sql = "SELECT * FROM tbl_alumno ORDER BY IDAlumno";
+	$sql = "SELECT * FROM tbl_alumno";
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -81,7 +81,7 @@
                                     <td><?php echo $row['Apellido_materno']; ?></td>
                                     <td><?php echo $row['Telf_celular']; ?></td>
 									<td><?php echo $row['Email']; ?></td>
-									<td><a href="p_m_cursos.php?IDAlumno=<?php echo $row['IDAlumno']; ?>&IDCarrera=<?php echo $row['IDCarrera']?>"><span class="glyphicon glyphicon-plus"></span></a></td>
+									<td><a href="p_m_ciclos.php?IDAlumno=<?php echo $row['IDAlumno']; ?>&IDCarrera=<?php echo $row['IDCarrera']?>"><span class="glyphicon glyphicon-plus"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>

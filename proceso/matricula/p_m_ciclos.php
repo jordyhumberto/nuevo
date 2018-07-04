@@ -3,27 +3,10 @@
 	require '../../conexion.php'; //Agregamos el script de Conexión
 	if(!isset($_SESSION["id_usuario"])){
 		header("Location: ../../index.php");
-	}
-	$sql1="SELECT co.IDCO AS id,s.Fecha_Fin AS fin,co.Estado AS estado FROM tbl_curso_operativo AS co INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre";
-	$resultado1=$mysqli->query($sql1);
-	$fechafin="";
-	$fechahoy=date('Y-m-d');
-	$fechahoy=substr($fechahoy,0,4).substr($fechahoy,5,2).substr($fechahoy,8,2);
-
-	while($fila=$resultado1->fetch_array(MYSQLI_ASSOC)){
-		$IDS=$fila['id'];
-		$fechafin=$fila['fin'];
-		$fechafin=substr($fechafin,0,4).substr($fechafin,5,2).substr($fechafin,8,2);
-		/* echo $fechafin;echo '<br>'; */
-		if($fechahoy>$fechafin){
-			/* echo 'si se puede'; */
-			$sql3="UPDATE tbl_curso_operativo SET Estado='00' WHERE IDCO='$IDS'";
-			$resultado3=$mysqli->query($sql3);
-		}
-	}
-
-	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso, d.Apellidos AS profe,c.IDCiclo as ciclo, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado,ca.Descripcion AS carrera"; 
-    $sql.=" FROM (((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula) INNER JOIN tbl_carrera AS ca ON c.IDCarrera=ca.IDCarrera)";
+    }
+    $id=$_GET['IDAlumno'];
+	$carrera=$_GET['IDCarrera'];
+	$sql = "SELECT * FROM tbl_ciclos";
 	$resultado = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
@@ -72,43 +55,32 @@
         <?php include '../../nav.php';?>
 		<div class="container">
 				<div class="row">
-					<h2 style="text-align:center">FORMULARIO DE CURSO OPERATIVO</h2>
+					<h2 style="text-align:center">FORMULARIO DE MATRICULA</h2>
+				</div>
+				<div class="row">
+					<h3 style="text-align:center">NUEVO REGRISTRO</h3>
 				</div>
                 <div class="row">
-					<a href="p_a_co_nuevo.php" class="btn btn-primary">Nuevo Registro</a>
-				</div>
+                    <a href="p_m_matricula.php" class="btn btn-primary">Regresar</a>
+                </div>
 				<br>
 				<div class="row table-responsive">
 					<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>IDCO</th>
-								<th>CARRERA</th>
-								<th>CURSO</th>
-                                <th>DOCENTE</th>
-								<th>CICLO</th>
-                                <th>SEMESTRE</th>
-								<th>INICIO</th>
-								<th>FIN</th>
-                                <th>AULA</th>
-								<th>ESTADO</th>
-                                <th></th>
+								<th>IDCICLO</th>
+								<th>DESCRIPCION</th>
+                                <th>ESTADO</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['id'];?></td>
-									<td><?php echo $row['carrera'];?></td>
-									<td><?php echo $row['curso'];?></td>
-									<td><?php echo $row['profe'];?></td>
-									<td><?php echo $row['ciclo']; ?></td>
-                                    <td><?php echo $row['semestre'];?></td>
-									<td><?php echo $row['inicio'];?></td>
-									<td><?php echo $row['fin'];?></td>
-                                    <td><?php echo $row['aula'];?></td>
-                                    <td><?php echo $row['estado'];?></td>
-									<td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
+									<td><?php echo $row['IDCiclo']; ?></td>
+									<td><?php echo $row['Descripcion']; ?></td>
+                                    <td><?php echo $row['Estado'];?></td>
+									<td><a href="p_m_cursos.php?IDAlumno=<?php echo $id; ?>&IDCarrera=<?php echo $carrera;?>&IDCiclo=<?php echo $row['IDCiclo']?>"><span class="glyphicon glyphicon-plus"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>

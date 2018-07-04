@@ -9,9 +9,11 @@ $error="";
 $alerta="";//agregar una alerta sobre los creditos
 $IDA=$_GET['IDAlumno'];
 $IDC=$_GET['IDCarrera'];
+$IDCC=$_POST['ciclo'];
 if(!isset($_POST['check'])){
-    $error="NO PRESIONÓ NINGÚN CHECKBOX";
-    header("Location: p_m_cursos.php?IDAlumno=$IDA&IDCarrera=$IDC&error=$error");
+	$error="NO PRESIONÓ NINGÚN CHECKBOX";
+	header("Location: p_m_cursos.php?IDAlumno=$IDA&IDCarrera=$IDC&IDCiclo=$IDCC&error=$error");
+	return;
 }
 $id=$_POST['check'];
 $N=count($id);
@@ -26,9 +28,10 @@ for($i=0; $i < $N; $i++)
     $suma=$suma+$credito;
 }
 /* echo $suma; */
-if($suma>24){
-    $error="*DEBE TENER COMO MÁXIMO 24 CRÉDITOS";
-    header("Location: p_m_cursos.php?IDAlumno=$IDA&IDCarrera=$IDC&error=$error");
+if($suma>26){
+    $error="*DEBE TENER COMO MÁXIMO 26 CRÉDITOS";
+	header("Location: p_m_cursos.php?IDAlumno=$IDA&IDCarrera=$IDC&IDCiclo=$IDCC&error=$error");
+	return;
 }else if($suma<20){
     $alerta="*ESTAS MATRICULANDO MENOS DE 20 CURSOS";
 }
@@ -108,7 +111,7 @@ $sqlp5="INSERT INTO tbl_compromiso_pago(IDMatricula,Nro_compromiso,Pago_F,Descue
 $resultadop5=$mysqli->query($sqlp5);
 //los cursos operativos con alumnos y con notas
 foreach ($id as $s) {
-	$sql5="INSERT INTO tbl_notas_alumno(IDMatricula,IDAlumno,IDCO,Estado) VALUES ('$IDM','$IDA','$s','01')";
+	$sql5="INSERT INTO tbl_notas_alumno(IDMatricula,IDAlumno,IDCO) VALUES ('$IDM','$IDA','$s')";
 	$resultado5=$mysqli->query($sql5);
 }
 ?>
