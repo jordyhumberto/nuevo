@@ -1,14 +1,18 @@
 *{
     padding: 0px;
     margin: 0px;
+    box-sizing: border-box;
 }
 .l_upein{/*LOGO DE LA UNIVERSIDAD*/
-    width: 8vw;
-    height: 8vw;
-    margin: 1vw;
+    /* width: 8vw; */
+    width: 4vw;
+    height: 4vw;
+    /* height: 8vw; */
+    margin: .5vw;
 }
 footer div{
-    background: linear-gradient(rgb(179, 45, 15),rgb(80, 20, 5));
+   /*  background: linear-gradient(rgb(179, 45, 15),rgb(80, 20, 5)); */
+    background: #2A3542;
     font-size: 1vw;
     color: white;
 }
@@ -16,11 +20,13 @@ footer div{
     height: 5vh;
     display: flex;
     flex-direction: row-reverse;
+    /* background: linear-gradient(black,#2A3542); */
 }
 .arriba a:hover{/*enlace boton arriba a la parte superior*/
-    background: linear-gradient(rgb(224, 37, 37),rgb(48, 8, 8));
+    /* background: linear-gradient(rgb(224, 37, 37),rgb(48, 8, 8)); */
     border-radius: .6vw;
 }
+
 .arriba a{
     padding:.5vw;
     text-decoration: none;
@@ -28,17 +34,18 @@ footer div{
 }
 .p_footer{
     display: flex;
-    height: 8vw;
+    height: 5vw;
     text-align: center;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
 .banner{/*banner superior*/
-    background: linear-gradient(rgb(167, 47, 20),rgb(92, 25, 10));
+    /* background: linear-gradient(rgb(167, 47, 20),rgb(92, 25, 10)); */
+    background: #DBCEC8;/*poner en blanco*/
     display: flex;
     flex-direction: row;
-    margin-top:.3vw; 
+    /* margin-top:.3vw;  */
 }
 .p_p{/*contenedor del titulo*/
     display:flex;
@@ -49,14 +56,15 @@ footer div{
 .p_upein{/*nombre de la universidad en el banner*/
     font-family: 'Alfa Slab One', cursive;
     font-family: 'Ultra', serif;
-    color: white;
+    color: black;
     font-size: 1.5vw;
 }
 .contenedor{
     padding: 0;
     /* width: 90vw; */
     margin: auto; 
-    border: .3vw white solid;
+    /* border: .3vw white solid; */
+
     background: white;
 }
 .container{/*contenedor de la tabla*/
@@ -71,42 +79,49 @@ footer div{
 
 /*---------------------------------------------------------------------*/
 ul{
-    z-index: 999999999;/*para que el nav quede adelante*/
-    background: linear-gradient(rgb(204, 53, 20),rgb(114, 31, 15));
+    /* z-index: 999999999; *//*para que el nav quede adelante*/
+    /* background: linear-gradient(rgb(204, 53, 20),rgb(114, 31, 15)); */
+    background: #2A3542;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     list-style: none;
     font-size: 1vw;
     font-family: Arial, Helvetica, sans-serif;
+    padding: .5vw;
 }
+/* ul li p{
+    display: block;
+    height: 100%;
+    color:grey;
+} */
 ul li a{
     text-decoration: none;
-    color:#fff;
-    display: block;
+    color:grey;
+    display: flex;
+    flex-direction: column;
     padding: .6vw;
+    box-sizing: border-box;
+    font-size: 1.2vw;
 }
 ul li a:hover{
-    background:  linear-gradient(rgb(105, 30, 13),rgb(185, 54, 28));
-    border-radius: .6vw;
-    text-decoration: none;
+    border-bottom:.5vw solid yellow;
     color:#fff;
 }
 ul li ul{
     display: none;
-    position: absolute;
-    min-width: 14vw;
+    /* position: absolute; */
+    /* min-width: 14vw; */
     border-radius: .6vw;
 }
 ul li:hover > ul{
     display: block;
 }
-ul li ul li{
-    position: relative;
-}
 ul li ul li:hover > ul{
-    right: -14vw;
+    /* right: -14vw; */
     top:0;
 }
+/********************************************************************************/
 
 #slider{
     height: 100vh;
@@ -114,4 +129,11 @@ ul li ul li:hover > ul{
 #bienvenido{
     height: 100%;
     width: 100%;
+}
+.lado1{
+    width: 15vw;
+    background: #2A3542;
+}
+.lado2{
+    flex-grow: 1;
 }
