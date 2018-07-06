@@ -95,6 +95,7 @@ ul li a:hover{
     border-bottom:.3vw solid #FF5E20;
     color:#fff;
     text-decoration: none;
+    cursor: pointer;
 }
 ul li ul{
     display: none;
