@@ -24,6 +24,7 @@ if(!isset($_SESSION["id_usuario"])){
     <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <style>
         .slider{
             display: flex;
