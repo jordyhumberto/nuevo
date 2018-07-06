@@ -27,19 +27,27 @@ footer div{
     flex-direction: row;
     align-items: center;
 }
+.l_upein{/*LOGO DE LA UNIVERSIDAD*/
+    display: block;
+    width: 3vw;
+    height: 3vw;
+    margin: .5vw;
+    margin-left: 1vw;
+}
 .p_upein{/*nombre de la universidad en el banner*/
     display: inline;
     font-family: 'IBM Plex Mono', monospace;
     color: #FF5E20;
-    font-size: 3vw;
+    font-size: 2vw;
     margin: 0;
 }
 .p_otro{
     display: inline;
     font-family: 'IBM Plex Mono', monospace;
     color:white;
-    font-size: 3vw;
+    font-size: 2vw;
     margin: 0;
+    margin-left:.5vw; 
 }
 /***************************************************************************************/
 .contenedor{
@@ -53,12 +61,7 @@ footer div{
     margin-bottom:1vw;
 }
 /*******************************************************************************/
-.l_upein{/*LOGO DE LA UNIVERSIDAD*/
-    display: block;
-    width: 5vw;
-    height: 5vw;
-    margin: .5vw;
-}
+
 nav{
     background: rgb(47, 59, 73);
     border-radius: 1vw;
