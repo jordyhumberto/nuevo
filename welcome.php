@@ -23,10 +23,10 @@ if(!isset($_SESSION["id_usuario"])){
     <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Great+Vibes|Press+Start+2P|Shrikhand" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
     <style>
         .slider{
             display: flex;
-            /* flex-direction:row; */
             justify-content: center;
             align-items: center;
         }
@@ -99,14 +99,7 @@ if(!isset($_SESSION["id_usuario"])){
 </head>
 <body>
     <div class="contenedor">
-		<header id="header">
-			<div class="banner">
-				<img class="l_upein" src="img/logo_upein.png" alt="Logo_upein">
-				<div class="p_p">
-				    <p class="p_upein">UNIVERSIDAD PERUANA DE</br>INVESTIGACIÓN Y NEGOCIOS</p>	
-				</div>
-			</div>
-        </header>
+		<?php include "banner.html";?>
         <div class="cuerpo" style="display:flex;">
             <div class="lado1">
                 <?php require "navu.html";?>
@@ -115,15 +108,10 @@ if(!isset($_SESSION["id_usuario"])){
                 <div id="slider">
                     <?php include "hola.html";?>
                 </div>
-                <footer>
-                    <div class="arriba"><a href="#header">arriba</a></div>
-                    <div class="p_footer">
-                        <p>UNIVERSIDAD PERUANA DE INVESTIGACIÓN Y NEGOCIOS</p>
-                        <p>Av. Salaverry 1810, Jesús María, Lima - Perú, Telf.:470 1687 / 265 5412 / 956 392 143</p>
-                    </div>
-                </footer>
+                
             </div>
         </div>
+        <?php include "footer.html";?>
 	</div>
 </body>
 </html>
