@@ -39,8 +39,8 @@
                         <li><a href="../../mantenimiento/administrativo/m_ad_proceso.php">Proceso Admision</a></li>
                         <li><a href="../../mantenimiento/administrativo/m_ad_becaa.php">Asignar Beca</a></li>
                         <li><a href="#">Usuarios</a></li>
-                        <li><a href="#">Movimientos Usuario</a></li>
-                        <li><a href="#">Documento D' Impresión</a></li>
+                        <!-- <li><a href="#">Movimientos Usuario</a></li>
+                        <li><a href="#">Documento D' Impresión</a></li> -->
                     </ul>
                 </li>
             </ul>
@@ -72,7 +72,7 @@
                         <li><a href="#">Horario-Clases</a></li>
                         <li><a href="#">Cursos-Alumno</a></li>
                         <li><a href="../../proceso/academico/p_a_registronotas.php">Registro-Notas</a></li>
-                        <li><a href="#">Registro-Notas-Admin</a></li>
+                        <!-- <li><a href="#">Registro-Notas-Admin</a></li> -->
                     </ul>
                 </li>
                 <li ><a href="#">Consultas Notas</a></li>

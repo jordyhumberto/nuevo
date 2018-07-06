@@ -100,12 +100,19 @@ ul li ul{
     display: none;
     border-radius: 1vw;
 }
-ul li:hover > ul{
+ul li ul:target{
     display: block;
 }
-ul li ul li:hover > ul{
-    top:0;
+ul li ul li ul{
+    display: none;
+    border-radius: 1vw;
 }
+ul li ul li ul:target{
+    display: block;
+}
+/* ul li ul li:hover > ul{
+    top:0;
+} */
 ul li ul li a{
     font-size: 1vw;
 }
