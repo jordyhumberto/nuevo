@@ -80,12 +80,13 @@ ul{
     width: 95%;
     margin:auto;
 }
+ul li{
+    padding: .4vw;
+}
 ul li a{
     text-decoration: none;
     color:grey;
-    /* display: flex;
-    flex-direction: column; */
-    padding: .3vw;
+    padding: .4vw;
     box-sizing: border-box;
     font-size: 1.2vw;
     font-family: 'IBM Plex Mono', monospace;
