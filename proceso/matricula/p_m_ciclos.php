@@ -6,6 +6,12 @@
     }
     $id=$_GET['IDAlumno'];
 	$carrera=$_GET['IDCarrera'];
+	$semestre=$_GET['IDSemestre'];
+	$estado=$_GET['Estado'];
+	$error="";
+	if ($estado=='00') {
+		$error="*SEMESTRE INACTIVO*";
+	}
 	$sql = "SELECT * FROM tbl_ciclos";
 	$resultado = $mysqli->query($sql);
 ?>
@@ -27,6 +33,12 @@
 	<link href="../../css/jquery.dataTables.min.css" rel="stylesheet">	
 	<script src="../../js/jquery.dataTables.min.js"></script>
 	<link rel="stylesheet" href="../../css/estilos.css">
+	<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Ultra" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Great+Vibes|Press+Start+2P|Shrikhand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Ultra" rel="stylesheet">
 	<script>
 		$(document).ready(function(){
@@ -52,16 +64,20 @@
 </head>
 <body>
 	<div class="contenedor">
-        <?php include '../../nav.php';?>
-		<div class="container">
-				<div class="row">
-					<h2 style="text-align:center">FORMULARIO DE MATRICULA</h2>
+	<?php include "../../banneru.html";?>
+		<div class="cuerpo" style="display:flex;">
+			<div class="lado1"><?php include '../../nav.php'?></div>
+			<div class="lado2">
+			<div class="container">
+				<div class="row" style="background:#FF6C60;border-radius:.8vw .8vw 0 0;">
+					<h2 style="text-align:center;color:#ffff;">FORMULARIO DE MATRICULA</h2>
 				</div>
+				<!-- <br> -->
 				<div class="row">
-					<h3 style="text-align:center">NUEVO REGRISTRO</h3>
+					<h3 style="text-align:center;color:red;"><?php echo $error;?></h3>
 				</div>
                 <div class="row">
-                    <a href="p_m_matricula.php" class="btn btn-primary">Regresar</a>
+                    <a href="p_m_semestre.php?IDAlumno=<?php echo $id;?>&IDCarrera=<?php echo $carrera;?>" class="btn btn-primary">Regresar</a>
                 </div>
 				<br>
 				<div class="row table-responsive">
@@ -87,13 +103,9 @@
 					</table>
 				</div>
 			</div>	
-		<footer>
-			<div class="arriba"><a href="#header">arriba</a></div>
-			<div class="p_footer">
-				<p>UNIVERSIDAD PERUANA DE INVESTIGACIÓN Y NEGOCIOS</p>
-				<p>Av. Salaverry 1810, Jesús María, Lima - Perú, Telf.:470 1687 / 265 5412 / 956 392 143</p>
-			</div>
-		</footer>
+		</div>
+	</div>
+	<?php include "../../footer.html";?>
 	</div>
 </body>
 </html>

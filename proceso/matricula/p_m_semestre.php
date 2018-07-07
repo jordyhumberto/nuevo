@@ -4,13 +4,15 @@
 	if(!isset($_SESSION["id_usuario"])){
 		header("Location: ../../index.php");
 	}
-	$sql = "SELECT * FROM tbl_alumno";
-	$resultado = $mysqli->query($sql);
+	$sql = "SELECT * FROM tbl_semestre";
+    $resultado = $mysqli->query($sql);
+    $id=$_GET['IDAlumno'];
+	$carrera=$_GET['IDCarrera'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
+<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -65,34 +67,36 @@
 				<div class="row" style="background:#FF6C60;border-radius:.8vw .8vw 0 0;">
 						<h2 style="text-align:center;color:#ffff;">FORMULARIO DE MATRICULA</h2>
 				</div>
-				<!-- <br>
+				<!-- <br> -->
 				<div class="row">
-					<h3 style="text-align:center">NUEVO REGRISTRO</h3>
-				</div> -->
+					<h3 style="text-align:center">SEMESTRE</h3>
+				</div>
 				<br><!--  -->
+                <div class="row">
+                    <a href="p_m_matricula.php" class="btn btn-primary">Regresar</a>
+                </div>
+                <br>
 				<div class="row table-responsive">
 					<table class="display" id="mitabla">
 						<thead>
 							<tr>
-								<th>ID_Alumno</th>
-								<th>Nombres</th>
-                                <th>Apellido_P</th>
-                                <th>Apellido_M</th>
-								<th>Telefono</th>
-								<th>Email</th>
-								<th>MATRICULA</th>
+								<th>DESCRIPCION</th>
+								<th>DETALLE</th>
+                                <th>FECHAINICIO</th>
+                                <th>FECHAFIN</th>
+								<th>ESTADO</th>
+                                <th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
 								<tr>
-									<td><?php echo $row['IDAlumno']; ?></td>
-									<td><?php echo $row['Nombres']; ?></td>
-									<td><?php echo $row['Apellido_paterno']; ?></td>
-                                    <td><?php echo $row['Apellido_materno']; ?></td>
-                                    <td><?php echo $row['Telf_celular']; ?></td>
-									<td><?php echo $row['Email']; ?></td>
-									<td><a href="p_m_semestre.php?IDAlumno=<?php echo $row['IDAlumno']; ?>&IDCarrera=<?php echo $row['IDCarrera']?>"><span class="glyphicon glyphicon-plus"></span></a></td>
+									<td><?php echo $row['Descripcion']; ?></td>
+									<td><?php echo $row['Detalle']; ?></td>
+									<td><?php echo $row['Fecha_Inicio']; ?></td>
+                                    <td><?php echo $row['Fecha_Fin']; ?></td>
+                                    <td><?php echo $row['Estado']; ?></td>
+									<td><a href="p_m_ciclos.php?IDAlumno=<?php echo $id;?>&IDCarrera=<?php echo $carrera;?>&IDSemestre=<?php echo $row['IDSemestre'];?>&Estado=<?php echo $row['Estado'];?>"><span class="glyphicon glyphicon-plus"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>
