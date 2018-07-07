@@ -25,7 +25,12 @@
 	<script src="../../js/jquery.dataTables.min.js"></script>
 
 	<link rel="stylesheet" href="../../css/estilos.css">
-	
+	<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Ultra" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Great+Vibes|Press+Start+2P|Shrikhand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Ultra" rel="stylesheet">
 	<script>
 		$(document).ready(function(){
@@ -52,50 +57,49 @@
 <body>
 	<div class="contenedor">
 		
-		<?php include '../../nav.php'?>
-		<div class="container">
-				<div class="row">
-					<h2 style="text-align:center">Formulario de Colegios</h2>
-				</div>
-				<div class="row">
-					<a href="m_g_c_nuevo.php" class="btn btn-primary">Nuevo Registro</a>
-				</div>
-				<br>
-				<div class="row table-responsive">
-				<!-- tabla de profesores -->
-				<table class="display" id="mitabla">
-						<thead>
-							<tr>
-								<th>ID_Colegio</th>
-								<th>Nombre</th>
-								<th>Dirección</th>
-								<th>Teléfono</th>
-								<th>Gestión</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
+		<?php include "../../banneru.html";?>
+		<div class="cuerpo" style="display:flex;">
+			<div class="lado1"><?php include '../../nav.php'?></div>
+			<div class="lado2">
+				<div class="container">
+					<div class="row" style="background:#FF6C60;border-radius:.8vw .8vw 0 0;">
+							<h2 style="text-align:center;color:#ffff;">Formulario de Colegios</h2>
+					</div>
+					<br>
+					<div class="row">
+						<a href="m_g_c_nuevo.php" class="btn btn-primary">Nuevo Registro</a>
+					</div>
+					<br>
+					<div class="row table-responsive">
+						<table class="display" id="mitabla">
+							<thead>
 								<tr>
-									<td><?php echo $row['IDcolegio']; ?></td>
-									<td><?php echo $row['Nombre']; ?></td>
-									<td><?php echo $row['Direccion']; ?></td>
-									<td><?php echo $row['Telefono']; ?></td>
-									<td><?php echo $row['Gestion']; ?></td>
-									<td><a href="m_g_c_modificar.php?IDcolegio=<?php echo $row['IDcolegio']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+									<th>ID_Colegio</th>
+									<th>Nombre</th>
+									<th>Dirección</th>
+									<th>Teléfono</th>
+									<th>Gestión</th>
+									<th></th>
 								</tr>
-							<?php } ?>
-						</tbody>
-					</table>
-				</div>
-			</div>	
-		<footer>
-			<div class="arriba"><a href="#header">arriba</a></div>
-			<div class="p_footer">
-				<p>UNIVERSIDAD PERUANA DE INVESTIGACIÓN Y NEGOCIOS</p>
-				<p>Av. Salaverry 1810, Jesús María, Lima - Perú, Telf.:470 1687 / 265 5412 / 956 392 143</p>
+							</thead>
+							<tbody>
+								<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
+									<tr>
+										<td><?php echo $row['IDcolegio']; ?></td>
+										<td><?php echo $row['Nombre']; ?></td>
+										<td><?php echo $row['Direccion']; ?></td>
+										<td><?php echo $row['Telefono']; ?></td>
+										<td><?php echo $row['Gestion']; ?></td>
+										<td><a href="m_g_c_modificar.php?IDcolegio=<?php echo $row['IDcolegio']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+				</div>	
 			</div>
-		</footer>
-	</div>
-</body>
+		</div>
+		<?php include "../../footer.html";?>
+		</div>
+	</body>
 </html>

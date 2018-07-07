@@ -37,7 +37,7 @@ footer div{
 .p_upein{/*nombre de la universidad en el banner*/
     display: inline;
     font-family: 'IBM Plex Mono', monospace;
-    color: #FF5E20;
+    color: #FF6C60;
     font-size: 2vw;
     margin: 0;
 }
@@ -58,7 +58,7 @@ footer div{
 .container{/*contenedor de la tabla*/
     background-color: white;
     width: 100%;
-    padding: 0 4vw;
+    padding: 4vw;
     min-height: 100vh;
     /* margin-bottom:1vw; */
 }
@@ -97,7 +97,7 @@ ul li a{
     font-family: 'IBM Plex Mono', monospace;
 }
 ul li a:hover{
-    border-bottom:.3vw solid #FF5E20;
+    border-bottom:.3vw solid #FF6C60;
     color:#fff;
     text-decoration: none;
     cursor: pointer;
@@ -138,5 +138,5 @@ ul li ul li ul li a{
     background: #2A3542;
 }
 .lado2{
-    flex-grow: 1;
+    width: 80vw;
 }

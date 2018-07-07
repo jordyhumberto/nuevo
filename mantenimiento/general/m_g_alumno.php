@@ -62,9 +62,10 @@
 			<div class="lado1"><?php include '../../nav.php'?></div>
 			<div class="lado2">
 				<div class="container">
-					<div class="row">
-							<h2 style="text-align:center">Formulario de Alumnos</h2>
+					<div class="row" style="background:#FF6C60;border-radius:.8vw .8vw 0 0;">
+							<h2 style="text-align:center;color:#ffff;">Formulario de Alumnos</h2>
 					</div>
+					<br>
 					<div class="row">
 						<a href="m_g_a_nuevo.php" class="btn btn-primary">Nuevo Registro</a>
 					</div>
