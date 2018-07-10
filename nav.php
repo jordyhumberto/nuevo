@@ -94,7 +94,7 @@
                 <li><a href="#">Horario Aula.</a></li><!--no sirve-->
             </ul>
         </li>
-        <li><a href="logout.php">Salir</a></li>
+        <li><a href="../../logout.php">Salir</a></li>
     </ul>	
 </nav>
 <script>

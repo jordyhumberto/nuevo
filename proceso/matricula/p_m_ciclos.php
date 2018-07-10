@@ -96,7 +96,7 @@
 									<td><?php echo $row['IDCiclo']; ?></td>
 									<td><?php echo $row['Descripcion']; ?></td>
                                     <td><?php echo $row['Estado'];?></td>
-									<td><a href="p_m_cursos.php?IDAlumno=<?php echo $id; ?>&IDCarrera=<?php echo $carrera;?>&IDCiclo=<?php echo $row['IDCiclo']?>"><span class="glyphicon glyphicon-plus"></span></a></td>
+									<td><a href="p_m_cursos.php?IDAlumno=<?php echo $id; ?>&IDCarrera=<?php echo $carrera;?>&IDCiclo=<?php echo $row['IDCiclo']?>&IDSemestre=<?php echo $semestre;?>&Estado=<?php echo $estado;?>"><span class="glyphicon glyphicon-plus"></span></a></td>
 								</tr>
 							<?php } ?>
 						</tbody>

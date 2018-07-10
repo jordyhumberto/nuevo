@@ -35,6 +35,7 @@
     <title>INTRANET</title>
 </head>
 <body>
+<div style="height:100vh;background:url('img/upeinfondo.jpg');background-size:100% 100%;">
 <div id="login" class="container">
   <div class="row-fluid">
     <div class="span12">
@@ -62,7 +63,10 @@
       </div><!--/.login-->
     </div><!--/.span12-->
   </div><!--/.row-fluid-->
-</div><!--/.container-->    
+</div>
+
+</div>
+ 
 </body>
 </html>
 

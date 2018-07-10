@@ -10,9 +10,12 @@ $alerta="";//agregar una alerta sobre los creditos
 $IDA=$_GET['IDAlumno'];
 $IDC=$_GET['IDCarrera'];
 $IDCC=$_POST['ciclo'];
+$semestre=$_GET['IDSemestre'];
+$estado=$_GET['Estado'];
+
 if(!isset($_POST['check'])){
 	$error="NO PRESIONÓ NINGÚN CHECKBOX";
-	header("Location: p_m_cursos.php?IDAlumno=$IDA&IDCarrera=$IDC&IDCiclo=$IDCC&error=$error");
+	header("Location: p_m_cursos.php?IDAlumno=$IDA&IDCarrera=$IDC&IDCiclo=$IDCC&error=$error&IDSemestre=$semestre&Estado=$estado");
 	return;
 }
 $id=$_POST['check'];
@@ -30,7 +33,7 @@ for($i=0; $i < $N; $i++)
 /* echo $suma; */
 if($suma>26){
     $error="*DEBE TENER COMO MÁXIMO 26 CRÉDITOS";
-	header("Location: p_m_cursos.php?IDAlumno=$IDA&IDCarrera=$IDC&IDCiclo=$IDCC&error=$error");
+	header("Location: p_m_cursos.php?IDAlumno=$IDA&IDCarrera=$IDC&IDCiclo=$IDCC&error=$error&IDSemestre=$semestre&Estado=$estado");
 	return;
 }else if($suma<20){
     $alerta="*ESTAS MATRICULANDO MENOS DE 20 CURSOS";

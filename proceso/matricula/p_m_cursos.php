@@ -7,6 +7,9 @@
 	$id=$_GET['IDAlumno'];
 	$carrera=$_GET['IDCarrera'];
 	$ciclo=$_GET['IDCiclo'];
+	$semestre=$_GET['IDSemestre'];
+	$estado=$_GET['Estado'];
+
 	$error="";
 	if(!empty($_GET["error"])){
 		$error=$_GET["error"];
@@ -15,23 +18,14 @@
 	$resultado1=$mysqli->query($sql1);
 	$fila=$resultado1->fetch_array(MYSQLI_ASSOC);
 
-	/* $sql2="SELECT * FROM tbl_notas_alumno WHERE IDAlumno='$id'";
-	$resultado2=$mysqli->query($sql2);
-	$fila1=$resultado2->fetch_array(MYSQLI_ASSOC); */
-	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso,c.Creditos as creditos, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
-	$sql.=" FROM ((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)";
-	$sql.=" WHERE s.Estado='01' AND c.IDCarrera='$carrera' AND c.IDCiclo='$ciclo'";
+	$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso,cc.Descripcion AS pre,c.Creditos as creditos, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula,c.IDCiclo AS ciclo, co.Estado AS estado"; 
+	$sql.=" FROM (((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)LEFT JOIN tbl_notas_alumno AS na ON co.IDCO=na.IDCO) LEFT JOIN tbl_cursos AS cc ON c.IDPrerequisito=cc.IDCursos";
+	$sql.=" WHERE (c.IDCarrera='$carrera' AND c.IDCiclo='$ciclo' AND co.IDSemestre='$semestre')";	
 	$resultado=$mysqli->query($sql);
-	$sql1 = "SELECT co.IDCO AS id, c.Descripcion AS curso,c.Creditos as creditos, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
-	$sql1.=" FROM (((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula) INNER JOIN tbl_notas_alumno as na on co.IDCO=na.IDCO)";
-	$sql1.=" WHERE s.Estado='01' AND c.IDCarrera='$carrera' AND na.Estado='00'";
-	$resultado1=$mysqli->query($sql1);
-	/* if(empty($fila1)){
-		$sql = "SELECT co.IDCO AS id, c.Descripcion AS curso,c.Creditos as creditos, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula, co.Estado AS estado"; 
-		$sql.=" FROM ((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)";
-		$sql.=" WHERE s.Estado='01' AND c.IDCarrera='$carrera' AND c.IDCiclo='1'";
-		$resultado=$mysqli->query($sql);
-	} */
+	//s.Estado='01' AND 
+	//AND c.IDCiclo='$ciclo' AND co.IDSemestre='$semestre'
+	//
+	// OR (c.IDCarrera='$carrera' AND na.Estado='00' AND na.IDAlumno='$id') 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -51,6 +45,12 @@
 	<link href="../../css/jquery.dataTables.min.css" rel="stylesheet">	
 	<script src="../../js/jquery.dataTables.min.js"></script>
 	<link rel="stylesheet" href="../../css/estilos.css">
+	<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Ultra" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Great+Vibes|Press+Start+2P|Shrikhand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Ultra" rel="stylesheet">
 	<script>
 		$(document).ready(function(){
@@ -76,10 +76,13 @@
 </head>
 <body>
 	<div class="contenedor">
-        <?php include '../../nav.php'?>
-		<div class="container">
-				<div class="row">
-					<h2 style="text-align:center">MATRICULA CURSOS</h2>
+	<?php include "../../banneru.html";?>
+		<div class="cuerpo" style="display:flex;">
+			<div class="lado1"><?php include '../../nav.php'?></div>
+			<div class="lado2">
+			<div class="container">
+			<div class="row" style="background:#FF6C60;border-radius:.8vw .8vw 0 0;">
+					<h2 style="text-align:center;color:#ffff;">MATRICULA CURSOS</h2>
 				</div>
 				<div class="row">
 					<h3 style="text-align:center"><?php echo $fila['Descripcion'];?></h3>
@@ -88,7 +91,7 @@
 					<p style="text-align:center;color:#FE0000;"><?php echo $error;?></p>
 				</div>
 				<br>
-				<form action="p_m_guardar.php?IDAlumno=<?php echo $id;?>&IDCarrera=<?php echo $carrera;?>" method="post">
+				<form action="p_m_guardar.php?IDAlumno=<?php echo $id;?>&IDCarrera=<?php echo $carrera;?>&IDSemestre=<?php echo $semestre;?>&Estado=<?php echo $estado;?>" method="post">
 					<input type="hidden" name="ciclo" value="<?php echo $ciclo;?>">
 					<div class="row table-responsive">
 						<table class="display" id="mitabla">
@@ -96,8 +99,10 @@
 								<tr>
 									<th>IDCO</th>
 									<th>CURSO</th>
+									<th>PREREQUISITO</th>
 									<th>DOCENTE</th>
 									<th>SEMESTRE</th>
+									<th>CICLO</th>
 									<th>INICIO</th>
 									<th>FIN</th>
 									<th>AULA</th>
@@ -111,22 +116,10 @@
 									<tr>
 										<td><?php echo $row['id'];?></td>
 										<td><?php echo $row['curso'];?></td>
+										<td><?php echo $row['pre'];?></td>
 										<td><?php echo $row['profe'];?></td>
 										<td><?php echo $row['semestre'];?></td>
-										<td><?php echo $row['inicio'];?></td>
-										<td><?php echo $row['fin'];?></td>
-										<td><?php echo $row['aula'];?></td>
-										<td><?php echo $row['creditos'];?></td>
-										<td><?php echo $row['estado'];?></td>
-										<td><input type="checkbox" name="check[]" value="<?php echo $row['id'];?>"></td>
-									</tr>
-								<?php } ?>
-								<?php while($row = $resultado1->fetch_array(MYSQLI_ASSOC)) { ?>
-									<tr>
-										<td><?php echo $row['id'];?></td>
-										<td><?php echo $row['curso'];?></td>
-										<td><?php echo $row['profe'];?></td>
-										<td><?php echo $row['semestre'];?></td>
+										<td><?php echo $row['ciclo'];?></td>
 										<td><?php echo $row['inicio'];?></td>
 										<td><?php echo $row['fin'];?></td>
 										<td><?php echo $row['aula'];?></td>
@@ -139,17 +132,13 @@
 						</table>
 					</div>
 					<br>
-					<a class="btn btn-default" href="p_m_ciclos.php?IDAlumno=<?php echo $id;?>&IDCarrera=<?php echo $carrera;?>">regresar</a>
+					<a class="btn btn-default" href="p_m_ciclos.php?IDAlumno=<?php echo $id;?>&IDCarrera=<?php echo $carrera;?>&IDSemestre=<?php echo $semestre;?>&Estado=<?php echo $estado;?>">regresar</a>
 					<input type="submit" class="btn btn-primary">
 				</form>
 			</div>	
-		<footer>
-			<div class="arriba"><a href="#header">arriba</a></div>
-			<div class="p_footer">
-				<p>UNIVERSIDAD PERUANA DE INVESTIGACIÓN Y NEGOCIOS</p>
-				<p>Av. Salaverry 1810, Jesús María, Lima - Perú, Telf.:470 1687 / 265 5412 / 956 392 143</p>
-			</div>
-		</footer>
+	</div>
+	</div>
+	<?php include "../../footer.html";?>
 	</div>
 </body>
 </html>
