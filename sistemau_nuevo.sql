@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-06-2018 a las 20:01:56
--- Versión del servidor: 10.1.32-MariaDB
--- Versión de PHP: 7.2.5
+-- Tiempo de generación: 10-08-2018 a las 19:17:47
+-- Versión del servidor: 10.1.33-MariaDB
+-- Versión de PHP: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -2387,7 +2387,9 @@ CREATE TABLE `tbl_alumno` (
 
 INSERT INTO `tbl_alumno` (`IDAlumno`, `IDPadmision`, `IDCarrera`, `Nombres`, `Apellido_paterno`, `Apellido_materno`, `Tipo_doc`, `N_documento`, `Direccion`, `Cod_dist`, `Cod_dep`, `Cod_prov`, `Sexo`, `Estado_civil`, `Fecha_nac`, `Cod_depn`, `Cod_provn`, `Telf_fijo`, `Telf_celular`, `Email`, `IDColegio`, `Fecha_egreso`, `Pension_c`, `IDMingreso`, `Alergia`, `T_sangre`, `Discapacidad`, `Comentarios`, `Nombre_tutor`, `Email_tutor`, `Direc_tutor`, `Fono_tutor`, `Parentesco`, `Estado`) VALUES
 ('2018010000', '201802', 'ISF', 'JORDY HUMBERTO', 'VILLAVICENCIO', 'CRUZ', 'DNI', '75682557', 'MZA LT9 AAHH LOS SAUCES 3RA ZONA COLLIQUE', '120206', '150000', '150100', '01', '00', '1994-05-16', '150000', '150100', '', '', 'jordyhvillavicencio@gmail.com', '0', '0000-00-00', 0, '1', '', '', '', '', '', '', '', '', '', '01'),
-('2018010001', '201802', 'INF', 'JORDY NEGOCIOS', 'VILLAVICENCIO', 'CRUZ', 'DNI', '75682557', 'HOLA', '030101', '010000', '030100', '01', '00', '1994-05-16', '010000', '030100', '', '', 'jordyhvillavicencio@gmail.com', '0', '0000-00-00', 0, '1', '', '', '', '', '', '', '', '', '', '01');
+('2018010001', '201802', 'INF', 'JORDY NEGOCIOS', 'VILLAVICENCIO', 'CRUZ', 'DNI', '75682557', 'HOLA', '030101', '010000', '030100', '01', '00', '1994-05-16', '010000', '030100', '', '', 'jordyhvillavicencio@gmail.com', '0', '0000-00-00', 0, '1', '', '', '', '', '', '', '', '', '', '01'),
+('2018020000', '201802', 'ISF', 'Metztli ', 'Atse', 'Atse', 'DNI', '88888888', 'hola', '120206', '150000', '150100', '01', '00', '2000-01-01', '150000', '150100', '', '', 'j@j.com', '0', '0000-00-00', 0, '1', '', '', '', '', '', '', '', '', '', '01'),
+('2018020001', '201802', 'ISF', 'Sanja', 'Tuathal', 'Tuathal', 'DNI', '99999999', 'HOLA', '120206', '150000', '150100', '00', '00', '1996-12-31', '150000', '150100', '', '', 'O@O.COM', '0', '0000-00-00', 0, '1', '', '', '', '', '', '', '', '', '', '01');
 
 -- --------------------------------------------------------
 
@@ -4737,6 +4739,18 @@ CREATE TABLE `tbl_compromiso_pago` (
   `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `tbl_compromiso_pago`
+--
+
+INSERT INTO `tbl_compromiso_pago` (`IDMatricula`, `Nro_compromiso`, `Pago_F`, `Descuento`, `Pago`, `Fecha`, `Estado`) VALUES
+('2018IS0000', 0, 200, 0, 200, '2018-07-30', '01'),
+('2018IS0000', 1, 760, 0, 760, '2018-08-10', '01'),
+('2018IS0000', 2, 760, 0, 760, '2018-09-10', '01'),
+('2018IS0000', 3, 760, 0, 760, '2018-10-10', '01'),
+('2018IS0000', 4, 760, 0, 760, '2018-11-10', '01'),
+('2018IS0000', 5, 760, 0, 760, '2018-12-10', '01');
+
 -- --------------------------------------------------------
 
 --
@@ -4758,6 +4772,7 @@ CREATE TABLE `tbl_cursos` (
   `HorasPractica` int(5) DEFAULT NULL,
   `Tipo` char(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `IDTA` int(11) NOT NULL,
+  `Plan_estudio` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -4765,15 +4780,18 @@ CREATE TABLE `tbl_cursos` (
 -- Volcado de datos para la tabla `tbl_cursos`
 --
 
-INSERT INTO `tbl_cursos` (`Año`, `Semestre`, `IDCursos`, `Descripcion`, `IDCarrera`, `Tipo_Curso`, `IDCiclo`, `IDPrerequisito`, `Creditos`, `Rcreditos`, `HorasTeoricas`, `HorasPractica`, `Tipo`, `IDTA`, `Estado`) VALUES
-(1, 'I', 'INFB0101', 'MATEMÁTICA I', 'INF', 'B', 1, '', 5, 0, 4, 2, 'O', 1, '01'),
-(1, 'I', 'ISFB0101', 'MATEMÁTICA I', 'ISF', 'B', 1, '', 5, 0, 4, 2, 'O', 1, '01'),
-(1, 'I', 'ISFB0102', 'SOPORTE TÉCNICO DE HARDWARE Y SOFTWARE', 'ISF', 'B', 1, '', 3, 0, 2, 2, 'O', 1, '01'),
-(1, 'II', 'ISFB0201', 'MATEMÁTICA II', 'ISF', 'B', 2, 'ISFB0101', 5, 0, 4, 2, 'O', 1, '01'),
-(1, 'I', 'ISFG0101', 'LENGUAJE I', 'ISF', 'G', 1, '', 5, 0, 4, 2, 'O', 1, '01'),
-(1, 'I', 'ISFG0102', 'METODOLOGÍA DEL TRABAJO UNIVERSITARIO', 'ISF', 'B', 1, '', 4, 0, 3, 2, 'O', 1, '01'),
-(1, 'I', 'ISFG0103', 'INGLÉS I', 'ISF', 'G', 1, '', 3, 0, 2, 2, 'O', 1, '01'),
-(1, 'II', 'ISFG0201', 'LENGUAJE II', 'ISF', 'G', 2, 'ISFG0101', 5, 0, 4, 2, 'O', 1, '01');
+INSERT INTO `tbl_cursos` (`Año`, `Semestre`, `IDCursos`, `Descripcion`, `IDCarrera`, `Tipo_Curso`, `IDCiclo`, `IDPrerequisito`, `Creditos`, `Rcreditos`, `HorasTeoricas`, `HorasPractica`, `Tipo`, `IDTA`, `Plan_estudio`, `Estado`) VALUES
+(1, 'I', 'INFB0101', 'MATEMÁTICA I', 'INF', 'B', 1, '', 5, 0, 4, 2, 'O', 1, '', '01'),
+(1, 'I', 'ISFB0101', 'MATEMÁTICA I', 'ISF', 'B', 1, '', 5, 0, 4, 2, 'O', 1, '', '01'),
+(1, 'I', 'ISFB0102', 'SOPORTE TÉCNICO DE HARDWARE Y SOFTWARE', 'ISF', 'B', 1, '', 3, 0, 2, 2, 'O', 1, '', '01'),
+(1, 'II', 'ISFB0201', 'MATEMÁTICA II', 'ISF', 'B', 2, 'ISFB0101', 5, 0, 4, 2, 'O', 1, '', '01'),
+(1, 'I', 'ISFG0101', 'LENGUAJE I', 'ISF', 'G', 1, '', 5, 0, 4, 2, 'O', 1, '', '01'),
+(1, 'I', 'ISFG0102', 'METODOLOGÍA DEL TRABAJO UNIVERSITARIO', 'ISF', 'B', 1, '', 4, 0, 3, 2, 'O', 1, '', '01'),
+(1, 'I', 'ISFG0103', 'INGLÉS I', 'ISF', 'G', 1, '', 3, 0, 2, 2, 'O', 1, '', '01'),
+(1, 'II', 'ISFG0201', 'LENGUAJE II', 'ISF', 'G', 2, 'ISFG0101', 5, 0, 4, 2, 'O', 1, '', '01'),
+(1, 'II', 'ISFG0202', 'INGLÉS II', 'ISF', 'G', 2, 'ISFG0103', 3, 0, 2, 2, 'O', 1, '2015', '01'),
+(1, 'II', 'ISFP0201', 'ALGORITMOS Y ESTRUCTURA DE DATOS I', 'ISF', 'P', 2, '', 3, 0, 2, 2, 'O', 1, '2015', '01'),
+(1, 'II', 'ISFP0202', 'ARQUITECTURA Y ENSAMBLAJE DE COMPUTADORAS', 'ISF', 'P', 2, 'ISFB0102', 4, 0, 3, 2, 'O', 1, '2015', '01');
 
 -- --------------------------------------------------------
 
@@ -4798,15 +4816,21 @@ CREATE TABLE `tbl_curso_operativo` (
 --
 
 INSERT INTO `tbl_curso_operativo` (`IDCO`, `IDCursos`, `IDDocente`, `IDSemestre`, `IDAula`, `F_exParcial`, `F_exFinal`, `F_exSusti`, `Estado`) VALUES
-('2018001', 'ISFG0103', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
-('2018002', 'ISFG0101', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
-('2018003', 'INFB0101', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
-('2018004', 'ISFB0101', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
-('2018005', 'ISFG0102', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
-('2018006', 'ISFB0102', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
-('2018007', 'ISFG0201', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
-('2018008', 'ISFB0201', 'OCAD201800', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
-('2018011', 'ISFG0103', 'OCAD201800', 2, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00');
+('2018000', 'ISFB0101', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018001', 'ISFB0102', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018002', 'ISFB0201', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018003', 'ISFG0101', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018004', 'ISFG0102', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018005', 'ISFG0103', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018006', 'ISFG0201', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018007', 'ISFG0202', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018008', 'ISFP0201', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018009', 'ISFP0202', 'OCAD201800', 3, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018010', 'ISFB0201', 'OCAD201800', 4, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018011', 'ISFG0201', 'OCAD201800', 4, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018012', 'ISFG0202', 'OCAD201800', 4, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018013', 'ISFP0201', 'OCAD201800', 4, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01'),
+('2018014', 'ISFP0202', 'OCAD201800', 4, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01');
 
 -- --------------------------------------------------------
 
@@ -4903,6 +4927,13 @@ CREATE TABLE `tbl_matricula` (
   `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `tbl_matricula`
+--
+
+INSERT INTO `tbl_matricula` (`IDMatricula`, `IDSemestre`, `IDAlumno`, `Fecha_registro`, `Matricula`, `Pension`, `Cant_creditos`, `Estado`) VALUES
+('2018IS0000', 1, '2018010000', '2018-07-04 00:00:00', 200, 760, 20, '01');
+
 -- --------------------------------------------------------
 
 --
@@ -4965,6 +4996,17 @@ CREATE TABLE `tbl_notas_alumno` (
   `Id_Usuario` int(11) DEFAULT NULL,
   `Estado` char(2) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_notas_alumno`
+--
+
+INSERT INTO `tbl_notas_alumno` (`IDMatricula`, `IDAlumno`, `IDCO`, `Nota1`, `Nota2`, `Nota3`, `Nota4`, `Nota5`, `Nota6`, `Nota7`, `Nota8`, `Nota9`, `Nota10`, `PPracticas`, `ExamenParcial`, `ExamenFinal`, `ExamenSusti`, `Promedio`, `Id_Usuario`, `Estado`) VALUES
+('2018IS0000', '2018010000', '2018005', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10.00', '11.00', '12.00', '14.00', '11.75', NULL, '01'),
+('2018IS0000', '2018010000', '2018003', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10.00', '9.00', '12.00', '0.00', '10.33', NULL, '00'),
+('2018IS0000', '2018010000', '2018000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10.00', '12.00', '14.00', '9.00', '11.25', NULL, '01'),
+('2018IS0000', '2018010000', '2018004', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '12.00', '11.00', '10.00', '13.00', '11.50', NULL, '01'),
+('2018IS0000', '2018010000', '2018001', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '15.00', '16.00', '17.00', '0.00', '16.00', NULL, '01');
 
 -- --------------------------------------------------------
 
@@ -5057,7 +5099,9 @@ CREATE TABLE `tbl_semestre` (
 
 INSERT INTO `tbl_semestre` (`IDSemestre`, `Descripcion`, `Nro_pagos`, `Fecha_Inicio`, `Fecha_Fin`, `Detalle`, `nro_notas`, `Estado`) VALUES
 (1, '2018-II', 5, '2018-08-06', '2018-12-21', 'SEGUNDO SEMESTRE DEL 2018', 5, '01'),
-(2, '2018-I', 5, '2018-02-05', '2018-06-16', 'PRIMER SEMESTRE DEL 2018', 5, '00');
+(2, '2018-I', 5, '2018-02-05', '2018-06-16', 'PRIMER SEMESTRE DEL 2018', 5, '00'),
+(3, '2019-I', 5, '2019-02-05', '2019-06-16', 'PRIMER SEMESTRE DEL 2019', 5, '01'),
+(4, '2019-II', 5, '2019-08-06', '2019-12-21', 'SEGUNDO SEMESTRE DE 2019', 5, '01');
 
 -- --------------------------------------------------------
 
@@ -6834,7 +6878,7 @@ ALTER TABLE `tbl_facultad`
 -- AUTO_INCREMENT de la tabla `tbl_local`
 --
 ALTER TABLE `tbl_local`
-  MODIFY `IDLocal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDLocal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_modalidad_ingreso`
@@ -6852,7 +6896,7 @@ ALTER TABLE `tbl_pago`
 -- AUTO_INCREMENT de la tabla `tbl_semestre`
 --
 ALTER TABLE `tbl_semestre`
-  MODIFY `IDSemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `IDSemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_tipo_pago`
