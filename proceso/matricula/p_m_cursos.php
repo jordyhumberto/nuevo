@@ -21,21 +21,7 @@
 	$sql.=" FROM (((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)LEFT JOIN tbl_notas_alumno AS na ON co.IDCO=na.IDCO) LEFT JOIN tbl_cursos AS cc ON c.IDPrerequisito=cc.IDCursos";
 	$sql.=" WHERE (c.IDCarrera='$carrera' AND c.IDCiclo='$ciclo' AND co.IDSemestre='$semestre' AND c.IDPrerequisito='') OR (c.IDCarrera='$carrera' AND na.IDAlumno=$id AND na.Estado='00') OR (c.IDCarrera='$carrera' AND c.IDCiclo='$ciclo' AND co.IDSemestre='$semestre' AND c.IDPrerequisito<>'')";	
 	$resultado=$mysqli->query($sql);
-	// 
-	/* $sql1 = "SELECT co.IDCO AS id, c.Descripcion AS curso,cc.Descripcion AS pre,c.Creditos as creditos, d.Apellidos AS profe, s.Descripcion AS semestre,s.Fecha_Inicio AS inicio,s.Fecha_Fin AS fin, a.Descripcion AS aula,c.IDCiclo AS ciclo, co.Estado AS estado"; 
-	$sql1.=" FROM (((((tbl_curso_operativo AS co INNER JOIN tbl_cursos AS c ON co.IDCursos=c.IDCursos) INNER JOIN tbl_docente AS d ON co.IDDocente=d.IDDocente) INNER JOIN tbl_semestre AS s ON co.IDSemestre=s.IDSemestre) LEFT JOIN tbl_aula AS a ON co.IDAula=a.IDAula)LEFT JOIN tbl_notas_alumno AS na ON co.IDCO=na.IDCO) LEFT JOIN tbl_cursos AS cc ON c.IDPrerequisito=cc.IDCursos";
-	$sql1.=" WHERE (c.IDCarrera='$carrera' AND na.IDAlumno=$id AND na.Estado='00')";	
-	$resultado1=$mysqli->query($sql1); */
-	//
-	// (c.IDCarrera='$carrera' AND c.IDCiclo='$ciclo' AND co.IDSemestre='$semestre' AND c.IDPrerequisito='') OR 
 
-	//s.Estado='01' AND
-	// 
-	//AND c.IDCiclo='$ciclo' AND co.IDSemestre='$semestre'
-	//
-	// OR (c.IDCarrera='$carrera' AND na.Estado='00' AND na.IDAlumno='$id') 
-	//
-	// OR (c.IDCarrera='$carrera')
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -123,11 +109,11 @@
 							</thead>
 							<tbody>
 								
-								<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>
+								<?php while($row = $resultado->fetch_array(MYSQLI_ASSOC)) { ?>	
 									<?php 
 										$x=$row['id'];
-										$s="SELECT * FROM tbl_curso_operativo WHERE IDCO='$x'"; 
-										if (2<3) {?>	
+										$s="SELECT * FROM tbl_curso_operativo";?>
+									<?php if($x>$y){?>
 										<tr>
 											<td><?php echo $row['id'];?></td>
 											<td><?php echo $row['curso'];?></td>
@@ -142,7 +128,7 @@
 											<td><?php echo $row['estado'];?></td>
 											<td><input type="checkbox" name="check[]" value="<?php echo $row['id'];?>"></td>
 										</tr>
-									<?php }?>
+									<?php } ?>
 								<?php } ?>
 
 							</tbody>
