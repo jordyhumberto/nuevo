@@ -109,7 +109,6 @@ if(!isset($_SESSION["id_usuario"])){
                 <div id="slider">
                     <?php include "hola.html";?>
                 </div>
-                
             </div>
         </div>
         <?php include "footer.html";?>
